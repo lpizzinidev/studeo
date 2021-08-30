@@ -1,6 +1,6 @@
 const Resource = require("../models/resource.model");
 
-const getResources = (req, res) => {
+const getResources = async (req, res) => {
   try {
     const data = await Resource.find();
     res.status(200).json(data);
@@ -9,7 +9,7 @@ const getResources = (req, res) => {
   }
 };
 
-const createResource = (req, res) => {
+const createResource = async (req, res) => {
   try {
     await Resource.create(req.body);
     res.status(200).json({ message: "Resource created successfully" });
@@ -18,7 +18,7 @@ const createResource = (req, res) => {
   }
 };
 
-const updateResource = (req, res) => {
+const updateResource = async (req, res) => {
   try {
     const { _id } = req.params;
     await Resource.updateOne({ _id }, req.body);
@@ -28,7 +28,7 @@ const updateResource = (req, res) => {
   }
 };
 
-const deleteResource = (req, res) => {
+const deleteResource = async (req, res) => {
   try {
     const { _id } = req.params;
     await Resource.deleteOne({ _id });

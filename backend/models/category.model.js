@@ -10,6 +10,11 @@ const Category = mongoose.model("category", {
     type: String,
     default: "",
   },
+  user: {
+    type: ObjectId,
+    required: true,
+    ref: "users",
+  },
   createdAt: {
     type: Date,
     default: Date.now,

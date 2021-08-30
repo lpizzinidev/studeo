@@ -19,10 +19,10 @@ connectDB();
 
 // Routes
 const resourceRouter = require("./routes/resource.route");
-app.use("/api/v1", resourceRouter);
+app.use("/api/v1/", resourceRouter);
 
 const categoryRouter = require("./routes/category.route");
-app.use("/api/v1", categoryRouter);
+app.use("/api/v1/", categoryRouter);
 
 const { PORT } = require("./config/variables");
 app.listen(PORT, console.log(`Server is listening on port ${PORT}...`));
