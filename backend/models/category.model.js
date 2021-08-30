@@ -4,6 +4,7 @@ const Category = mongoose.model("category", {
   name: {
     type: String,
     required: true,
+    unique: true,
   },
   description: {
     type: String,
