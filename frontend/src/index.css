@@ -1,13 +1,75 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --color-primary: #fecf30;
+  --color-secondary: #262626;
+  --color-secondary-bck: rgba(38, 38, 38, 0.95);
+  --color-secondary-light: #a6a09c;
+  --color-secondary-lightest: #f2f2f2;
+
+  --font-size-heading-1: 72px;
+  --font-size-heading-2: 36px;
+  --font-size-subtitle: 36px;
+  --font-size-body-1: 24px;
+  --font-size-body-2: 18px;
+  --font-size-footer: 14px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: "FredokaOne";
+  src: url("./fonts/Fredoka_One/FredokaOne-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./fonts/Roboto/Roboto-Light.ttf") format("truetype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./fonts/Roboto/Roboto-Medium.ttf") format("truetype");
+  font-weight: 500;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-secondary-bck);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "FredokaOne";
+  color: white;
+}
+
+p,
+span,
+label {
+  font-family: "Roboto";
+  color: white;
+}
+
+.container {
+  max-width: 1366px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.heading-1 {
+  font-size: var(--font-size-heading-1);
+}
+
+.subtitle {
+  font-size: var(--font-size-subtitle);
+  font-weight: 300;
 }
