@@ -29,6 +29,8 @@ services:
       - PORT=5000
       - MONGO_USER=backend
       - MONGO_PSW=psw123!
+      - MONGO_STORE_SECRET_KEY=EC39157B9BF2EF2EA631B6EE2F842
+      - JWT_TOKEN=89937765DF6782BAEF517D9484C8D
     depends_on:
       - mongo
     networks:
