@@ -1,8 +1,17 @@
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+import HomeContainer from "./components/homepage/HomeContainer";
+import NotFound from "./components/globals/NotFound";
+
 function App() {
   return (
     <div className="container">
-      <h1 className="heading-1">Example</h1>
-      <p className="subtitle">This is roboto</p>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" component={HomeContainer} exact />
+          <Route component={NotFound} />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }

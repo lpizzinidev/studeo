@@ -4,6 +4,8 @@
   --color-secondary-bck: rgba(38, 38, 38, 0.95);
   --color-secondary-light: #a6a09c;
   --color-secondary-lightest: #f2f2f2;
+  --color-black: #000000;
+  --color-white: #ffffff;
 
   --font-size-heading-1: 72px;
   --font-size-heading-2: 36px;
@@ -17,6 +19,12 @@
   font-family: "FredokaOne";
   src: url("./fonts/Fredoka_One/FredokaOne-Regular.ttf") format("truetype");
   font-weight: 400;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./fonts/Roboto/Roboto-Thin.ttf") format("truetype");
+  font-weight: 100;
 }
 
 @font-face {
@@ -39,6 +47,7 @@
 
 body {
   margin: 0;
+  padding: 20px;
   background-color: var(--color-secondary-bck);
 }
 
@@ -50,6 +59,7 @@ h5,
 h6 {
   font-family: "FredokaOne";
   color: white;
+  margin: 0;
 }
 
 p,
@@ -57,10 +67,11 @@ span,
 label {
   font-family: "Roboto";
   color: white;
+  margin: 0;
 }
 
 .container {
-  max-width: 1366px;
+  max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -71,5 +82,56 @@ label {
 
 .subtitle {
   font-size: var(--font-size-subtitle);
+  font-weight: 100;
+}
+
+.button {
+  background-color: var(--color-primary);
+  color: var(--color-black);
+  font-size: var(--font-size-body-2);
   font-weight: 300;
+  height: 50px;
+  border-radius: 25px;
+  min-width: 150px;
+  padding-left: 25px;
+  padding-right: 25px;
+  outline: none;
+  border: none;
+}
+
+.text-button {
+  background-color: transparent;
+  color: var(--color-white);
+  font-size: var(--font-size-body-2);
+  font-weight: 300;
+  height: 50px;
+  border-radius: 25px;
+  min-width: 150px;
+  padding-left: 25px;
+  padding-right: 25px;
+  outline: none;
+  border: none;
+}
+
+.button:hover,
+.text-button:hover {
+  cursor: pointer;
+}
+
+/* Homepage */
+.home-navbar {
+  text-align: right;
+}
+
+.home-container {
+  display: flex;
+}
+
+.home-container > * {
+  flex: 1;
+  align-self: center;
+}
+
+.home-logo {
+  max-width: 100%;
 }
