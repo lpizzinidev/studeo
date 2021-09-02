@@ -13,6 +13,8 @@
   --font-size-body-1: 24px;
   --font-size-body-2: 18px;
   --font-size-footer: 14px;
+
+  --border-radius: 25px;
 }
 
 @font-face {
@@ -64,7 +66,8 @@ h6 {
 
 p,
 span,
-label {
+label,
+input {
   font-family: "Roboto";
   color: white;
   margin: 0;
@@ -80,9 +83,18 @@ label {
   font-size: var(--font-size-heading-1);
 }
 
+.heading-2 {
+  font-size: var(--font-size-heading-2);
+}
+
 .subtitle {
   font-size: var(--font-size-subtitle);
   font-weight: 100;
+}
+
+.text-body-2 {
+  font-size: var(--font-size-body-2);
+  font-weight: 400;
 }
 
 .button {
@@ -91,7 +103,7 @@ label {
   font-size: var(--font-size-body-2);
   font-weight: 300;
   height: 50px;
-  border-radius: 25px;
+  border-radius: var(--border-radius);
   min-width: 150px;
   padding-left: 25px;
   padding-right: 25px;
@@ -105,7 +117,6 @@ label {
   font-size: var(--font-size-body-2);
   font-weight: 300;
   height: 50px;
-  border-radius: 25px;
   min-width: 150px;
   padding-left: 25px;
   padding-right: 25px;
@@ -116,6 +127,22 @@ label {
 .button:hover,
 .text-button:hover {
   cursor: pointer;
+}
+
+.input-text-field {
+  font-size: var(--font-size-body-2);
+  font-weight: 300;
+  background-color: var(--color-secondary-lightest);
+  border-radius: var(--border-radius);
+  color: var(--color-black);
+  min-height: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+  outline: none;
+  border: none;
+  margin-bottom: 10px;
+  margin-top: 2px;
+  min-width: 350px;
 }
 
 /* Homepage */
@@ -134,4 +161,14 @@ label {
 
 .home-logo {
   max-width: 100%;
+}
+
+/* Authentication */
+.auth-container {
+  display: flex;
+}
+
+.auth-container > * {
+  flex: 1;
+  align-self: center;
 }
