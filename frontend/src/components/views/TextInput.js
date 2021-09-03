@@ -1,8 +1,13 @@
-const TextInput = ({ type, name }) => {
+const TextInput = ({ type, title, name, onChange }) => {
   return (
     <div>
-      <p className="text-body-2">{name}</p>
-      <input type={type || "text"} className="input-text-field" />
+      <p className="text-body-2">{title}</p>
+      <input
+        type={type || "text"}
+        name={name}
+        className="input-text-field"
+        onChange={onChange}
+      />
     </div>
   );
 };
