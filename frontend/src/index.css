@@ -15,6 +15,8 @@
   --font-size-footer: 14px;
 
   --border-radius: 25px;
+
+  --box-shadow: 0px 4px 8px 4px rgba(0, 0, 0, 0.2);
 }
 
 @font-face {
@@ -92,8 +94,18 @@ input {
   font-weight: 100;
 }
 
+.text-body-1 {
+  font-size: var(--font-size-body-1);
+  font-weight: 500;
+}
+
 .text-body-2 {
   font-size: var(--font-size-body-2);
+  font-weight: 400;
+}
+
+.text-footer {
+  font-size: var(--font-size-footer);
   font-weight: 400;
 }
 
@@ -124,8 +136,18 @@ input {
   border: none;
 }
 
+.info-button {
+  background-color: transparent;
+  color: var(--color-primary);
+  font-size: var(--font-size-body-2);
+  font-weight: 400;
+  outline: none;
+  border: none;
+}
+
 .button:hover,
-.text-button:hover {
+.text-button:hover,
+.info-button:hover {
   cursor: pointer;
 }
 
@@ -143,11 +165,53 @@ input {
   margin-bottom: 10px;
   margin-top: 2px;
   width: 100%;
+  max-width: 750px;
+}
+
+.input-text-field:active,
+.input-text-field:focus {
+  box-shadow: var(--box-shadow);
+}
+
+.search-bar-container {
+  position: relative;
+  text-align: center;
+}
+
+.search-bar-container > img {
+  position: absolute;
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+.search-bar-container > input {
+  padding-left: 50px;
 }
 
 .link-text {
   text-decoration: none;
   color: var(--color-white);
+}
+
+.card {
+  background-color: var(--color-secondary-light);
+  border-radius: var(--border-radius);
+}
+
+.card:hover,
+.card:active,
+.card:focus {
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+}
+
+.logo {
+  max-width: 100%;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
 }
 
 /* Homepage */
@@ -162,10 +226,6 @@ input {
 .home-container > * {
   flex: 1;
   align-self: center;
-}
-
-.home-logo {
-  max-width: 100%;
 }
 
 /* Authentication */
@@ -187,4 +247,39 @@ input {
   width: 100%;
   margin-top: 25px;
   margin-bottom: 5px;
+}
+
+/* Dashboard */
+.list-header {
+  display: flex;
+}
+
+.list-header > p,
+.list-header > h1 {
+  flex: 1;
+}
+
+.card-list {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  column-gap: 25px;
+  row-gap: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.card-list-w100 {
+  display: grid;
+  grid-template-columns: auto;
+  row-gap: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.card-item * {
+  color: var(--color-black);
+}
+
+.card-item > div {
+  padding: 30px 20px;
 }

@@ -3,7 +3,7 @@ import homepage from "../../assets/img/homepage.png";
 const HomeLogo = () => {
   return (
     <div>
-      <img src={homepage} className="home-logo" alt="Homepage" />
+      <img src={homepage} className="logo" alt="Homepage" />
     </div>
   );
 };
