@@ -2,7 +2,8 @@ const Category = require("../models/category.model");
 
 const getCategories = async (req, res) => {
   try {
-    const data = await Category.find();
+    const { _id } = req.user;
+    const data = await Category.find({ user: _id });
     res.status(200).json(data);
   } catch (err) {
     res.status(400).json({ message: "Error fetching categories" });
@@ -11,10 +12,17 @@ const getCategories = async (req, res) => {
 
 const createCategory = async (req, res) => {
   try {
-    await Category.create(req.body);
+    const { _id } = req.user;
+    const { name, description } = req.body;
+
+    await Category.create({
+      user: _id,
+      name: name,
+      description: description,
+    });
     res.status(200).json({ message: "Category created successfully" });
   } catch (err) {
-    res.status(400).json({ message: "Error creating category" });
+    res.status(400).json({ message: "Error creating category" + err });
   }
 };
 

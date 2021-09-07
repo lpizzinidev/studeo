@@ -1,11 +1,17 @@
 import CategoriesItem from "./CategoriesItem";
 
+import { GetCategories } from "../../../controllers/CategoriesController";
+
 const CategoriesList = () => {
+  const { loading, categories } = GetCategories();
+
   return (
     <div className="card-list-w100">
-      <CategoriesItem />
-      <CategoriesItem />
-      <CategoriesItem />
+      {loading
+        ? "Loading categories..."
+        : categories.map((category) => {
+            return <CategoriesItem key={category._id} {...category} />;
+          })}
     </div>
   );
 };

@@ -17,7 +17,10 @@ function App() {
           <Route path="/signup" component={AuthContainer} />
           <Route path="/dashboard" component={DashboardContainer} />
           <Route path="/categories" component={CategoriesContainer} />
-          <Route path="/categories-edit" component={CategoriesEditContainer} />
+          <Route
+            path="/categories-edit/:_id?"
+            component={CategoriesEditContainer}
+          />
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>

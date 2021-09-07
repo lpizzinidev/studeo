@@ -1,11 +1,15 @@
-const CategoriesItem = () => {
+import { Link } from "react-router-dom";
+
+const CategoriesItem = ({ _id, name }) => {
   return (
-    <div className="card card-item">
-      <div>
-        <p className="text-body-1">Category</p>
-        <p className="text-footer">3 resources</p>
+    <Link to={`/categories-edit/${_id}`}>
+      <div className="card card-item">
+        <div>
+          <p className="text-body-1">{name}</p>
+          <p className="text-footer">3 resources</p>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
