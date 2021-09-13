@@ -5,13 +5,15 @@ import { GetCategories } from "../../../controllers/CategoriesController";
 const CategoriesList = () => {
   const { loading, categories } = GetCategories();
 
+  if (loading) {
+    return "Loading categories...";
+  }
+
   return (
     <div className="card-list-w100">
-      {loading
-        ? "Loading categories..."
-        : categories.map((category) => {
-            return <CategoriesItem key={category._id} {...category} />;
-          })}
+      {categories.map((category) => {
+        return <CategoriesItem key={category._id} {...category} />;
+      })}
     </div>
   );
 };

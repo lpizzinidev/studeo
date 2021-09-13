@@ -19,6 +19,23 @@ export const GetCategories = () => {
   return { loading, categories };
 };
 
+export const GetCategory = (_id) => {
+  const [loading, isLoading] = useState(true);
+  const [category, setCategory] = useState(null);
+
+  const loadCategory = async () => {
+    const { data } = await api.getCategory(_id);
+    setCategory(data);
+    isLoading(false);
+  };
+
+  useEffect(() => {
+    loadCategory();
+  }, []);
+
+  return { loading, category };
+};
+
 export const createCategory = async (formData) => {
   try {
     await api.createCategory(formData);

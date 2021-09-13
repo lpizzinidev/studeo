@@ -16,6 +16,7 @@ export const signUp = (formData) => API.post("/signup", formData);
 
 /* Categories */
 export const getCategories = () => API.get("/categories");
+export const getCategory = (id) => API.get(`/categories/${id}`);
 export const createCategory = (formData) => API.post("/categories", formData);
 export const updateCategory = (id, formData) =>
   API.put(`/categories/${id}`, formData);

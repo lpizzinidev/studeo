@@ -10,6 +10,16 @@ const getCategories = async (req, res) => {
   }
 };
 
+const getCategory = async (req, res) => {
+  try {
+    const { _id } = req.params;
+    const data = await Category.findById(_id);
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(400).json({ message: "Error fetching category" });
+  }
+};
+
 const createCategory = async (req, res) => {
   try {
     const { _id } = req.user;
@@ -48,6 +58,7 @@ const deleteCategory = async (req, res) => {
 
 module.exports = {
   getCategories,
+  getCategory,
   createCategory,
   updateCategory,
   deleteCategory,

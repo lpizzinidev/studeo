@@ -75,6 +75,10 @@ input {
   margin: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 .container {
   max-width: 1280px;
   margin-left: auto;
@@ -261,7 +265,7 @@ input {
 
 .card-list {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat(3, 1fr);
   column-gap: 25px;
   row-gap: 25px;
   margin-top: 10px;

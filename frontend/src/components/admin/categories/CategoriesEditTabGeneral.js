@@ -1,40 +1,70 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 import { createCategory, updateCategory } from "../../../api/server";
 
+import { GetCategory } from "../../../controllers/CategoriesController";
+
 import TextInput from "../../views/TextInput";
 
-const initialFormData = {
+let initialFormData = {
   title: "",
   description: "",
 };
 
-const CategoriesEditTabGeneral = ({ match }) => {
-  const { _id } = match.params;
+const CategoriesEditTabGeneral = () => {
+  // Check if editing mode
+  const { _id } = useParams();
+
+  let isLoading = false;
+
+  if (_id) {
+    // Editing
+    const { loading, category } = GetCategory(_id);
+
+    isLoading = loading;
+
+    if (!loading) {
+      initialFormData = {
+        title: category.name,
+        description: category.description,
+      };
+    }
+  }
 
   const [formData, setFormData] = useState(initialFormData);
-
-  useEffect(() => {
-    console.log(_id);
-  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    createCategory(formData);
+    if (_id) {
+      updateCategory(_id, formData);
+    } else {
+      createCategory(formData);
+    }
   };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  if (isLoading) {
+    return "Loading category...";
+  }
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <TextInput title="Name" name="name" onChange={handleChange} />
+        <TextInput
+          title="Name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
         <TextInput
           title="Description"
           name="description"
+          value={formData.description}
           onChange={handleChange}
         />
         <input type="submit" className="button" value="SAVE" />
