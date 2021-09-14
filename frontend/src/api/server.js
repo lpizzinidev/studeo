@@ -14,6 +14,14 @@ API.interceptors.request.use((req) => {
 export const signIn = (formData) => API.post("/signin", formData);
 export const signUp = (formData) => API.post("/signup", formData);
 
+/* Resources */
+export const getResourceList = () => API.get("/resources");
+export const getResource = (id) => API.get(`/resources/${id}`);
+export const createResource = (formData) => API.post("/resources", formData);
+export const updateResource = (id, formData) =>
+  API.put(`/resource/${id}`, formData);
+export const deleteResource = (id) => API.delete(`resources/${id}`);
+
 /* Categories */
 export const getCategories = () => API.get("/categories");
 export const getCategory = (id) => API.get(`/categories/${id}`);

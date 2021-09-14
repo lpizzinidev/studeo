@@ -5,6 +5,8 @@ import AuthContainer from "./components/auth/AuthContainer";
 import DashboardContainer from "./components/admin/dashboard/DashboardContainer";
 import CategoriesContainer from "./components/admin/categories/CategoriesContainer";
 import CategoriesEditContainer from "./components/admin/categories/CategoriesEditContainer";
+import ResourcesContainer from "./components/admin/resources/ResourcesContainer";
+import ResourcesEditContainer from "./components/admin/resources/ResourcesEditContainer";
 import NotFound from "./components/pages/NotFound";
 
 function App() {
@@ -20,6 +22,11 @@ function App() {
           <Route
             path="/categories-edit/:_id?"
             component={CategoriesEditContainer}
+          />
+          <Route path="/resources" component={ResourcesContainer} />
+          <Route
+            path="/resources-edit/:_id?"
+            component={ResourcesEditContainer}
           />
           <Route component={NotFound} />
         </Switch>

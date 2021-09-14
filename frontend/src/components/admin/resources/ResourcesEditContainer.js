@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
-import { createCategory, updateCategory } from "../../../api/server";
+import {
+  createResource,
+  updateResource,
+} from "../../../controllers/ResourcesController";
 
-import { GetCategory } from "../../../controllers/CategoriesController";
+import { GetResource } from "../../../controllers/ResourcesController";
 
 import TextInput from "../../views/TextInput";
 
-const CategoriesEditTabGeneral = () => {
+const ResourcesEditContainer = () => {
   let initialFormData = {
     name: "",
+    link: "",
     description: "",
   };
 
@@ -22,19 +26,18 @@ const CategoriesEditTabGeneral = () => {
 
   if (_id) {
     // Editing
-    const { loading, category } = GetCategory(_id);
+    const { loading, resource } = GetResource(_id);
 
     isLoading = loading;
 
     if (!loading) {
-      initialFormData = { ...category };
+      initialFormData = { ...resource };
     }
   }
 
   const [formData, setFormData] = useState(initialFormData);
 
   useEffect(() => {
-    console.log(initialFormData);
     setFormData(initialFormData);
   }, [isLoading]);
 
@@ -42,9 +45,9 @@ const CategoriesEditTabGeneral = () => {
     e.preventDefault();
 
     if (_id) {
-      updateCategory(_id, formData);
+      updateResource(_id, formData);
     } else {
-      createCategory(formData);
+      createResource(formData);
     }
 
     history.goBack();
@@ -55,16 +58,23 @@ const CategoriesEditTabGeneral = () => {
   };
 
   if (isLoading) {
-    return "Loading category...";
+    return "Loading resource...";
   }
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <h1 className="heading-1">Edit resource</h1>
+      <form>
         <TextInput
           title="Name"
           name="name"
           value={formData.name}
+          onChange={handleChange}
+        />
+        <TextInput
+          title="URL"
+          name="link"
+          value={formData.link}
           onChange={handleChange}
         />
         <TextInput
@@ -79,4 +89,4 @@ const CategoriesEditTabGeneral = () => {
   );
 };
 
-export default CategoriesEditTabGeneral;
+export default ResourcesEditContainer;

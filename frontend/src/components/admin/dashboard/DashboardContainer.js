@@ -25,7 +25,10 @@ const DashboardContainer = () => {
       <h1 className="heading-1">Hello, User</h1>
       <DashboardListHeader title="Categories" destPath="/categories" />
       <DashboardCategoryList />
-      <DashboardListHeader title="Recently added resources" />
+      <DashboardListHeader
+        title="Recently added resources"
+        destPath="/resources"
+      />
       <DashboardResourceList />
       <hr />
       <input

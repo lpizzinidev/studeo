@@ -3,13 +3,13 @@ import { useState, useEffect } from "react";
 import * as api from "../api/server";
 
 export const GetCategories = () => {
-  const [loading, isLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
 
   const loadCategories = async () => {
     const { data } = await api.getCategories();
     setCategories(data);
-    isLoading(false);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -20,13 +20,13 @@ export const GetCategories = () => {
 };
 
 export const GetCategory = (_id) => {
-  const [loading, isLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState(null);
 
   const loadCategory = async () => {
     const { data } = await api.getCategory(_id);
     setCategory(data);
-    isLoading(false);
+    setLoading(false);
   };
 
   useEffect(() => {
