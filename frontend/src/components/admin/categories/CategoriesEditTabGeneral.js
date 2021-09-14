@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, useHistory } from "react-router-dom";
 
 import { createCategory, updateCategory } from "../../../api/server";
 
@@ -7,12 +7,14 @@ import { GetCategory } from "../../../controllers/CategoriesController";
 
 import TextInput from "../../views/TextInput";
 
-let initialFormData = {
-  title: "",
-  description: "",
-};
-
 const CategoriesEditTabGeneral = () => {
+  let initialFormData = {
+    name: "",
+    description: "",
+  };
+
+  const history = useHistory();
+
   // Check if editing mode
   const { _id } = useParams();
 
@@ -26,13 +28,18 @@ const CategoriesEditTabGeneral = () => {
 
     if (!loading) {
       initialFormData = {
-        title: category.name,
+        name: category.name,
         description: category.description,
       };
     }
   }
 
   const [formData, setFormData] = useState(initialFormData);
+
+  useEffect(() => {
+    console.log(initialFormData);
+    setFormData(initialFormData);
+  }, [isLoading]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,6 +49,8 @@ const CategoriesEditTabGeneral = () => {
     } else {
       createCategory(formData);
     }
+
+    history.goBack();
   };
 
   const handleChange = (e) => {

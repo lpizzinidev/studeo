@@ -2,7 +2,7 @@ import CategoriesItem from "./CategoriesItem";
 
 import { GetCategories } from "../../../controllers/CategoriesController";
 
-const CategoriesList = () => {
+const CategoriesList = ({ search }) => {
   const { loading, categories } = GetCategories();
 
   if (loading) {
@@ -11,9 +11,13 @@ const CategoriesList = () => {
 
   return (
     <div className="card-list-w100">
-      {categories.map((category) => {
-        return <CategoriesItem key={category._id} {...category} />;
-      })}
+      {categories
+        .filter((category) => {
+          return category.name.toUpperCase().includes(search.toUpperCase());
+        })
+        .map((category) => {
+          return <CategoriesItem key={category._id} {...category} />;
+        })}
     </div>
   );
 };

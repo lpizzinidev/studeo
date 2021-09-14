@@ -1,12 +1,19 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import SearchBar from "../../views/SearchBar";
 import CategoriesList from "./CategoriesList";
 
 const CategoriesContainer = () => {
+  const [search, setSearch] = useState("");
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
   return (
     <div>
-      <SearchBar placeholder="Search category..." />
+      <SearchBar onSearch={handleSearch} placeholder="Search category..." />
       <div className="list-header">
         <h1 className="heading-1">Categories</h1>
         <Link to="/categories-edit">
@@ -15,7 +22,7 @@ const CategoriesContainer = () => {
           </button>
         </Link>
       </div>
-      <CategoriesList />
+      <CategoriesList search={search} />
     </div>
   );
 };
