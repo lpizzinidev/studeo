@@ -218,6 +218,31 @@ a {
   height: 24px;
 }
 
+/* Sidenav */
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: var(--color-secondary);
+  overflow-x: hidden;
+  transition: 0.4s;
+  padding: 16px;
+  box-shadow: var(--box-shadow);
+}
+
+.sidenav.open {
+  width: 300px;
+}
+
+@media screen and (max-width: 600px) {
+  .sidenav.open {
+    width: 100%;
+  }
+}
+
 /* Homepage */
 .home-navbar {
   text-align: right;
