@@ -34,7 +34,6 @@ const CategoriesEditTabGeneral = () => {
   const [formData, setFormData] = useState(initialFormData);
 
   useEffect(() => {
-    console.log(initialFormData);
     setFormData(initialFormData);
   }, [isLoading]);
 

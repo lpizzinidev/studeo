@@ -1,11 +1,22 @@
 const Resource = require("../models/resource.model");
 
-const getResources = async (req, res) => {
+const getResourcesList = async (req, res) => {
   try {
     const data = await Resource.find();
     res.status(200).json(data);
   } catch (err) {
     res.status(400).json({ message: "Error fetching resources" });
+  }
+};
+
+const getResource = async (req, res) => {
+  try {
+    const { _id } = req.params;
+
+    const data = await Resource.findById(_id);
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(400).json({ message: "Error fetching resource" });
   }
 };
 
@@ -44,7 +55,8 @@ const deleteResource = async (req, res) => {
 };
 
 module.exports = {
-  getResources,
+  getResourcesList,
+  getResource,
   createResource,
   updateResource,
   deleteResource,

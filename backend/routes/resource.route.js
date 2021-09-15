@@ -2,13 +2,18 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  getResources,
+  getResourcesList,
+  getResource,
   createResource,
   updateResource,
   deleteResource,
 } = require("../controllers/resource.controller");
 
-router.route("/resources").get(getResources).post(createResource);
-router.route("/resources/:_id").put(updateResource).delete(deleteResource);
+router.route("/resources").get(getResourcesList).post(createResource);
+router
+  .route("/resources/:_id")
+  .get(getResource)
+  .put(updateResource)
+  .delete(deleteResource);
 
 module.exports = router;

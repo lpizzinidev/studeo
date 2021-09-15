@@ -15,17 +15,21 @@ export const signIn = (formData) => API.post("/signin", formData);
 export const signUp = (formData) => API.post("/signup", formData);
 
 /* Resources */
-export const getResourceList = () => API.get("/resources");
-export const getResource = (id) => API.get(`/resources/${id}`);
-export const createResource = (formData) => API.post("/resources", formData);
+const resourcesPath = "/resources";
+
+export const getResourceList = () => API.get(resourcesPath);
+export const getResource = (id) => API.get(`${resourcesPath}/${id}`);
+export const createResource = (formData) => API.post(resourcesPath, formData);
 export const updateResource = (id, formData) =>
-  API.put(`/resource/${id}`, formData);
-export const deleteResource = (id) => API.delete(`resources/${id}`);
+  API.put(`${resourcesPath}/${id}`, formData);
+export const deleteResource = (id) => API.delete(`${resourcesPath}/${id}`);
 
 /* Categories */
-export const getCategories = () => API.get("/categories");
-export const getCategory = (id) => API.get(`/categories/${id}`);
-export const createCategory = (formData) => API.post("/categories", formData);
+const categoriesPath = "/categories";
+
+export const getCategories = () => API.get(categoriesPath);
+export const getCategory = (id) => API.get(`/${categoriesPath}/${id}`);
+export const createCategory = (formData) => API.post(categoriesPath, formData);
 export const updateCategory = (id, formData) =>
-  API.put(`/categories/${id}`, formData);
-export const deleteCategory = (id) => API.delete(`/categories/${id}`);
+  API.put(`${categoriesPath}/${id}`, formData);
+export const deleteCategory = (id) => API.delete(`${categoriesPath}/${id}`);

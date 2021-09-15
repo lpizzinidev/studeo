@@ -53,6 +53,10 @@ const ResourcesEditContainer = () => {
     history.goBack();
   };
 
+  const handleCancel = () => {
+    history.goBack();
+  };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -64,7 +68,7 @@ const ResourcesEditContainer = () => {
   return (
     <div>
       <h1 className="heading-1">Edit resource</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <TextInput
           title="Name"
           name="name"
@@ -82,6 +86,12 @@ const ResourcesEditContainer = () => {
           name="description"
           value={formData.description}
           onChange={handleChange}
+        />
+        <input
+          type="button"
+          className="text-button"
+          value="CANCEL"
+          onClick={handleCancel}
         />
         <input type="submit" className="button" value="SAVE" />
       </form>

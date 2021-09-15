@@ -46,7 +46,7 @@ export const createResource = async (formData) => {
 
 export const updateResource = async (id, formData) => {
   try {
-    await api.updateResource(formData);
+    await api.updateResource(id, formData);
   } catch (err) {
     console.log(err);
   }
