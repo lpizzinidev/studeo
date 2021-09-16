@@ -11,37 +11,36 @@ import ResourcesContainer from "./components/admin/resources/ResourcesContainer"
 import ResourcesEditContainer from "./components/admin/resources/ResourcesEditContainer";
 import NotFound from "./components/pages/NotFound";
 
+import AppContext from "./contexts/AppContext";
+
 function App() {
   const [sidenavOpen, setSidenavOpen] = useState(false);
 
-  const toggleSidenav = () => {
-    setSidenavOpen((oldSidenavOpen) => !oldSidenavOpen);
-  };
-
   return (
-    <div className="container">
-      <BrowserRouter>
-        <Sidenav open={sidenavOpen} />
-        <button onClick={toggleSidenav}>Toggle</button>
-        <Switch>
-          <Route path="/" component={HomeContainer} exact />
-          <Route path="/signin" component={AuthContainer} />
-          <Route path="/signup" component={AuthContainer} />
-          <Route path="/dashboard" component={DashboardContainer} />
-          <Route path="/categories" component={CategoriesContainer} />
-          <Route
-            path="/categories-edit/:_id?"
-            component={CategoriesEditContainer}
-          />
-          <Route path="/resources" component={ResourcesContainer} />
-          <Route
-            path="/resources-edit/:_id?"
-            component={ResourcesEditContainer}
-          />
-          <Route component={NotFound} />
-        </Switch>
-      </BrowserRouter>
-    </div>
+    <AppContext.Provider value={{ setSidenavOpen }}>
+      <div className="container">
+        <BrowserRouter>
+          <Sidenav open={sidenavOpen} />
+          <Switch>
+            <Route path="/" component={HomeContainer} exact />
+            <Route path="/signin" component={AuthContainer} />
+            <Route path="/signup" component={AuthContainer} />
+            <Route path="/dashboard" component={DashboardContainer} />
+            <Route path="/categories" component={CategoriesContainer} />
+            <Route
+              path="/categories-edit/:_id?"
+              component={CategoriesEditContainer}
+            />
+            <Route path="/resources" component={ResourcesContainer} />
+            <Route
+              path="/resources-edit/:_id?"
+              component={ResourcesEditContainer}
+            />
+            <Route component={NotFound} />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    </AppContext.Provider>
   );
 }
 
