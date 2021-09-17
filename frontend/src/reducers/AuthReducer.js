@@ -9,8 +9,6 @@ export const authReducer = (state, action) => {
       localStorage.clear();
       break;
     default:
-      break;
+      return state;
   }
-
-  return state;
 };

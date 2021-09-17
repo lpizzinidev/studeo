@@ -11,7 +11,6 @@ const DashboardCategoryList = ({ search }) => {
 
   return (
     <div className="card-list">
-      <p className="text-body-1">Your categories ({categories.length})</p>
       {categories
         .filter((category) => {
           return category.name.toUpperCase().includes(search.toUpperCase());

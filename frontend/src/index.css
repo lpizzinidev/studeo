@@ -278,4 +278,9 @@ a {
 
 .card-item > div {
   padding: 30px 20px;
+  display: flex;
+}
+
+.card-item > div > p {
+  flex: 1;
 }
