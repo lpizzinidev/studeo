@@ -10,7 +10,7 @@ const CategoriesList = ({ search }) => {
   }
 
   return (
-    <div className="card-list-w100">
+    <div className="card-list">
       {categories
         .filter((category) => {
           return category.name.toUpperCase().includes(search.toUpperCase());

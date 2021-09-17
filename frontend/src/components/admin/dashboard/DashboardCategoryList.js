@@ -2,7 +2,7 @@ import DashboardCategoryItem from "./DashboardCategoryItem";
 
 import { GetCategories } from "../../../controllers/CategoriesController";
 
-const DashboardCategoryList = () => {
+const DashboardCategoryList = ({ search }) => {
   const { loading, categories } = GetCategories();
 
   if (loading) {
@@ -11,9 +11,14 @@ const DashboardCategoryList = () => {
 
   return (
     <div className="card-list">
-      {categories.map((category) => {
-        return <DashboardCategoryItem key={category._id} {...category} />;
-      })}
+      <p className="text-body-1">Your categories ({categories.length})</p>
+      {categories
+        .filter((category) => {
+          return category.name.toUpperCase().includes(search.toUpperCase());
+        })
+        .map((category) => {
+          return <DashboardCategoryItem key={category._id} {...category} />;
+        })}
     </div>
   );
 };

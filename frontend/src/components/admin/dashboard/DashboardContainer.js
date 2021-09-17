@@ -1,10 +1,8 @@
-import { useReducer } from "react";
+import { useState, useReducer } from "react";
 import { useHistory } from "react-router-dom";
 
 import SearchBar from "../../views/SearchBar";
-import DashboardListHeader from "./DashboardListHeader";
 import DashboardCategoryList from "./DashboardCategoryList";
-import DashboardResourceList from "./DashboardResourceList";
 
 import { authReducer } from "../../../reducers/AuthReducer";
 
@@ -14,6 +12,11 @@ const DashboardContainer = () => {
   const history = useHistory();
 
   const [state, dispatch] = useReducer(authReducer);
+  const [search, setSearch] = useState("");
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
 
   const handleLogout = () => {
     logout(dispatch, history);
@@ -21,15 +24,9 @@ const DashboardContainer = () => {
 
   return (
     <div>
-      <SearchBar placeholder="Search resource..." />
+      <SearchBar placeholder="Search category..." onSearch={handleSearch} />
       <h1 className="heading-1">Hello, User</h1>
-      <DashboardListHeader title="Categories" destPath="/categories" />
-      <DashboardCategoryList />
-      <DashboardListHeader
-        title="Recently added resources"
-        destPath="/resources"
-      />
-      <DashboardResourceList />
+      <DashboardCategoryList search={search} />
       <hr />
       <input
         type="button"
