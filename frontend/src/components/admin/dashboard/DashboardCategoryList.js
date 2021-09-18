@@ -1,9 +1,15 @@
+import { useContext } from "react";
+
+import CategoriesContext from "../../../contexts/CategoriesContext";
+
 import DashboardCategoryItem from "./DashboardCategoryItem";
 
 import { GetCategories } from "../../../controllers/CategoriesController";
 
 const DashboardCategoryList = ({ search }) => {
-  const { loading, categories } = GetCategories();
+  const { dispatchCategories } = useContext(CategoriesContext);
+
+  const { loading, categories } = GetCategories(dispatchCategories);
 
   if (loading) {
     return "Loading categories...";

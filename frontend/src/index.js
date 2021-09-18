@@ -4,10 +4,10 @@ import "./index.css";
 import App from "./App";
 
 // Fonts
-import "./fonts/Fredoka_One/FredokaOne-Regular.ttf";
-import "./fonts/Roboto/Roboto-Light.ttf";
-import "./fonts/Roboto/Roboto-Regular.ttf";
-import "./fonts/Roboto/Roboto-Medium.ttf";
+import "./assets/fonts/Fredoka_One/FredokaOne-Regular.ttf";
+import "./assets/fonts/Roboto/Roboto-Light.ttf";
+import "./assets/fonts/Roboto/Roboto-Regular.ttf";
+import "./assets/fonts/Roboto/Roboto-Medium.ttf";
 
 ReactDOM.render(
   <React.StrictMode>
