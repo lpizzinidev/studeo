@@ -1,12 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
-import {
-  createResource,
-  updateResource,
-} from "../../../controllers/ResourcesController";
-
-import { GetResource } from "../../../controllers/ResourcesController";
+import { ResourcesContext } from "../../../contexts/ResourcesContext";
 
 import TextInput from "../../views/TextInput";
 
@@ -19,6 +14,9 @@ const ResourcesEditContainer = () => {
 
   const history = useHistory();
 
+  const { getResource, createResource, updateResource } =
+    useContext(ResourcesContext);
+
   // Check if editing mode
   const { _id } = useParams();
 
@@ -26,13 +24,8 @@ const ResourcesEditContainer = () => {
 
   if (_id) {
     // Editing
-    const { loading, resource } = GetResource(_id);
-
-    isLoading = loading;
-
-    if (!loading) {
-      initialFormData = { ...resource };
-    }
+    const resource = getResource(_id);
+    initialFormData = { ...resource };
   }
 
   const [formData, setFormData] = useState(initialFormData);

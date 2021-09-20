@@ -5,11 +5,7 @@ import {
   DELETE_CATEGORY,
 } from "./ActionTypes";
 
-export const categoriesInitialState = {
-  categories: [],
-};
-
-export const categoriesReducer = (state, action) => {
+export const CategoriesReducer = (state, action) => {
   switch (action.type) {
     case SET_CATEGORIES_LIST:
       return { ...state, categories: action.payload };

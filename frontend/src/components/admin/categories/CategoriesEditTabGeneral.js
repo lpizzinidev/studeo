@@ -1,11 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
-import CategoriesContext from "../../../contexts/CategoriesContext";
-
-import { createCategory, updateCategory } from "../../../api/server";
-
-import { getCategory } from "../../../controllers/CategoriesController";
+import { CategoriesContext } from "../../../contexts/CategoriesContext";
 
 import TextInput from "../../views/TextInput";
 
@@ -17,7 +13,8 @@ const CategoriesEditTabGeneral = () => {
 
   const history = useHistory();
 
-  const { stateCategories, dispatchCategories } = useContext(CategoriesContext);
+  const { getCategory, createCategory, updateCategory } =
+    useContext(CategoriesContext);
 
   // Check if editing mode
   const { _id } = useParams();
@@ -26,8 +23,7 @@ const CategoriesEditTabGeneral = () => {
 
   if (_id) {
     // Editing
-    const category = getCategory(_id, stateCategories);
-    console.log(category);
+    const category = getCategory(_id);
     initialFormData = { ...category };
   }
 
@@ -41,9 +37,9 @@ const CategoriesEditTabGeneral = () => {
     e.preventDefault();
 
     if (_id) {
-      updateCategory(_id, formData, dispatchCategories);
+      updateCategory(_id, formData);
     } else {
-      createCategory(formData, dispatchCategories);
+      createCategory(formData);
     }
 
     history.goBack();

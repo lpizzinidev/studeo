@@ -1,17 +1,15 @@
-import { useState, useReducer } from "react";
+import { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
+
+import { AuthContext } from "../../../contexts/AuthContext";
 
 import SearchBar from "../../views/SearchBar";
 import DashboardCategoryList from "./DashboardCategoryList";
 
-import { authReducer } from "../../../reducers/AuthReducer";
-
-import { logout } from "../../../controllers/AuthController";
-
 const DashboardContainer = () => {
   const history = useHistory();
 
-  const [state, dispatch] = useReducer(authReducer);
+  const { logout } = useContext(AuthContext);
 
   const [search, setSearch] = useState("");
 
@@ -20,7 +18,7 @@ const DashboardContainer = () => {
   };
 
   const handleLogout = () => {
-    logout(dispatch, history);
+    logout(history);
   };
 
   return (

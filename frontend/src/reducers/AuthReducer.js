@@ -1,6 +1,6 @@
 import { AUTH, LOGOUT } from "./ActionTypes";
 
-export const authReducer = (state, action) => {
+export const AuthReducer = (state, action) => {
   switch (action.type) {
     case AUTH:
       localStorage.setItem("token", action.payload);

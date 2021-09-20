@@ -1,12 +1,14 @@
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
 
-import ResourcesItem from "./ResourcesItem";
+import { ResourcesContext } from "../../../contexts/ResourcesContext";
 
-import { GetResourceList } from "../../../controllers/ResourcesController";
+import ResourcesItem from "./ResourcesItem";
 
 const ResourcesList = ({ search }) => {
   const { category } = useParams();
 
+  const { GetResourceList } = useContext(ResourcesContext);
   const { loading, resources } = GetResourceList();
 
   if (loading) {

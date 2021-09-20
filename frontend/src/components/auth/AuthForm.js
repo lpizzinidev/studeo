@@ -1,9 +1,7 @@
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
 
-import { signin, signup } from "../../controllers/AuthController";
-
-import { authReducer } from "../../reducers/AuthReducer";
+import { AuthContext } from "../../contexts/AuthContext";
 
 import TextInput from "../views/TextInput";
 
@@ -20,7 +18,7 @@ const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
 
-  const [state, dispatch] = useReducer(authReducer);
+  const { signin, signup } = useContext(AuthContext);
 
   useEffect(() => {
     setIsLogin(location.pathname === "/signin");
@@ -30,9 +28,9 @@ const AuthForm = () => {
     e.preventDefault();
 
     if (isLogin) {
-      signin(formData, dispatch, history);
+      signin(formData, history);
     } else {
-      signup(formData, dispatch, history);
+      signup(formData, history);
     }
   };
 
