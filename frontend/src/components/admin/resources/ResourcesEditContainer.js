@@ -14,7 +14,7 @@ const ResourcesEditContainer = () => {
 
   const history = useHistory();
 
-  const { getResource, createResource, updateResource } =
+  const { GetResource, createResource, updateResource } =
     useContext(ResourcesContext);
 
   // Check if editing mode
@@ -24,7 +24,9 @@ const ResourcesEditContainer = () => {
 
   if (_id) {
     // Editing
-    const resource = getResource(_id);
+    const { loading, resource } = GetResource(_id);
+
+    isLoading = loading;
     initialFormData = { ...resource };
   }
 

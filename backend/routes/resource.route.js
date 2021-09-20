@@ -9,7 +9,8 @@ const {
   deleteResource,
 } = require("../controllers/resource.controller");
 
-router.route("/resources").get(getResourcesList).post(createResource);
+router.route("/resources").post(createResource);
+router.route("/resources/:category").get(getResourcesList);
 router
   .route("/resources/:_id")
   .get(getResource)

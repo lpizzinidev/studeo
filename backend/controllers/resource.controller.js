@@ -2,7 +2,8 @@ const Resource = require("../models/resource.model");
 
 const getResourcesList = async (req, res) => {
   try {
-    const data = await Resource.find();
+    const { category } = req.params;
+    const data = await Resource.find({ category });
     res.status(200).json(data);
   } catch (err) {
     res.status(400).json({ message: "Error fetching resources" });

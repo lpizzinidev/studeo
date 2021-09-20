@@ -25,12 +25,12 @@ export const ResourcesProvider = ({ children }) => {
   const [state, dispatch] = useReducer(ResourcesReducer, initialState);
 
   // Actions
-  const GetResourcesList = () => {
+  const GetResourcesList = (category) => {
     const [loading, setLoading] = useState(true);
     const [resources, setResources] = useState([]);
 
     const loadResources = async () => {
-      const { data } = await api.getResourceList();
+      const { data } = await api.getResourceList(category);
 
       dispatch({ type: SET_RESOURCES_LIST, payload: data });
 
@@ -45,8 +45,22 @@ export const ResourcesProvider = ({ children }) => {
     return { loading, resources };
   };
 
-  const getResource = (id) => {
-    return state.resources.filter((resource) => resource._id === id);
+  const GetResource = (id) => {
+    const [loading, setLoading] = useState(true);
+    const [resource, setResource] = useState(null);
+
+    const loadResource = async () => {
+      const { data } = await api.getResource(id);
+
+      setResource(data);
+      setLoading(false);
+    };
+
+    useEffect(() => {
+      loadResource();
+    }, []);
+
+    return { loading, resource };
   };
 
   const createResource = async (formData) => {
@@ -81,7 +95,7 @@ export const ResourcesProvider = ({ children }) => {
       value={{
         resources: state.resources,
         GetResourcesList,
-        getResource,
+        GetResource,
         createResource,
         updateResource,
         deleteResource,

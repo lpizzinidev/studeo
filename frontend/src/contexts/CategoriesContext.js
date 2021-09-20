@@ -45,8 +45,21 @@ export const CategoriesProvider = ({ children }) => {
     return { loading, categories };
   };
 
-  const getCategory = (_id) => {
-    return state.categories.find((category) => category._id === _id);
+  const GetCategory = (_id) => {
+    const [loading, setLoading] = useState(true);
+    const [category, setCategory] = useState(null);
+
+    const loadCategory = async () => {
+      const { data } = await api.getCategory(_id);
+      setCategory(data);
+      setLoading(false);
+    };
+
+    useEffect(() => {
+      loadCategory();
+    }, []);
+
+    return { loading, category };
   };
 
   const createCategory = async (formData) => {
@@ -83,7 +96,7 @@ export const CategoriesProvider = ({ children }) => {
       value={{
         categories: state.categories,
         GetCategoriesList,
-        getCategory,
+        GetCategory,
         createCategory,
         updateCategory,
         deleteCategory,

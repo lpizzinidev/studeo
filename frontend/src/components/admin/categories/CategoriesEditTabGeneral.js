@@ -13,7 +13,7 @@ const CategoriesEditTabGeneral = () => {
 
   const history = useHistory();
 
-  const { getCategory, createCategory, updateCategory } =
+  const { GetCategory, createCategory, updateCategory } =
     useContext(CategoriesContext);
 
   // Check if editing mode
@@ -23,7 +23,9 @@ const CategoriesEditTabGeneral = () => {
 
   if (_id) {
     // Editing
-    const category = getCategory(_id);
+    const { loading, category } = GetCategory(_id);
+
+    isLoading = loading;
     initialFormData = { ...category };
   }
 
