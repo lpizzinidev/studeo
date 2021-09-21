@@ -8,18 +8,11 @@ export const CategoriesContainer = () => {
 
   return (
     <div>
-      <h1 className='heading-1'>Edit category</h1>
-      <CategoriesEdit />
-      {_id && (
-        <>
-          <Link to={`/resources/${_id}`}>
-            <button type='button' className='button'>
-              Add resource
-            </button>
-          </Link>
-          <ResourcesList />
-        </>
-      )}
+      <h1 className='heading-2'>{_id ? 'Edit' : 'New'} category</h1>
+      <div className='category-container'>
+        <CategoriesEdit />
+        {_id && <ResourcesList />}
+      </div>
     </div>
   );
 };

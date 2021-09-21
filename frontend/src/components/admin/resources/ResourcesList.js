@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { ResourcesContext } from '../../../contexts/ResourcesContext';
 
@@ -17,6 +17,11 @@ export const ResourcesList = ({ search }) => {
 
   return (
     <div>
+      <Link to={`/resources/${_id}`}>
+        <button type='button' className='button'>
+          Add resource
+        </button>
+      </Link>
       <div className='card-list'>
         {resources
           .filter((resource) => {

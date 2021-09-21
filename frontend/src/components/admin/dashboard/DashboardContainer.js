@@ -1,10 +1,13 @@
 import { useState, useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { AuthContext } from '../../../contexts/AuthContext';
 
 import SearchBar from '../../views/SearchBar';
+import { Fab } from '../../views/Fab';
 import { CategoriesList } from '../categories/CategoriesList';
+
+import plusIcon from '../../../assets/icons/plus.svg';
 
 const DashboardContainer = () => {
   const history = useHistory();
@@ -25,11 +28,7 @@ const DashboardContainer = () => {
     <div>
       <SearchBar placeholder='Search category...' onSearch={handleSearch} />
       <h1 className='heading-1'>Hello, User</h1>
-      <Link to='/categories'>
-        <button type='button' className='button'>
-          Add category
-        </button>
-      </Link>
+      <p className='text-body-1'>Your categories</p>
       <CategoriesList search={search} />
       <hr />
       <input
@@ -38,6 +37,7 @@ const DashboardContainer = () => {
         value='LOGOUT'
         onClick={handleLogout}
       />
+      <Fab icon={plusIcon} location='/categories' />
     </div>
   );
 };
