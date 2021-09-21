@@ -28,7 +28,7 @@ const DashboardContainer = () => {
     <div>
       <SearchBar placeholder='Search category...' onSearch={handleSearch} />
       <h1 className='heading-1'>Hello, User</h1>
-      <p className='text-body-1'>Your categories</p>
+      <p className='subtitle'>Your categories</p>
       <CategoriesList search={search} />
       <hr />
       <input
@@ -37,7 +37,7 @@ const DashboardContainer = () => {
         value='LOGOUT'
         onClick={handleLogout}
       />
-      <Fab icon={plusIcon} location='/categories' />
+      <Fab icon={plusIcon} destination='/categories' />
     </div>
   );
 };
