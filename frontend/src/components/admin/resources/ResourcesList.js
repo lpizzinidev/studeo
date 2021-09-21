@@ -1,29 +1,26 @@
-import { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 
-import { ResourcesContext } from "../../../contexts/ResourcesContext";
+import { ResourcesContext } from '../../../contexts/ResourcesContext';
 
-import ResourcesItem from "./ResourcesItem";
+import { ResourcesItem } from './ResourcesItem';
 
-const ResourcesList = ({ search }) => {
-  const { category } = useParams();
+export const ResourcesList = ({ search }) => {
+  const { _id } = useParams();
 
-  const { GetResourceList } = useContext(ResourcesContext);
-  const { loading, resources } = GetResourceList();
+  const { GetResourcesList } = useContext(ResourcesContext);
+  const { loading, resources } = GetResourcesList(_id);
 
   if (loading) {
-    return "Loading resources...";
+    return 'Loading resources...';
   }
 
   return (
     <div>
-      <div className="card-list">
+      <div className='card-list'>
         {resources
           .filter((resource) => {
-            return resource.category === category;
-          })
-          .filter((resource) => {
-            return resource.name.toUpperCase().includes(search.toUpperCase());
+            return resource.category === _id;
           })
           .map((resource) => {
             return <ResourcesItem key={resource._id} {...resource} />;
@@ -32,5 +29,3 @@ const ResourcesList = ({ search }) => {
     </div>
   );
 };
-
-export default ResourcesList;

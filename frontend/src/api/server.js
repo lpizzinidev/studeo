@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios';
 
-const API = axios.create({ baseURL: "http://localhost:5000/api/v1" });
+const API = axios.create({ baseURL: 'http://localhost:5000/api/v1' });
 
 API.interceptors.request.use((req) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   if (token) {
     req.headers.authorization = `Bearer ${token}`;
   }
@@ -11,22 +11,25 @@ API.interceptors.request.use((req) => {
 });
 
 /* Authentication */
-export const signIn = (formData) => API.post("/signin", formData);
-export const signUp = (formData) => API.post("/signup", formData);
+export const signIn = (formData) => API.post('/signin', formData);
+export const signUp = (formData) => API.post('/signup', formData);
 
 /* Resources */
-const resourcesPath = "/resources";
+const resourcesPath = '/resources';
 
 export const getResourceList = (category) =>
   API.get(`${resourcesPath}/${category}`);
-export const getResource = (id) => API.get(`${resourcesPath}/${id}`);
-export const createResource = (formData) => API.post(resourcesPath, formData);
-export const updateResource = (id, formData) =>
-  API.put(`${resourcesPath}/${id}`, formData);
-export const deleteResource = (id) => API.delete(`${resourcesPath}/${id}`);
+export const getResource = (id, category) =>
+  API.get(`${resourcesPath}/${category}/${id}`);
+export const createResource = (category, formData) =>
+  API.post(`${resourcesPath}/${category}`, formData);
+export const updateResource = (id, category, formData) =>
+  API.put(`${resourcesPath}/${category}/${id}`, formData);
+export const deleteResource = (id, category) =>
+  API.delete(`${resourcesPath}/${category}/${id}`);
 
 /* Categories */
-const categoriesPath = "/categories";
+const categoriesPath = '/categories';
 
 export const getCategoriesList = () => API.get(categoriesPath);
 export const getCategory = (id) => API.get(`${categoriesPath}/${id}`);

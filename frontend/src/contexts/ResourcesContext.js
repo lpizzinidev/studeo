@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useReducer } from "react";
-import { ResourcesReducer } from "../reducers/ResourcesReducer";
+import React, { useState, useEffect, useReducer } from 'react';
+import { ResourcesReducer } from '../reducers/ResourcesReducer';
 
 // API
-import * as api from "../api/server";
+import * as api from '../api/server';
 
 // Action types
 import {
@@ -10,7 +10,7 @@ import {
   CREATE_RESOURCE,
   UPDATE_RESOURCE,
   DELETE_RESOURCE,
-} from "../reducers/ActionTypes";
+} from '../reducers/ActionTypes';
 
 // Initial state
 const initialState = {
@@ -45,12 +45,12 @@ export const ResourcesProvider = ({ children }) => {
     return { loading, resources };
   };
 
-  const GetResource = (id) => {
+  const GetResource = (id, category) => {
     const [loading, setLoading] = useState(true);
     const [resource, setResource] = useState(null);
 
     const loadResource = async () => {
-      const { data } = await api.getResource(id);
+      const { data } = await api.getResource(id, category);
 
       setResource(data);
       setLoading(false);
@@ -63,27 +63,27 @@ export const ResourcesProvider = ({ children }) => {
     return { loading, resource };
   };
 
-  const createResource = async (formData) => {
+  const createResource = async (category, formData) => {
     try {
-      const { data } = await api.createResource(formData);
+      const { data } = await api.createResource(category, formData);
       dispatch({ type: CREATE_RESOURCE, payload: data });
     } catch (err) {
       console.log(err);
     }
   };
 
-  const updateResource = async (id, formData) => {
+  const updateResource = async (id, category, formData) => {
     try {
-      const { data } = await api.updateResource(id, formData);
+      const { data } = await api.updateResource(id, category, formData);
       dispatch({ type: UPDATE_RESOURCE, payload: data });
     } catch (err) {
       console.log(err);
     }
   };
 
-  const deleteResource = async (id) => {
+  const deleteResource = async (id, category) => {
     try {
-      await api.deleteResource(id);
+      await api.deleteResource(id, category);
       dispatch({ type: DELETE_RESOURCE, payload: id });
     } catch (err) {
       console.log(err);

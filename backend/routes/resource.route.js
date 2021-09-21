@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 const {
@@ -7,12 +7,12 @@ const {
   createResource,
   updateResource,
   deleteResource,
-} = require("../controllers/resource.controller");
+} = require('../controllers/resource.controller');
 
-router.route("/resources").post(createResource);
-router.route("/resources/:category").get(getResourcesList);
+router.route('/resources/:category').get(getResourcesList);
+router.route('/resources/:category').post(createResource);
 router
-  .route("/resources/:_id")
+  .route('/resources/:category/:_id')
   .get(getResource)
   .put(updateResource)
   .delete(deleteResource);

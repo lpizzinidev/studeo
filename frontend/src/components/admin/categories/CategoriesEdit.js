@@ -1,14 +1,14 @@
-import { useState, useEffect, useContext } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useState, useEffect, useContext } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 
-import { CategoriesContext } from "../../../contexts/CategoriesContext";
+import { CategoriesContext } from '../../../contexts/CategoriesContext';
 
-import TextInput from "../../views/TextInput";
+import TextInput from '../../views/TextInput';
 
-const CategoriesEditTabGeneral = () => {
+export const CategoriesEdit = () => {
   let initialFormData = {
-    name: "",
-    description: "",
+    name: '',
+    description: '',
   };
 
   const history = useHistory();
@@ -52,28 +52,26 @@ const CategoriesEditTabGeneral = () => {
   };
 
   if (isLoading) {
-    return "Loading category...";
+    return 'Loading category...';
   }
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <TextInput
-          title="Name"
-          name="name"
+          title='Name'
+          name='name'
           value={formData.name}
           onChange={handleChange}
         />
         <TextInput
-          title="Description"
-          name="description"
+          title='Description'
+          name='description'
           value={formData.description}
           onChange={handleChange}
         />
-        <input type="submit" className="button" value="SAVE" />
+        <input type='submit' className='button' value='SAVE' />
       </form>
     </div>
   );
 };
-
-export default CategoriesEditTabGeneral;

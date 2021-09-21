@@ -1,15 +1,15 @@
-import { useState, useEffect, useContext } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useState, useEffect, useContext } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 
-import { ResourcesContext } from "../../../contexts/ResourcesContext";
+import { ResourcesContext } from '../../../contexts/ResourcesContext';
 
-import TextInput from "../../views/TextInput";
+import TextInput from '../../views/TextInput';
 
-const ResourcesEditContainer = () => {
+export const ResourcesEdit = () => {
   let initialFormData = {
-    name: "",
-    link: "",
-    description: "",
+    name: '',
+    link: '',
+    description: '',
   };
 
   const history = useHistory();
@@ -18,13 +18,13 @@ const ResourcesEditContainer = () => {
     useContext(ResourcesContext);
 
   // Check if editing mode
-  const { _id } = useParams();
+  const { _id, category } = useParams();
 
   let isLoading = false;
 
   if (_id) {
     // Editing
-    const { loading, resource } = GetResource(_id);
+    const { loading, resource } = GetResource(_id, category);
 
     isLoading = loading;
     initialFormData = { ...resource };
@@ -40,9 +40,9 @@ const ResourcesEditContainer = () => {
     e.preventDefault();
 
     if (_id) {
-      updateResource(_id, formData);
+      updateResource(_id, category, formData);
     } else {
-      createResource(formData);
+      createResource(category, formData);
     }
 
     history.goBack();
@@ -57,41 +57,39 @@ const ResourcesEditContainer = () => {
   };
 
   if (isLoading) {
-    return "Loading resource...";
+    return 'Loading resource...';
   }
 
   return (
     <div>
-      <h1 className="heading-1">Edit resource</h1>
+      <h1 className='heading-1'>Edit resource</h1>
       <form onSubmit={handleSubmit}>
         <TextInput
-          title="Name"
-          name="name"
+          title='Name'
+          name='name'
           value={formData.name}
           onChange={handleChange}
         />
         <TextInput
-          title="URL"
-          name="link"
+          title='URL'
+          name='link'
           value={formData.link}
           onChange={handleChange}
         />
         <TextInput
-          title="Description"
-          name="description"
+          title='Description'
+          name='description'
           value={formData.description}
           onChange={handleChange}
         />
         <input
-          type="button"
-          className="text-button"
-          value="CANCEL"
+          type='button'
+          className='text-button'
+          value='CANCEL'
           onClick={handleCancel}
         />
-        <input type="submit" className="button" value="SAVE" />
+        <input type='submit' className='button' value='SAVE' />
       </form>
     </div>
   );
 };
-
-export default ResourcesEditContainer;
