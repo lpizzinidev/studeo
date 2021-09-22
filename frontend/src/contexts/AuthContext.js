@@ -1,11 +1,11 @@
-import React, { useReducer } from "react";
-import { AuthReducer } from "../reducers/AuthReducer";
+import React, { useReducer } from 'react';
+import { AuthReducer } from '../reducers/AuthReducer';
 
 // API
-import * as api from "../api/server";
+import * as api from '../api/server';
 
 // Action types
-import { AUTH, LOGOUT } from "../reducers/ActionTypes";
+import { AUTH, LOGOUT } from '../reducers/ActionTypes';
 
 // Create context
 export const AuthContext = React.createContext();
@@ -15,13 +15,17 @@ export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer);
 
   // Actions
+  const isLogged = () => {
+    return !!localStorage.getItem('token');
+  };
+
   const signin = async (formData, history) => {
     try {
       const { data } = await api.signIn(formData);
 
       dispatch({ type: AUTH, payload: data.token });
 
-      history.push("/dashboard");
+      history.push('/dashboard');
     } catch (err) {
       console.log(err);
     }
@@ -33,7 +37,7 @@ export const AuthProvider = ({ children }) => {
 
       dispatch({ type: AUTH, payload: data.token });
 
-      history.push("/dashboard");
+      history.push('/dashboard');
     } catch (err) {
       console.log(err);
     }
@@ -41,12 +45,13 @@ export const AuthProvider = ({ children }) => {
 
   const logout = (history) => {
     dispatch({ type: LOGOUT });
-    history.push("/");
+    history.push('/');
   };
 
   return (
     <AuthContext.Provider
       value={{
+        isLogged,
         signin,
         signup,
         logout,

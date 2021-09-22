@@ -11,6 +11,9 @@ import { AuthProvider } from './contexts/AuthContext';
 import { CategoriesProvider } from './contexts/CategoriesContext';
 import { ResourcesProvider } from './contexts/ResourcesContext';
 
+import { AdminRoute } from './components/AdminRoute';
+import { PublicRoute } from './components/PublicRoute';
+
 function App() {
   return (
     <AuthProvider>
@@ -19,19 +22,19 @@ function App() {
           <div className='container'>
             <BrowserRouter>
               <Switch>
-                <Route path='/' component={HomeContainer} exact />
-                <Route path='/signin' component={AuthContainer} />
-                <Route path='/signup' component={AuthContainer} />
-                <Route path='/dashboard' component={DashboardContainer} />
-                <Route
+                <PublicRoute path='/' component={HomeContainer} exact />
+                <PublicRoute path='/signin' component={AuthContainer} />
+                <PublicRoute path='/signup' component={AuthContainer} />
+                <AdminRoute path='/dashboard' component={DashboardContainer} />
+                <AdminRoute
                   path='/categories/:_id?'
                   component={CategoriesContainer}
                 />
-                <Route
+                <AdminRoute
                   path='/resources/:category/:_id?'
                   component={ResourcesEdit}
                 />
-                <Route component={NotFound} />
+                <AdminRoute component={NotFound} />
               </Switch>
             </BrowserRouter>
           </div>

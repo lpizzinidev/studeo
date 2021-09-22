@@ -20,24 +20,28 @@ export const ResourcesList = ({ search }) => {
     return <Loading text='Loading resources...' />;
   }
 
-  if (resources.length === 0) {
-    return <NoData text='No resources found' />;
-  }
-
   return (
     <div>
-      <p className='subtitle'>Resources</p>
       <div className='card-list'>
-        {resources
-          .filter((resource) => {
-            return resource.category === _id;
-          })
-          .filter((resource) => {
-            return resource.name.toUpperCase().includes(search.toUpperCase());
-          })
-          .map((resource) => {
-            return <ResourcesItem key={resource._id} {...resource} />;
-          })}
+        {resources.length === 0 ? (
+          <NoData text='No resources found' />
+        ) : (
+          <>
+            <p className='subtitle'>Resources</p>
+            {resources
+              .filter((resource) => {
+                return resource.category === _id;
+              })
+              .filter((resource) => {
+                return resource.name
+                  .toUpperCase()
+                  .includes(search.toUpperCase());
+              })
+              .map((resource) => {
+                return <ResourcesItem key={resource._id} {...resource} />;
+              })}
+          </>
+        )}
       </div>
       <Fab icon={plusIcon} destination={`/resources/${_id}`} />
     </div>
