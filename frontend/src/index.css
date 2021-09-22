@@ -254,6 +254,10 @@ a {
   max-width: 100%;
 }
 
+.logo-small {
+  max-width: 350px;
+}
+
 .icon {
   width: 24px;
   height: 24px;
@@ -352,6 +356,10 @@ a {
 }
 
 .loading-container {
+  text-align: center;
+}
+
+.no-data-container {
   text-align: center;
 }
 

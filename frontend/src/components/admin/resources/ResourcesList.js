@@ -5,6 +5,8 @@ import { ResourcesContext } from '../../../contexts/ResourcesContext';
 
 import { ResourcesItem } from './ResourcesItem';
 import { Fab } from '../../views/Fab';
+import { Loading } from '../../views/Loading';
+import { NoData } from '../../views/NoData';
 
 import plusIcon from '../../../assets/icons/plus.svg';
 
@@ -15,7 +17,11 @@ export const ResourcesList = ({ search }) => {
   const { loading, resources } = GetResourcesList(_id);
 
   if (loading) {
-    return 'Loading resources...';
+    return <Loading text='Loading resources...' />;
+  }
+
+  if (resources.length === 0) {
+    return <NoData text='No resources found' />;
   }
 
   return (
@@ -25,6 +31,9 @@ export const ResourcesList = ({ search }) => {
         {resources
           .filter((resource) => {
             return resource.category === _id;
+          })
+          .filter((resource) => {
+            return resource.name.toUpperCase().includes(search.toUpperCase());
           })
           .map((resource) => {
             return <ResourcesItem key={resource._id} {...resource} />;
