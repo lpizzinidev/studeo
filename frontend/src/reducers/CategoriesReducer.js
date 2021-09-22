@@ -3,7 +3,9 @@ import {
   CREATE_CATEGORY,
   UPDATE_CATEGORY,
   DELETE_CATEGORY,
-} from "./ActionTypes";
+  SHOW_EDIT_CATEGORY,
+  HIDE_EDIT_CATEGORY,
+} from './ActionTypes';
 
 export const CategoriesReducer = (state, action) => {
   switch (action.type) {
@@ -21,6 +23,18 @@ export const CategoriesReducer = (state, action) => {
         (category) => category._id !== action.payload
       );
       return { ...state, categories: remainingCategories };
+    case SHOW_EDIT_CATEGORY:
+      return {
+        ...state,
+        editingCategory: action.payload,
+        showEditingCategory: true,
+      };
+    case HIDE_EDIT_CATEGORY:
+      return {
+        ...state,
+        editingCategory: null,
+        showEditingCategory: false,
+      };
     default:
       return state;
   }

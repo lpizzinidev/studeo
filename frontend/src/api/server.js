@@ -32,7 +32,6 @@ export const deleteResource = (id, category) =>
 const categoriesPath = '/categories';
 
 export const getCategoriesList = () => API.get(categoriesPath);
-export const getCategory = (id) => API.get(`${categoriesPath}/${id}`);
 export const createCategory = (formData) => API.post(categoriesPath, formData);
 export const updateCategory = (id, formData) =>
   API.put(`${categoriesPath}/${id}`, formData);

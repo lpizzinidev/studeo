@@ -4,11 +4,8 @@ import { useParams } from 'react-router-dom';
 import { ResourcesContext } from '../../../contexts/ResourcesContext';
 
 import { ResourcesItem } from './ResourcesItem';
-import { Fab } from '../../views/Fab';
 import { Loading } from '../../views/Loading';
 import { NoData } from '../../views/NoData';
-
-import plusIcon from '../../../assets/icons/plus.svg';
 
 export const ResourcesList = ({ search }) => {
   const { _id } = useParams();
@@ -20,30 +17,20 @@ export const ResourcesList = ({ search }) => {
     return <Loading text='Loading resources...' />;
   }
 
+  const filteredResources = resources.filter((resource) => {
+    return resource.name.toUpperCase().includes(search.toUpperCase());
+  });
+
+  if (filteredResources.length === 0) {
+    return <NoData text='No resources found' />;
+  }
+
   return (
-    <div>
-      <div className='card-list'>
-        {resources.length === 0 ? (
-          <NoData text='No resources found' />
-        ) : (
-          <>
-            <p className='subtitle'>Resources</p>
-            {resources
-              .filter((resource) => {
-                return resource.category === _id;
-              })
-              .filter((resource) => {
-                return resource.name
-                  .toUpperCase()
-                  .includes(search.toUpperCase());
-              })
-              .map((resource) => {
-                return <ResourcesItem key={resource._id} {...resource} />;
-              })}
-          </>
-        )}
-      </div>
-      <Fab icon={plusIcon} destination={`/resources/${_id}`} />
+    <div className='card-list'>
+      <p className='subtitle'>Resources</p>
+      {filteredResources.map((resource) => {
+        return <ResourcesItem key={resource._id} {...resource} />;
+      })}
     </div>
   );
 };

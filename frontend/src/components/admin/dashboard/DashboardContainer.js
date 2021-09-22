@@ -6,6 +6,7 @@ import { AuthContext } from '../../../contexts/AuthContext';
 import SearchBar from '../../views/SearchBar';
 import { Fab } from '../../views/Fab';
 import { CategoriesList } from '../categories/CategoriesList';
+import { CategoriesEditDialog } from '../categories/CategoriesEditDialog';
 
 import plusIcon from '../../../assets/icons/plus.svg';
 
@@ -35,6 +36,7 @@ const DashboardContainer = () => {
         value='LOGOUT'
         onClick={handleLogout}
       />
+      <CategoriesEditDialog />
       <Fab icon={plusIcon} destination='/categories' />
     </div>
   );

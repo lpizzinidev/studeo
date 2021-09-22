@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { CategoriesEdit } from './CategoriesEdit';
 import { ResourcesList } from '../resources/ResourcesList';
 import SearchBar from '../../views/SearchBar';
+import { Fab } from '../../views/Fab';
+
+import plusIcon from '../../../assets/icons/plus.svg';
 
 export const CategoriesContainer = () => {
   const { _id } = useParams();
@@ -19,9 +21,9 @@ export const CategoriesContainer = () => {
       <SearchBar placeholder='Search resource...' onSearch={handleSearch} />
       <h1 className='heading-1'>{_id ? 'Edit' : 'New'} category</h1>
       <div className='category-container'>
-        <CategoriesEdit />
         {_id && <ResourcesList search={search} />}
       </div>
+      <Fab icon={plusIcon} destination={`/resources/${_id}`} />
     </div>
   );
 };

@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useReducer } from "react";
-import { CategoriesReducer } from "../reducers/CategoriesReducer";
+import React, { useState, useEffect, useReducer } from 'react';
+import { CategoriesReducer } from '../reducers/CategoriesReducer';
 
 // API
-import * as api from "../api/server";
+import * as api from '../api/server';
 
 // Action types
 import {
@@ -10,11 +10,15 @@ import {
   CREATE_CATEGORY,
   UPDATE_CATEGORY,
   DELETE_CATEGORY,
-} from "../reducers/ActionTypes";
+  SHOW_EDIT_CATEGORY,
+  HIDE_EDIT_CATEGORY,
+} from '../reducers/ActionTypes';
 
 // Initial state
 const initialState = {
   categories: [],
+  editingCategory: null,
+  showEditingCategory: false,
 };
 
 // Create context
@@ -43,23 +47,6 @@ export const CategoriesProvider = ({ children }) => {
     }, []);
 
     return { loading, categories };
-  };
-
-  const GetCategory = (_id) => {
-    const [loading, setLoading] = useState(true);
-    const [category, setCategory] = useState(null);
-
-    const loadCategory = async () => {
-      const { data } = await api.getCategory(_id);
-      setCategory(data);
-      setLoading(false);
-    };
-
-    useEffect(() => {
-      loadCategory();
-    }, []);
-
-    return { loading, category };
   };
 
   const createCategory = async (formData) => {
@@ -91,15 +78,24 @@ export const CategoriesProvider = ({ children }) => {
     }
   };
 
+  const showEditCategory = (category) => {
+    dispatch({ type: SHOW_EDIT_CATEGORY, payload: category });
+  };
+
+  const hideEditCategory = () => {
+    dispatch({ type: HIDE_EDIT_CATEGORY });
+  };
+
   return (
     <CategoriesContext.Provider
       value={{
-        categories: state.categories,
+        ...state,
         GetCategoriesList,
-        GetCategory,
         createCategory,
         updateCategory,
         deleteCategory,
+        showEditCategory,
+        hideEditCategory,
       }}
     >
       {children}
