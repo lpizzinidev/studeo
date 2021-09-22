@@ -57,7 +57,7 @@ export const CategoriesEdit = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='auth-form'>
         <TextInput
           title='Name'
           name='name'

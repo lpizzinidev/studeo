@@ -1,9 +1,12 @@
 import { useContext } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { ResourcesContext } from '../../../contexts/ResourcesContext';
 
 import { ResourcesItem } from './ResourcesItem';
+import { Fab } from '../../views/Fab';
+
+import plusIcon from '../../../assets/icons/plus.svg';
 
 export const ResourcesList = ({ search }) => {
   const { _id } = useParams();
@@ -17,11 +20,7 @@ export const ResourcesList = ({ search }) => {
 
   return (
     <div>
-      <Link to={`/resources/${_id}`}>
-        <button type='button' className='button'>
-          Add resource
-        </button>
-      </Link>
+      <p className='subtitle'>Resources</p>
       <div className='card-list'>
         {resources
           .filter((resource) => {
@@ -31,6 +30,7 @@ export const ResourcesList = ({ search }) => {
             return <ResourcesItem key={resource._id} {...resource} />;
           })}
       </div>
+      <Fab icon={plusIcon} destination={`/resources/${_id}`} />
     </div>
   );
 };

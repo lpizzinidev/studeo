@@ -28,9 +28,7 @@ const DashboardContainer = () => {
     <div>
       <SearchBar placeholder='Search category...' onSearch={handleSearch} />
       <h1 className='heading-1'>Hello, User</h1>
-      <p className='subtitle'>Your categories</p>
       <CategoriesList search={search} />
-      <hr />
       <input
         type='button'
         className='button'

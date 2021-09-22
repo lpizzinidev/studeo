@@ -62,7 +62,7 @@ export const ResourcesEdit = () => {
 
   return (
     <div>
-      <h1 className='heading-1'>Edit resource</h1>
+      <h1 className='heading-1'>{_id ? 'Edit' : 'New'} resource</h1>
       <form onSubmit={handleSubmit}>
         <TextInput
           title='Name'
