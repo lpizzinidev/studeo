@@ -3,6 +3,7 @@ import { useState, useContext } from 'react';
 import { CategoriesContext } from '../../../contexts/CategoriesContext';
 
 import TextInput from '../../views/TextInput';
+import { TextFieldInput } from '../../views/TextFieldInput';
 
 export const CategoriesEditDialog = () => {
   const {
@@ -41,20 +42,31 @@ export const CategoriesEditDialog = () => {
   return (
     <div className={`modal ${showEditingCategory ? 'open' : ''}`}>
       <div className='modal-content'>
-        <form onSubmit={handleSubmit} className='auth-form'>
+        <h1 className='heading-2'>
+          {editingCategory ? 'Edit' : 'New'} category
+        </h1>
+        <form onSubmit={handleSubmit} className='dialog-form'>
           <TextInput
             title='Name'
             name='name'
             value={formData.name}
             onChange={handleChange}
           />
-          <TextInput
+          <TextFieldInput
             title='Description'
             name='description'
             value={formData.description}
             onChange={handleChange}
           />
-          <input type='submit' className='button' value='SAVE' />
+          <div className='modal-footer'>
+            <input
+              type='button'
+              className='text-button'
+              value='CANCEL'
+              onClick={() => hideEditCategory()}
+            />
+            <input type='submit' className='button' value='SAVE' />
+          </div>
         </form>
       </div>
     </div>

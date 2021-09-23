@@ -12,6 +12,7 @@ import {
   DELETE_CATEGORY,
   SHOW_EDIT_CATEGORY,
   HIDE_EDIT_CATEGORY,
+  SET_EDIT_CATEGORY_ERRORS,
 } from '../reducers/ActionTypes';
 
 // Initial state
@@ -19,6 +20,7 @@ const initialState = {
   categories: [],
   editingCategory: null,
   showEditingCategory: false,
+  categoryErrors: null,
 };
 
 // Create context
@@ -54,7 +56,7 @@ export const CategoriesProvider = ({ children }) => {
       const { data } = await api.createCategory(formData);
       dispatch({ type: CREATE_CATEGORY, payload: data });
     } catch (err) {
-      console.log(err);
+      dispatch({ type: SET_EDIT_CATEGORY_ERRORS, payload: err });
     }
   };
 
@@ -64,14 +66,13 @@ export const CategoriesProvider = ({ children }) => {
 
       dispatch({ type: UPDATE_CATEGORY, payload: data });
     } catch (err) {
-      console.log(err);
+      dispatch({ type: SET_EDIT_CATEGORY_ERRORS, payload: err });
     }
   };
 
   const deleteCategory = async (id) => {
     try {
       await api.deleteCategory(id);
-
       dispatch({ type: DELETE_CATEGORY, payload: id });
     } catch (err) {
       console.log(err);

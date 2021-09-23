@@ -18,11 +18,12 @@ const createCategory = async (req, res) => {
       user: _id,
       ...req.body,
     });
+
     res
       .status(200)
       .json({ data: newCategory, message: 'Category created successfully' });
   } catch (err) {
-    res.status(400).json({ message: 'Error creating category' });
+    res.status(500).json({ message: 'Error creating category' });
   }
 };
 

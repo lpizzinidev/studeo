@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { AuthContext } from '../../../contexts/AuthContext';
+import { CategoriesContext } from '../../../contexts/CategoriesContext';
 
 import SearchBar from '../../views/SearchBar';
 import { Fab } from '../../views/Fab';
@@ -14,6 +15,7 @@ const DashboardContainer = () => {
   const history = useHistory();
 
   const { logout } = useContext(AuthContext);
+  const { showEditCategory } = useContext(CategoriesContext);
 
   const [search, setSearch] = useState('');
 
@@ -23,6 +25,10 @@ const DashboardContainer = () => {
 
   const handleLogout = () => {
     logout(history);
+  };
+
+  const handleNewCategory = () => {
+    showEditCategory(null);
   };
 
   return (
@@ -37,7 +43,7 @@ const DashboardContainer = () => {
         onClick={handleLogout}
       />
       <CategoriesEditDialog />
-      <Fab icon={plusIcon} destination='/categories' />
+      <Fab icon={plusIcon} alt='Nuova categoria' onClick={handleNewCategory} />
     </div>
   );
 };

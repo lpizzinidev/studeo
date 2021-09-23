@@ -1,10 +1,10 @@
-const express = require("express");
+const express = require('express');
 const app = express();
 
-const cors = require("cors");
+const cors = require('cors');
 app.use(cors());
 
-require("dotenv").config();
+require('dotenv').config();
 
 app.use(express.json());
 app.use(
@@ -14,16 +14,16 @@ app.use(
 );
 
 // Database
-const connectDB = require("./config/database");
+const connectDB = require('./config/database');
 connectDB();
 
 // Authentication
-const passport = require("passport");
-const session = require("express-session");
+const passport = require('passport');
+const session = require('express-session');
 
-const { MONGO_STORE_SECRET_KEY } = require("./config/variables");
+const { MONGO_STORE_SECRET_KEY } = require('./config/variables');
 
-require("./config/passport-jwt")(passport);
+require('./config/passport-jwt')(passport);
 
 app.use(
   session({
@@ -37,16 +37,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-const basePath = "/api/v1/";
-app.use(basePath, require("./routes/auth.route"));
+const basePath = '/api/v1/';
+app.use(basePath, require('./routes/auth.route'));
 
 // Protected routes
 app.use(
   basePath,
-  passport.authenticate("jwt", { session: false }),
-  require("./routes/resource.route"),
-  require("./routes/category.route")
+  passport.authenticate('jwt', { session: false }),
+  require('./routes/resource.route'),
+  require('./routes/category.route')
 );
 
-const { PORT } = require("./config/variables");
+const { PORT } = require('./config/variables');
 app.listen(PORT, console.log(`Server is listening on port ${PORT}...`));

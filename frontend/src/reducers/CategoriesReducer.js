@@ -5,6 +5,7 @@ import {
   DELETE_CATEGORY,
   SHOW_EDIT_CATEGORY,
   HIDE_EDIT_CATEGORY,
+  SET_EDIT_CATEGORY_ERRORS,
 } from './ActionTypes';
 
 export const CategoriesReducer = (state, action) => {
@@ -12,12 +13,20 @@ export const CategoriesReducer = (state, action) => {
     case SET_CATEGORIES_LIST:
       return { ...state, categories: action.payload };
     case CREATE_CATEGORY:
-      return { ...state, categories: [...state.categories, action.payload] };
+      return {
+        ...state,
+        categories: [...state.categories, action.payload],
+        categoryErrors: null,
+      };
     case UPDATE_CATEGORY:
       const otherCategories = state.categories.filter(
         (category) => category._id !== action.payload._id
       );
-      return { ...state, categories: [...otherCategories, action.payload] };
+      return {
+        ...state,
+        categories: [...otherCategories, action.payload],
+        categoryErrors: null,
+      };
     case DELETE_CATEGORY:
       const remainingCategories = state.categories.filter(
         (category) => category._id !== action.payload
@@ -34,6 +43,11 @@ export const CategoriesReducer = (state, action) => {
         ...state,
         editingCategory: null,
         showEditingCategory: false,
+      };
+    case SET_EDIT_CATEGORY_ERRORS:
+      return {
+        ...state,
+        categoryErrors: action.payload,
       };
     default:
       return state;

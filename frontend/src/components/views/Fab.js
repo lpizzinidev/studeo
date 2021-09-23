@@ -1,11 +1,7 @@
-import { Link } from 'react-router-dom';
-
-export const Fab = ({ icon, destination }) => {
+export const Fab = ({ icon, alt, onClick }) => {
   return (
-    <Link to={destination}>
-      <button type='button' className='fab'>
-        <img src={icon} alt={destination} />
-      </button>
-    </Link>
+    <button type='button' className='fab' onClick={onClick}>
+      <img src={icon} alt={alt} />
+    </button>
   );
 };
