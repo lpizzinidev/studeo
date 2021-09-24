@@ -4,8 +4,8 @@ const validateCategory = (method) => {
   switch (method) {
     case 'createCategory': {
       return [
-        body('name', 'Name is required').trim().not().isEmpty().escape(),
-        body('description').optional().trim().isString().escape(),
+        body('name', 'Name is required').not().isEmpty().trim().escape(),
+        body('description').optional().isString().trim().escape(),
       ];
     }
   }

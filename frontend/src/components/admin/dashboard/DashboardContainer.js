@@ -19,10 +19,6 @@ const DashboardContainer = () => {
 
   const [search, setSearch] = useState('');
 
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-  };
-
   const handleLogout = () => {
     logout(history);
   };
@@ -33,7 +29,11 @@ const DashboardContainer = () => {
 
   return (
     <div>
-      <SearchBar placeholder='Search category...' onSearch={handleSearch} />
+      <SearchBar
+        placeholder='Search category...'
+        search={search}
+        setSearch={setSearch}
+      />
       <h1 className='heading-1'>Hello, User</h1>
       <CategoriesList search={search} />
       <input
