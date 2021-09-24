@@ -1,5 +1,8 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+
+import { CategoriesContext } from '../../../contexts/CategoriesContext';
+import { ResourcesContext } from '../../../contexts/ResourcesContext';
 
 import { ResourcesList } from '../resources/ResourcesList';
 import SearchBar from '../../views/SearchBar';
@@ -10,20 +13,27 @@ import plusIcon from '../../../assets/icons/plus.svg';
 export const CategoriesContainer = () => {
   const { _id } = useParams();
 
+  const { categories } = useContext(CategoriesContext);
+  const { showEditResource } = useContext(ResourcesContext);
+
+  const category = categories.find((category) => category._id === _id);
+
   const [search, setSearch] = useState('');
 
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
+  const handleNewResource = () => {
+    showEditResource(null);
   };
 
   return (
     <div>
-      <SearchBar placeholder='Search resource...' onSearch={handleSearch} />
-      <h1 className='heading-1'>{_id ? 'Edit' : 'New'} category</h1>
-      <div className='category-container'>
-        {_id && <ResourcesList search={search} />}
-      </div>
-      <Fab icon={plusIcon} destination={`/resources/${_id}`} />
+      <SearchBar
+        placeholder='Search resource...'
+        search={search}
+        setSearch={setSearch}
+      />
+      <h1 className='heading-1'>{category.name}</h1>
+      <ResourcesList search={search} />
+      <Fab icon={plusIcon} alt='New resource' onClick={handleNewResource} />
     </div>
   );
 };

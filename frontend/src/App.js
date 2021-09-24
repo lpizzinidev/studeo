@@ -4,7 +4,6 @@ import HomeContainer from './components/homepage/HomeContainer';
 import AuthContainer from './components/auth/AuthContainer';
 import DashboardContainer from './components/admin/dashboard/DashboardContainer';
 import { CategoriesContainer } from './components/admin/categories/CategoriesContainer';
-import { ResourcesEdit } from './components/admin/resources/ResourcesEdit';
 import NotFound from './components/pages/NotFound';
 
 import { AuthProvider } from './contexts/AuthContext';
@@ -29,10 +28,6 @@ function App() {
                 <AdminRoute
                   path='/categories/:_id?'
                   component={CategoriesContainer}
-                />
-                <AdminRoute
-                  path='/resources/:category/:_id?'
-                  component={ResourcesEdit}
                 />
                 <AdminRoute component={NotFound} />
               </Switch>

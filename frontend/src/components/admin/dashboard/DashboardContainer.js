@@ -8,6 +8,7 @@ import SearchBar from '../../views/SearchBar';
 import { Fab } from '../../views/Fab';
 import { CategoriesList } from '../categories/CategoriesList';
 import { CategoriesEditDialog } from '../categories/CategoriesEditDialog';
+import { ResourcesEditDialog } from '../resources/ResourcesEditDialog';
 
 import plusIcon from '../../../assets/icons/plus.svg';
 
@@ -43,7 +44,8 @@ const DashboardContainer = () => {
         onClick={handleLogout}
       />
       <CategoriesEditDialog />
-      <Fab icon={plusIcon} alt='Nuova categoria' onClick={handleNewCategory} />
+      <ResourcesEditDialog />
+      <Fab icon={plusIcon} alt='New category' onClick={handleNewCategory} />
     </div>
   );
 };
