@@ -14,7 +14,7 @@ export const ResourcesList = ({ search }) => {
   const { loading, resources } = GetResourcesList(_id);
 
   if (loading) {
-    return <Loading text='Loading resources...' />;
+    return <Loading text="Loading resources..." />;
   }
 
   const filteredResources = resources.filter((resource) => {
@@ -22,14 +22,14 @@ export const ResourcesList = ({ search }) => {
   });
 
   if (filteredResources.length === 0) {
-    return <NoData text='No resources found' />;
+    return <NoData text="No resources found" />;
   }
 
   return (
-    <div className='card-list'>
-      <p className='subtitle'>Resources</p>
+    <div className="card-list">
+      <p className="subtitle">Resources</p>
       {filteredResources.map((resource) => {
-        return <ResourcesItem key={resource._id} {...resource} />;
+        return <ResourcesItem key={resource._id} resource={resource} />;
       })}
     </div>
   );

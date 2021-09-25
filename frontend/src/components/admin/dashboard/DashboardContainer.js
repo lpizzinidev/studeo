@@ -8,7 +8,6 @@ import SearchBar from '../../views/SearchBar';
 import { Fab } from '../../views/Fab';
 import { CategoriesList } from '../categories/CategoriesList';
 import { CategoriesEditDialog } from '../categories/CategoriesEditDialog';
-import { ResourcesEditDialog } from '../resources/ResourcesEditDialog';
 
 import plusIcon from '../../../assets/icons/plus.svg';
 
@@ -31,21 +30,20 @@ const DashboardContainer = () => {
   return (
     <div>
       <SearchBar
-        placeholder='Search category...'
+        placeholder="Search category..."
         search={search}
         setSearch={setSearch}
       />
-      <h1 className='heading-1'>Hello, User</h1>
+      <h1 className="heading-1">Hello, User</h1>
       <CategoriesList search={search} />
       <input
-        type='button'
-        className='button'
-        value='LOGOUT'
+        type="button"
+        className="button"
+        value="LOGOUT"
         onClick={handleLogout}
       />
       <CategoriesEditDialog />
-      <ResourcesEditDialog />
-      <Fab icon={plusIcon} alt='New category' onClick={handleNewCategory} />
+      <Fab icon={plusIcon} alt="New category" onClick={handleNewCategory} />
     </div>
   );
 };

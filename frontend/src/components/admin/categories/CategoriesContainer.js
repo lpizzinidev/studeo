@@ -5,6 +5,7 @@ import { CategoriesContext } from '../../../contexts/CategoriesContext';
 import { ResourcesContext } from '../../../contexts/ResourcesContext';
 
 import { ResourcesList } from '../resources/ResourcesList';
+import { ResourcesEditDialog } from '../resources/ResourcesEditDialog';
 import SearchBar from '../../views/SearchBar';
 import { Fab } from '../../views/Fab';
 
@@ -27,13 +28,14 @@ export const CategoriesContainer = () => {
   return (
     <div>
       <SearchBar
-        placeholder='Search resource...'
+        placeholder="Search resource..."
         search={search}
         setSearch={setSearch}
       />
-      <h1 className='heading-1'>{category.name}</h1>
+      <h1 className="heading-1">{category.name}</h1>
       <ResourcesList search={search} />
-      <Fab icon={plusIcon} alt='New resource' onClick={handleNewResource} />
+      <ResourcesEditDialog />
+      <Fab icon={plusIcon} alt="New resource" onClick={handleNewResource} />
     </div>
   );
 };

@@ -1,13 +1,19 @@
-import { Link } from 'react-router-dom';
+import { useContext } from 'react';
 
-export const ResourcesItem = ({ _id, name, category }) => {
+import { ResourcesContext } from '../../../contexts/ResourcesContext';
+
+export const ResourcesItem = ({ resource }) => {
+  const { showEditResource } = useContext(ResourcesContext);
+
+  const handleClick = () => {
+    showEditResource(resource);
+  };
+
   return (
-    <Link to={`/resources/${category}/${_id}`}>
-      <div className='card card-item'>
-        <div>
-          <p className='text-body-1'>{name}</p>
-        </div>
+    <div className="card card-item" onClick={handleClick}>
+      <div>
+        <p className="text-body-1">{resource.name}</p>
       </div>
-    </Link>
+    </div>
   );
 };
