@@ -3,7 +3,7 @@ const Category = require('../models/category.model');
 const getCategories = async (req, res) => {
   try {
     const { _id } = req.user;
-    const data = await Category.find({ user: _id });
+    const data = await Category.find({ user: _id }).sort('name').exec();
     res.status(200).json(data);
   } catch (err) {
     res.status(400).json({ message: 'Error fetching categories' });

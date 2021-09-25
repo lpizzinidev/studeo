@@ -73,13 +73,15 @@ export const ResourcesEditDialog = () => {
             value={formData.description}
             onChange={handleChange}
           />
-          <input
-            type="button"
-            className="text-button"
-            value="CANCEL"
-            onClick={handleCancel}
-          />
-          <input type="submit" className="button" value="SAVE" />
+          <div className="modal-footer">
+            <input
+              type="button"
+              className="text-button"
+              value="CANCEL"
+              onClick={handleCancel}
+            />
+            <input type="submit" className="button" value="SAVE" />
+          </div>
         </form>
       </div>
     </div>
