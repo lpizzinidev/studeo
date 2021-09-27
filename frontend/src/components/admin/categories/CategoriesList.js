@@ -7,8 +7,8 @@ import { Loading } from '../../views/Loading';
 import { NoData } from '../../views/NoData';
 
 export const CategoriesList = ({ search }) => {
-  const { GetCategoriesList } = useContext(CategoriesContext);
-  const { loading, categories } = GetCategoriesList();
+  const { categories, GetCategoriesList } = useContext(CategoriesContext);
+  const { loading } = GetCategoriesList();
 
   if (loading) {
     return <Loading text='Loading categories...' />;

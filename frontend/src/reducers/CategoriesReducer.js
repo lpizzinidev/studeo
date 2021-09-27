@@ -16,7 +16,6 @@ export const CategoriesReducer = (state, action) => {
       return {
         ...state,
         categories: [...state.categories, action.payload],
-        categoryErrors: null,
       };
     case UPDATE_CATEGORY:
       const otherCategories = state.categories.filter(
@@ -25,7 +24,6 @@ export const CategoriesReducer = (state, action) => {
       return {
         ...state,
         categories: [...otherCategories, action.payload],
-        categoryErrors: null,
       };
     case DELETE_CATEGORY:
       const remainingCategories = state.categories.filter(
@@ -37,6 +35,7 @@ export const CategoriesReducer = (state, action) => {
         ...state,
         editingCategory: action.payload,
         showEditingCategory: true,
+        categoryErrors: '',
       };
     case HIDE_EDIT_CATEGORY:
       return {

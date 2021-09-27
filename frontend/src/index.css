@@ -6,6 +6,8 @@
   --color-secondary-lightest: #f2f2f2;
   --color-black: #000000;
   --color-white: #ffffff;
+  --color-red: #d64933;
+  --color-red-bck: rgba(214, 73, 51, 0.75);
 
   --font-size-heading-1: 72px;
   --font-size-heading-2: 36px;
@@ -133,6 +135,17 @@ a {
 .text-footer {
   font-size: var(--font-size-footer);
   font-weight: 400;
+}
+
+.text-error {
+  font-size: var(--font-size-body-2);
+  background-color: var(--color-red-bck);
+  color: var(--color-white);
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: var(--border-radius);
+  text-align: center;
+  font-weight: 300;
 }
 
 .button {

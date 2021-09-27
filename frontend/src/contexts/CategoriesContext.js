@@ -20,7 +20,7 @@ const initialState = {
   categories: [],
   editingCategory: null,
   showEditingCategory: false,
-  categoryErrors: null,
+  categoryErrors: '',
 };
 
 // Create context
@@ -55,18 +55,21 @@ export const CategoriesProvider = ({ children }) => {
     try {
       const { data } = await api.createCategory(formData);
       dispatch({ type: CREATE_CATEGORY, payload: data });
+
+      hideEditCategory();
     } catch (err) {
-      dispatch({ type: SET_EDIT_CATEGORY_ERRORS, payload: err });
+      handleCategoryError(err);
     }
   };
 
   const updateCategory = async (id, formData) => {
     try {
       const { data } = await api.updateCategory(id, formData);
-
       dispatch({ type: UPDATE_CATEGORY, payload: data });
+
+      hideEditCategory();
     } catch (err) {
-      dispatch({ type: SET_EDIT_CATEGORY_ERRORS, payload: err });
+      handleCategoryError(err);
     }
   };
 
@@ -79,12 +82,34 @@ export const CategoriesProvider = ({ children }) => {
     }
   };
 
+  const handleCategoryError = (err) => {
+    const { status } = err.response;
+    if (status === 400) {
+      // Client error
+      const { data } = err.response;
+      const { errors } = data;
+
+      let errMsg = '';
+      for (let error of errors) {
+        errMsg += error.msg;
+      }
+      dispatch({ type: SET_EDIT_CATEGORY_ERRORS, payload: errMsg });
+    } else {
+      // Server error
+      dispatch({ type: SET_EDIT_CATEGORY_ERRORS, payload: err.message });
+    }
+  };
+
   const showEditCategory = (category) => {
     dispatch({ type: SHOW_EDIT_CATEGORY, payload: category });
   };
 
   const hideEditCategory = () => {
     dispatch({ type: HIDE_EDIT_CATEGORY });
+  };
+
+  const cancelCategoryErrors = () => {
+    dispatch({ type: SET_EDIT_CATEGORY_ERRORS, payload: '' });
   };
 
   return (
@@ -97,6 +122,7 @@ export const CategoriesProvider = ({ children }) => {
         deleteCategory,
         showEditCategory,
         hideEditCategory,
+        cancelCategoryErrors,
       }}
     >
       {children}

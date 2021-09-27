@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import { CategoriesContext } from '../../../contexts/CategoriesContext';
 
@@ -6,22 +6,26 @@ import TextInput from '../../views/TextInput';
 import { TextFieldInput } from '../../views/TextFieldInput';
 
 export const CategoriesEditDialog = () => {
+  const initialFormData = {
+    name: '',
+    description: '',
+  };
+
   const {
     editingCategory,
+    categoryErrors,
     showEditingCategory,
     hideEditCategory,
     createCategory,
     updateCategory,
+    cancelCategoryErrors,
   } = useContext(CategoriesContext);
 
-  const [formData, setFormData] = useState(
-    editingCategory
-      ? { ...editingCategory }
-      : {
-          name: '',
-          description: '',
-        }
-  );
+  const [formData, setFormData] = useState(initialFormData);
+
+  useEffect(() => {
+    setFormData(editingCategory ? { ...editingCategory } : initialFormData);
+  }, [showEditingCategory]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,12 +35,11 @@ export const CategoriesEditDialog = () => {
     } else {
       createCategory(formData);
     }
-
-    hideEditCategory();
   };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    cancelCategoryErrors();
   };
 
   return (
@@ -45,6 +48,9 @@ export const CategoriesEditDialog = () => {
         <h1 className='heading-2'>
           {editingCategory ? 'Edit' : 'New'} category
         </h1>
+        {categoryErrors !== '' && (
+          <p className='text-error'>{categoryErrors}</p>
+        )}
         <form onSubmit={handleSubmit} className='dialog-form'>
           <TextInput
             title='Name'

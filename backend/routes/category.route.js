@@ -13,7 +13,7 @@ const { validate } = require('../middlewares/validator.middleware');
 router
   .route('/categories')
   .get(getCategories)
-  .post(createCategory, validate('createCategory'));
+  .post(validate('createCategory'), createCategory);
 router.route('/categories/:_id').put(updateCategory).delete(deleteCategory);
 
 module.exports = router;
