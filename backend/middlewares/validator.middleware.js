@@ -1,7 +1,13 @@
 const { body } = require('express-validator');
 
-const validateResource = (method) => {
+const validate = (method) => {
   switch (method) {
+    case 'createCategory': {
+      return [
+        body('name', 'Name is required').not().isEmpty().trim().escape(),
+        body('description').optional().isString().trim().escape(),
+      ];
+    }
     case 'createResource': {
       return [
         body('name', 'Name is required').not().isEmpty().trim().escape(),
@@ -12,4 +18,4 @@ const validateResource = (method) => {
   }
 };
 
-module.exports = { validateResource };
+module.exports = { validate };

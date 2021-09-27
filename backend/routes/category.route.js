@@ -8,12 +8,12 @@ const {
   deleteCategory,
 } = require('../controllers/category.controller');
 
-const { validateCategory } = require('../middlewares/category.validator');
+const { validate } = require('../middlewares/category.validator');
 
 router
   .route('/categories')
   .get(getCategories)
-  .post(createCategory, validateCategory('createCategory'));
+  .post(createCategory, validate('createCategory'));
 router.route('/categories/:_id').put(updateCategory).delete(deleteCategory);
 
 module.exports = router;

@@ -9,12 +9,12 @@ const {
   deleteResource,
 } = require('../controllers/resource.controller');
 
-const { validateResource } = require('../middlewares/resource.validator');
+const { validate } = require('../middlewares/resource.validator');
 
 router.route('/resources/:category').get(getResourcesList);
 router
   .route('/resources/:category')
-  .post(createResource, validateResource('createResource'));
+  .post(createResource, validate('createResource'));
 router
   .route('/resources/:category/:_id')
   .get(getResource)
