@@ -9,7 +9,7 @@ const {
   deleteResource,
 } = require('../controllers/resource.controller');
 
-const { validate } = require('../middlewares/resource.validator');
+const { validate } = require('../middlewares/validator.middleware');
 
 router.route('/resources/:category').get(getResourcesList);
 router

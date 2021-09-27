@@ -8,7 +8,7 @@ const {
   deleteCategory,
 } = require('../controllers/category.controller');
 
-const { validate } = require('../middlewares/category.validator');
+const { validate } = require('../middlewares/validator.middleware');
 
 router
   .route('/categories')
