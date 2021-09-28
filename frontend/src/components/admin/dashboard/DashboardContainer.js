@@ -8,6 +8,7 @@ import SearchBar from '../../views/SearchBar';
 import { Fab } from '../../views/Fab';
 import { CategoriesList } from '../categories/CategoriesList';
 import { CategoriesEditDialog } from '../categories/CategoriesEditDialog';
+import { DialogConfirm } from '../../views/DialogConfirm';
 
 import plusIcon from '../../../assets/icons/plus.svg';
 
@@ -18,9 +19,15 @@ const DashboardContainer = () => {
   const { showEditCategory } = useContext(CategoriesContext);
 
   const [search, setSearch] = useState('');
+  const [showDialogLogout, setShowDialogLogout] = useState(false);
+
+  const requestLogout = () => {
+    setShowDialogLogout(true);
+  };
 
   const handleLogout = () => {
     logout(history);
+    setShowDialogLogout(false);
   };
 
   const handleNewCategory = () => {
@@ -30,20 +37,27 @@ const DashboardContainer = () => {
   return (
     <div>
       <SearchBar
-        placeholder="Search category..."
+        placeholder='Search category...'
         search={search}
         setSearch={setSearch}
       />
-      <h1 className="heading-1">Hello, User</h1>
+      <h1 className='heading-1'>Hello, User</h1>
       <CategoriesList search={search} />
       <input
-        type="button"
-        className="button"
-        value="LOGOUT"
-        onClick={handleLogout}
+        type='button'
+        className='button-red'
+        value='LOGOUT'
+        onClick={requestLogout}
       />
       <CategoriesEditDialog />
-      <Fab icon={plusIcon} alt="New category" onClick={handleNewCategory} />
+      <DialogConfirm
+        title='Logout'
+        message='Are you sure you want to exit the application?'
+        confirmAction={handleLogout}
+        show={showDialogLogout}
+        setShow={setShowDialogLogout}
+      />
+      <Fab icon={plusIcon} alt='New category' onClick={handleNewCategory} />
     </div>
   );
 };

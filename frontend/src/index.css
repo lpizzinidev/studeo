@@ -148,7 +148,8 @@ a {
   font-weight: 300;
 }
 
-.button {
+.button,
+.button-red {
   background-color: var(--color-primary);
   color: var(--color-black);
   font-size: var(--font-size-body-2);
@@ -160,6 +161,11 @@ a {
   padding-right: 25px;
   outline: none;
   border: none;
+}
+
+.button-red {
+  background-color: var(--color-red);
+  color: var(--color-white);
 }
 
 .text-button {
@@ -310,10 +316,6 @@ a {
   margin-top: 25px;
 }
 
-.dialog-form {
-  margin-top: 20px;
-}
-
 .auth-submit {
   width: 100%;
   margin-top: 25px;
@@ -323,6 +325,7 @@ a {
 /* Dashboard */
 .list-header {
   display: flex;
+  align-items: center;
 }
 
 .list-header > p,
@@ -346,6 +349,7 @@ a {
   row-gap: 15px;
   margin-top: 10px;
   margin-bottom: 10px;
+  padding-bottom: 70px;
 }
 
 .card-item * {
@@ -353,8 +357,7 @@ a {
 }
 
 .card-item > div {
-  padding: 30px 20px;
-  display: flex;
+  padding: 20px;
 }
 
 .card-item > div > p {
@@ -402,12 +405,20 @@ a {
 
 .modal-content {
   background-color: var(--color-secondary);
-  margin: 15% auto;
+  margin: 40px auto;
   padding: 20px;
   width: 80%;
   max-width: 500px;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
+}
+
+.modal-body {
+  margin-top: 15px;
+}
+
+.modal-body .input-text-field {
+  margin-bottom: 10px;
 }
 
 .modal-footer {

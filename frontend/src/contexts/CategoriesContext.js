@@ -84,9 +84,10 @@ export const CategoriesProvider = ({ children }) => {
 
   const handleCategoryError = (err) => {
     const { status } = err.response;
+    const { data } = err.response;
+
     if (status === 400) {
       // Client error
-      const { data } = err.response;
       const { errors } = data;
 
       let errMsg = '';
@@ -96,7 +97,7 @@ export const CategoriesProvider = ({ children }) => {
       dispatch({ type: SET_EDIT_CATEGORY_ERRORS, payload: errMsg });
     } else {
       // Server error
-      dispatch({ type: SET_EDIT_CATEGORY_ERRORS, payload: err.message });
+      dispatch({ type: SET_EDIT_CATEGORY_ERRORS, payload: data.message });
     }
   };
 

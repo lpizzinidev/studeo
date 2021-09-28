@@ -3,12 +3,10 @@ import { useState, useEffect, useContext } from 'react';
 import { CategoriesContext } from '../../../contexts/CategoriesContext';
 
 import TextInput from '../../views/TextInput';
-import { TextFieldInput } from '../../views/TextFieldInput';
 
 export const CategoriesEditDialog = () => {
   const initialFormData = {
     name: '',
-    description: '',
   };
 
   const {
@@ -48,32 +46,28 @@ export const CategoriesEditDialog = () => {
         <h1 className='heading-2'>
           {editingCategory ? 'Edit' : 'New'} category
         </h1>
-        {categoryErrors !== '' && (
-          <p className='text-error'>{categoryErrors}</p>
-        )}
-        <form onSubmit={handleSubmit} className='dialog-form'>
-          <TextInput
-            title='Name'
-            name='name'
-            value={formData.name}
-            onChange={handleChange}
-          />
-          <TextFieldInput
-            title='Description'
-            name='description'
-            value={formData.description}
-            onChange={handleChange}
-          />
-          <div className='modal-footer'>
-            <input
-              type='button'
-              className='text-button'
-              value='CANCEL'
-              onClick={() => hideEditCategory()}
+        <div className='modal-body'>
+          {categoryErrors !== '' && (
+            <p className='text-error'>{categoryErrors}</p>
+          )}
+          <form onSubmit={handleSubmit} className='dialog-form'>
+            <TextInput
+              title='Name'
+              name='name'
+              value={formData.name}
+              onChange={handleChange}
             />
-            <input type='submit' className='button' value='SAVE' />
-          </div>
-        </form>
+            <div className='modal-footer'>
+              <input
+                type='button'
+                className='text-button'
+                value='CANCEL'
+                onClick={() => hideEditCategory()}
+              />
+              <input type='submit' className='button' value='SAVE' />
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

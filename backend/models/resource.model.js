@@ -1,7 +1,7 @@
-const { ObjectId } = require("mongodb");
-const mongoose = require("mongoose");
+const { ObjectId } = require('mongodb');
+const mongoose = require('mongoose');
 
-const Resource = mongoose.model("resource", {
+const Resource = mongoose.model('resource', {
   name: {
     type: String,
     required: true,
@@ -12,18 +12,22 @@ const Resource = mongoose.model("resource", {
     required: true,
     unique: true,
   },
-  description: {
+  author: {
     type: String,
-    default: "",
+    default: '',
+  },
+  duration: {
+    type: Number,
+    default: 0,
   },
   user: {
     type: ObjectId,
     required: true,
-    ref: "users",
+    ref: 'users',
   },
   category: {
     type: ObjectId,
-    ref: "categories",
+    ref: 'categories',
   },
   completed: {
     type: Boolean,

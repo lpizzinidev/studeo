@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { Redirect, useParams, useHistory } from 'react-router-dom';
 
 import { CategoriesContext } from '../../../contexts/CategoriesContext';
 import { ResourcesContext } from '../../../contexts/ResourcesContext';
@@ -38,6 +38,11 @@ export const CategoriesContainer = () => {
   const handleNewResource = () => {
     showEditResource(null);
   };
+
+  if (!category) {
+    // Se non trovo la categoria torno alla dashboard
+    return <Redirect to='/dashboard'></Redirect>;
+  }
 
   return (
     <div>

@@ -1,12 +1,14 @@
+const Category = require('../models/category.model');
 const Resource = require('../models/resource.model');
 
 const getResourcesList = async (req, res) => {
   try {
     const { category } = req.params;
     const data = await Resource.find({ category });
+
     res.status(200).json(data);
   } catch (err) {
-    res.status(400).json({ message: 'Error fetching resources' });
+    res.status(500).json({ message: 'Error fetching resources' });
   }
 };
 
@@ -14,9 +16,10 @@ const getResource = async (req, res) => {
   try {
     const { _id } = req.params;
     const data = await Resource.findById(_id);
+
     res.status(200).json(data);
   } catch (err) {
-    res.status(400).json({ message: 'Error fetching resource' });
+    res.status(500).json({ message: 'Error fetching resource' });
   }
 };
 
@@ -25,30 +28,41 @@ const createResource = async (req, res) => {
     const { _id } = req.user;
     const { category } = req.params;
 
-    await Resource.create({
+    const newResource = await Resource.create({
       user: _id,
       category,
       ...req.body,
     });
-    res.status(200).json({ message: 'Resource created successfully' });
+
+    // Aggiungo risorsa a categoria
+    await Category.findByIdAndUpdate(
+      category,
+      { $push: { resources: newResource._id } },
+      { new: true, useFindAndModify: false }
+    );
+
+    res.status(200).json(newResource);
   } catch (err) {
-    res.status(400).json({ message: 'Error creating resource' });
+    res.status(500).json({ message: 'Error creating resource' });
   }
 };
 
 const updateResource = async (req, res) => {
   try {
     const { _id, category } = req.params;
-    await Resource.updateOne(
-      { _id },
+
+    const updatedResource = await Resource.findByIdAndUpdate(
+      _id,
       {
         category,
         ...req.body,
-      }
+      },
+      { new: true }
     );
-    res.status(200).json({ message: 'Resource updated successfully' });
+
+    res.status(200).json(updatedResource);
   } catch (err) {
-    res.status(400).json({ message: 'Error updating resource' });
+    res.status(500).json({ message: 'Error updating resource' });
   }
 };
 
@@ -58,7 +72,7 @@ const deleteResource = async (req, res) => {
     await Resource.deleteOne({ _id });
     res.status(200).json({ message: 'Resource deleted successfully' });
   } catch (err) {
-    res.status(400).json({ message: 'Error deleting resource' });
+    res.status(500).json({ message: 'Error deleting resource' });
   }
 };
 

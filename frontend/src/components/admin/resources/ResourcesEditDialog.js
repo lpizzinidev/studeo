@@ -18,8 +18,9 @@ export const ResourcesEditDialog = () => {
 
   const initialState = {
     name: '',
+    author: '',
+    duration: 0,
     link: '',
-    description: '',
   };
 
   const [formData, setFormData] = useState(initialState);
@@ -50,39 +51,48 @@ export const ResourcesEditDialog = () => {
 
   return (
     <div className={`modal ${showEditingResource ? 'open' : ''}`}>
-      <div className="modal-content">
-        <h1 className="heading-2">
+      <div className='modal-content'>
+        <h1 className='heading-2'>
           {editingResource ? 'Edit' : 'New'} resource
         </h1>
-        <form onSubmit={handleSubmit}>
-          <TextInput
-            title="Name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-          <TextInput
-            title="URL"
-            name="link"
-            value={formData.link}
-            onChange={handleChange}
-          />
-          <TextInput
-            title="Description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-          />
-          <div className="modal-footer">
-            <input
-              type="button"
-              className="text-button"
-              value="CANCEL"
-              onClick={handleCancel}
+        <div className='modal-body'>
+          <form onSubmit={handleSubmit}>
+            <TextInput
+              title='Name'
+              name='name'
+              value={formData.name}
+              onChange={handleChange}
             />
-            <input type="submit" className="button" value="SAVE" />
-          </div>
-        </form>
+            <TextInput
+              title='Author'
+              name='author'
+              value={formData.author}
+              onChange={handleChange}
+            />
+            <TextInput
+              type='number'
+              title='Duration (min)'
+              name='duration'
+              value={formData.duration}
+              onChange={handleChange}
+            />
+            <TextInput
+              title='URL'
+              name='link'
+              value={formData.link}
+              onChange={handleChange}
+            />
+            <div className='modal-footer'>
+              <input
+                type='button'
+                className='text-button'
+                value='CANCEL'
+                onClick={handleCancel}
+              />
+              <input type='submit' className='button' value='SAVE' />
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
