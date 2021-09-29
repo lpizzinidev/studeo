@@ -1,3 +1,5 @@
+const { validationResult } = require('express-validator');
+
 const Category = require('../models/category.model');
 const Resource = require('../models/resource.model');
 
@@ -27,6 +29,11 @@ const createResource = async (req, res) => {
   try {
     const { _id } = req.user;
     const { category } = req.params;
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
     const newResource = await Resource.create({
       user: _id,

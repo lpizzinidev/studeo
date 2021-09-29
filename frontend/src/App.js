@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 
 import HomeContainer from './components/homepage/HomeContainer';
 import AuthContainer from './components/auth/AuthContainer';

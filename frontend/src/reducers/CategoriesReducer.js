@@ -35,7 +35,7 @@ export const CategoriesReducer = (state, action) => {
         ...state,
         editingCategory: action.payload,
         showEditingCategory: true,
-        categoryErrors: '',
+        categoryErrors: [],
       };
     case HIDE_EDIT_CATEGORY:
       return {

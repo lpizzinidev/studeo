@@ -19,7 +19,7 @@ export const ResourcesReducer = (state, action) => {
       return {
         ...state,
         resources: [...state.resources, action.payload],
-        resourcesErrors: null,
+        resourceErrors: [],
       };
     case UPDATE_RESOURCE:
       const otherResources = state.resources.filter(
@@ -28,7 +28,7 @@ export const ResourcesReducer = (state, action) => {
       return {
         ...state,
         resources: [...otherResources, action.payload],
-        resourcesErrors: null,
+        resourceErrors: [],
       };
     case DELETE_RESOURCE:
       const remainingResources = state.resources.filter(
@@ -37,13 +37,14 @@ export const ResourcesReducer = (state, action) => {
       return {
         ...state,
         resources: remainingResources,
-        resourcesErrors: null,
+        resourceErrors: [],
       };
     case SHOW_EDIT_RESOURCE:
       return {
         ...state,
         editingResource: action.payload,
         showEditingResource: true,
+        resourceErrors: [],
       };
     case HIDE_EDIT_RESOURCE:
       return {
@@ -54,7 +55,7 @@ export const ResourcesReducer = (state, action) => {
     case SET_EDIT_RESOURCE_ERRORS:
       return {
         ...state,
-        resourcesErrors: action.payload,
+        resourceErrors: action.payload,
       };
     default:
       return state;

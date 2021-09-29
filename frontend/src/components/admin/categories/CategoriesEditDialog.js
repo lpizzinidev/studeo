@@ -47,8 +47,12 @@ export const CategoriesEditDialog = () => {
           {editingCategory ? 'Edit' : 'New'} category
         </h1>
         <div className='modal-body'>
-          {categoryErrors !== '' && (
-            <p className='text-error'>{categoryErrors}</p>
+          {categoryErrors.length > 0 && (
+            <ul className='list-error'>
+              {categoryErrors.map((error) => (
+                <li key={error}>{error}</li>
+              ))}
+            </ul>
           )}
           <form onSubmit={handleSubmit} className='dialog-form'>
             <TextInput

@@ -141,7 +141,9 @@ a {
   font-weight: 400;
 }
 
-.text-error {
+.list-error {
+  font-family: 'Roboto';
+  list-style-type: none;
   font-size: var(--font-size-body-2);
   background-color: var(--color-red-bck);
   color: var(--color-white);
@@ -150,6 +152,10 @@ a {
   border-radius: var(--border-radius);
   text-align: center;
   font-weight: 300;
+}
+
+.list-error li:not(:last-child) {
+  margin-bottom: 4px;
 }
 
 .button {

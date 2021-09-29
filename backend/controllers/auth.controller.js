@@ -1,12 +1,19 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const { validationResult } = require('express-validator');
+
 const User = require('../models/user.model');
 
 const { JWT_TOKEN } = require('../config/variables');
 
 const signIn = async (req, res) => {
   const { email, password } = req.body;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
   try {
     const user = await User.findOne({ email });
@@ -33,18 +40,9 @@ const signIn = async (req, res) => {
 const signUp = async (req, res) => {
   const { email, password, confirmPassword } = req.body;
 
-  if (!email || email === '') {
-    return res.status(400).json({ message: 'Insert a valid e-mail address' });
-  }
-
-  if (!password || password.length < 6) {
-    return res
-      .status(400)
-      .json({ message: 'Password must be at least 6 chars' });
-  }
-
-  if (password !== confirmPassword) {
-    return res.status(400).json({ message: 'Password must be equals' });
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
 
   try {

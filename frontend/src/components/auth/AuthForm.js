@@ -1,14 +1,14 @@
-import { useState, useEffect, useContext } from "react";
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { useState, useEffect, useContext } from 'react';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext } from '../../contexts/AuthContext';
 
-import TextInput from "../views/TextInput";
+import TextInput from '../views/TextInput';
 
 const initialFormData = {
-  email: "",
-  password: "",
-  confirmPassword: "",
+  email: '',
+  password: '',
+  confirmPassword: '',
 };
 
 const AuthForm = () => {
@@ -18,10 +18,10 @@ const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
 
-  const { signin, signup } = useContext(AuthContext);
+  const { authErrors, signin, signup } = useContext(AuthContext);
 
   useEffect(() => {
-    setIsLogin(location.pathname === "/signin");
+    setIsLogin(location.pathname === '/signin');
   }, [location]);
 
   const handleSubmit = (e) => {
@@ -40,45 +40,52 @@ const AuthForm = () => {
 
   return (
     <div>
-      <h2 className="heading-2">Login</h2>
-      <form className="auth-form" onSubmit={handleSubmit}>
+      <h2 className='heading-2'>Login</h2>
+      {authErrors.length > 0 && (
+        <ul className='list-error'>
+          {authErrors.map((error) => (
+            <li key={error}>{error}</li>
+          ))}
+        </ul>
+      )}
+      <form className='auth-form' onSubmit={handleSubmit}>
         <TextInput
-          type="email"
-          name="email"
-          title="E-mail"
+          type='email'
+          name='email'
+          title='E-mail'
           onChange={handleChange}
         />
         <TextInput
-          type="password"
-          name="password"
-          title="Password"
+          type='password'
+          name='password'
+          title='Password'
           onChange={handleChange}
         />
         {isLogin || (
           <TextInput
-            type="password"
-            name="confirmPassword"
-            title="Confirm password"
+            type='password'
+            name='confirmPassword'
+            title='Confirm password'
             onChange={handleChange}
           />
         )}
         <input
-          type="submit"
-          className="button auth-submit"
-          value={isLogin ? "LOGIN" : "REGISTER"}
+          type='submit'
+          className='button auth-submit'
+          value={isLogin ? 'LOGIN' : 'REGISTER'}
         />
       </form>
       {isLogin ? (
         <p>
-          Not registered?{" "}
-          <Link to="/signup" className="link-text">
+          Not registered?{' '}
+          <Link to='/signup' className='link-text'>
             <strong>Create an account</strong>
           </Link>
         </p>
       ) : (
         <p>
-          Already registered?{" "}
-          <Link to="/signin" className="link-text">
+          Already registered?{' '}
+          <Link to='/signin' className='link-text'>
             <strong>Sign in</strong>
           </Link>
         </p>

@@ -41,14 +41,16 @@ const DashboardContainer = () => {
         search={search}
         setSearch={setSearch}
       />
-      <h1 className='heading-1'>Hello, User</h1>
+      <div className='list-header'>
+        <h1 className='heading-1'>Hello, User</h1>
+        <input
+          type='button'
+          className='text-button red'
+          value='LOGOUT'
+          onClick={requestLogout}
+        />
+      </div>
       <CategoriesList search={search} />
-      <input
-        type='button'
-        className='button-red'
-        value='LOGOUT'
-        onClick={requestLogout}
-      />
       <CategoriesEditDialog />
       <DialogConfirm
         title='Logout'

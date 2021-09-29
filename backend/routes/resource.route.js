@@ -14,7 +14,7 @@ const { validate } = require('../middlewares/validator.middleware');
 router.route('/resources/:category').get(getResourcesList);
 router
   .route('/resources/:category')
-  .post(createResource, validate('createResource'));
+  .post(validate('createResource'), createResource);
 router
   .route('/resources/:category/:_id')
   .get(getResource)

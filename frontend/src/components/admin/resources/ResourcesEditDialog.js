@@ -11,6 +11,7 @@ export const ResourcesEditDialog = () => {
   const {
     editingResource,
     showEditingResource,
+    resourceErrors,
     hideEditResource,
     createResource,
     updateResource,
@@ -37,8 +38,6 @@ export const ResourcesEditDialog = () => {
     } else {
       createResource(_id, formData);
     }
-
-    hideEditResource();
   };
 
   const handleCancel = () => {
@@ -56,6 +55,13 @@ export const ResourcesEditDialog = () => {
           {editingResource ? 'Edit' : 'New'} resource
         </h1>
         <div className='modal-body'>
+          {resourceErrors.length > 0 && (
+            <ul className='list-error'>
+              {resourceErrors.map((error) => (
+                <li key={error}>{error}</li>
+              ))}
+            </ul>
+          )}
           <form onSubmit={handleSubmit}>
             <TextInput
               title='Name'

@@ -12,8 +12,6 @@ import SearchBar from '../../views/SearchBar';
 import { Fab } from '../../views/Fab';
 
 import plusIcon from '../../../assets/icons/plus.svg';
-import editIcon from '../../../assets/icons/edit.svg';
-import deleteIcon from '../../../assets/icons/delete.svg';
 
 export const CategoriesContainer = () => {
   const { _id } = useParams();

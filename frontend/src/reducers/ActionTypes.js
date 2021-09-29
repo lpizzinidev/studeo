@@ -1,6 +1,7 @@
 /* Authentication */
 export const AUTH = 'AUTH';
 export const LOGOUT = 'LOGOUT';
+export const SET_AUTH_ERRORS = 'SET_AUTH_ERRORS';
 
 /* Categories */
 export const SET_CATEGORIES_LIST = 'SET_CATEGORIES_LIST';

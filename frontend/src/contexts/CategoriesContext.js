@@ -4,23 +4,17 @@ import { CategoriesReducer } from '../reducers/CategoriesReducer';
 // API
 import * as api from '../api/server';
 
+import * as utils from '../util/util';
+
 // Action types
-import {
-  SET_CATEGORIES_LIST,
-  CREATE_CATEGORY,
-  UPDATE_CATEGORY,
-  DELETE_CATEGORY,
-  SHOW_EDIT_CATEGORY,
-  HIDE_EDIT_CATEGORY,
-  SET_EDIT_CATEGORY_ERRORS,
-} from '../reducers/ActionTypes';
+import * as actionTypes from '../reducers/ActionTypes';
 
 // Initial state
 const initialState = {
   categories: [],
   editingCategory: null,
   showEditingCategory: false,
-  categoryErrors: '',
+  categoryErrors: [],
 };
 
 // Create context
@@ -38,7 +32,7 @@ export const CategoriesProvider = ({ children }) => {
     const loadCategories = async () => {
       const { data } = await api.getCategoriesList();
 
-      dispatch({ type: SET_CATEGORIES_LIST, payload: data });
+      dispatch({ type: actionTypes.SET_CATEGORIES_LIST, payload: data });
 
       setCategories(data);
       setLoading(false);
@@ -54,63 +48,50 @@ export const CategoriesProvider = ({ children }) => {
   const createCategory = async (formData) => {
     try {
       const { data } = await api.createCategory(formData);
-      dispatch({ type: CREATE_CATEGORY, payload: data });
+      dispatch({ type: actionTypes.CREATE_CATEGORY, payload: data });
 
       hideEditCategory();
     } catch (err) {
-      handleCategoryError(err);
+      dispatch({
+        type: actionTypes.SET_EDIT_CATEGORY_ERRORS,
+        payload: utils.handleErrorObj(err),
+      });
     }
   };
 
   const updateCategory = async (id, formData) => {
     try {
       const { data } = await api.updateCategory(id, formData);
-      dispatch({ type: UPDATE_CATEGORY, payload: data });
+      dispatch({ type: actionTypes.UPDATE_CATEGORY, payload: data });
 
       hideEditCategory();
     } catch (err) {
-      handleCategoryError(err);
+      dispatch({
+        type: actionTypes.SET_EDIT_CATEGORY_ERRORS,
+        payload: utils.handleErrorObj(err),
+      });
     }
   };
 
   const deleteCategory = async (id) => {
     try {
       await api.deleteCategory(id);
-      dispatch({ type: DELETE_CATEGORY, payload: id });
+      dispatch({ type: actionTypes.DELETE_CATEGORY, payload: id });
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handleCategoryError = (err) => {
-    const { status } = err.response;
-    const { data } = err.response;
-
-    if (status === 400) {
-      // Client error
-      const { errors } = data;
-
-      let errMsg = '';
-      for (let error of errors) {
-        errMsg += error.msg;
-      }
-      dispatch({ type: SET_EDIT_CATEGORY_ERRORS, payload: errMsg });
-    } else {
-      // Server error
-      dispatch({ type: SET_EDIT_CATEGORY_ERRORS, payload: data.message });
-    }
-  };
-
   const showEditCategory = (category) => {
-    dispatch({ type: SHOW_EDIT_CATEGORY, payload: category });
+    dispatch({ type: actionTypes.SHOW_EDIT_CATEGORY, payload: category });
   };
 
   const hideEditCategory = () => {
-    dispatch({ type: HIDE_EDIT_CATEGORY });
+    dispatch({ type: actionTypes.HIDE_EDIT_CATEGORY });
   };
 
   const cancelCategoryErrors = () => {
-    dispatch({ type: SET_EDIT_CATEGORY_ERRORS, payload: '' });
+    dispatch({ type: actionTypes.SET_EDIT_CATEGORY_ERRORS, payload: '' });
   };
 
   return (
