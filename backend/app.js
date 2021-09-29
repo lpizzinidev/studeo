@@ -48,5 +48,8 @@ app.use(
   require('./routes/category.route')
 );
 
+// Error handler middleware
+app.use(require('./middlewares/errorHandler.middleware'));
+
 const { PORT } = require('./config/variables');
 app.listen(PORT, console.log(`Server is listening on port ${PORT}...`));
