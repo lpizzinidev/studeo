@@ -85,7 +85,7 @@ export const ResourcesEditDialog = () => {
             <div className='modal-footer'>
               <input
                 type='button'
-                className='text-button'
+                className='text-button mr-15'
                 value='CANCEL'
                 onClick={handleCancel}
               />

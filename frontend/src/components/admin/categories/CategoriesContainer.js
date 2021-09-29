@@ -7,6 +7,7 @@ import { ResourcesContext } from '../../../contexts/ResourcesContext';
 import { CategoriesEditDialog } from './CategoriesEditDialog';
 import { ResourcesList } from '../resources/ResourcesList';
 import { ResourcesEditDialog } from '../resources/ResourcesEditDialog';
+import { DialogConfirm } from '../../views/DialogConfirm';
 import SearchBar from '../../views/SearchBar';
 import { Fab } from '../../views/Fab';
 
@@ -25,9 +26,14 @@ export const CategoriesContainer = () => {
   const category = categories.find((category) => category._id === _id);
 
   const [search, setSearch] = useState('');
+  const [showDialogDelete, setShowDialogDelete] = useState(false);
 
   const handleEditCategory = () => {
     showEditCategory(category);
+  };
+
+  const requestDeleteCategory = () => {
+    setShowDialogDelete(true);
   };
 
   const handleDeleteCategory = () => {
@@ -51,22 +57,31 @@ export const CategoriesContainer = () => {
         search={search}
         setSearch={setSearch}
       />
-      <h1 className='heading-1'>{category.name}</h1>
-      <img
-        className='icon'
-        src={editIcon}
-        alt='Edit category'
-        onClick={handleEditCategory}
-      />
-      <img
-        className='icon'
-        src={deleteIcon}
-        alt='Delete category'
-        onClick={handleDeleteCategory}
-      />
+      <div className='list-header'>
+        <h1 className='heading-1'>{category.name}</h1>
+        <input
+          type='button'
+          className='text-button mr-15'
+          value='EDIT'
+          onClick={handleEditCategory}
+        />
+        <input
+          type='button'
+          className='text-button red'
+          value='DELETE'
+          onClick={requestDeleteCategory}
+        />
+      </div>
       <ResourcesList search={search} />
       <CategoriesEditDialog />
       <ResourcesEditDialog />
+      <DialogConfirm
+        title='Delete category'
+        message='Are you sure you want to delete the category and its resources?'
+        confirmAction={handleDeleteCategory}
+        show={showDialogDelete}
+        setShow={setShowDialogDelete}
+      />
       <Fab icon={plusIcon} alt='New resource' onClick={handleNewResource} />
     </div>
   );
