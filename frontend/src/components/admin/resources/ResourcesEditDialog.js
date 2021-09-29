@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { ResourcesContext } from '../../../contexts/ResourcesContext';
 
 import TextInput from '../../views/TextInput';
+import { ErrorInfo } from '../../views/ErrorInfo';
 
 export const ResourcesEditDialog = () => {
   const { _id } = useParams();
@@ -15,6 +16,7 @@ export const ResourcesEditDialog = () => {
     hideEditResource,
     createResource,
     updateResource,
+    cancelResourceErrors,
   } = useContext(ResourcesContext);
 
   const initialState = {
@@ -46,6 +48,7 @@ export const ResourcesEditDialog = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    cancelResourceErrors();
   };
 
   return (
@@ -55,14 +58,8 @@ export const ResourcesEditDialog = () => {
           {editingResource ? 'Edit' : 'New'} resource
         </h1>
         <div className='modal-body'>
-          {resourceErrors.length > 0 && (
-            <ul className='list-error'>
-              {resourceErrors.map((error) => (
-                <li key={error}>{error}</li>
-              ))}
-            </ul>
-          )}
           <form onSubmit={handleSubmit}>
+            <ErrorInfo errors={resourceErrors} />
             <TextInput
               title='Name'
               name='name'

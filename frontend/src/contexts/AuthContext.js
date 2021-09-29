@@ -59,6 +59,13 @@ export const AuthProvider = ({ children }) => {
     history.push('/');
   };
 
+  const cancelAuthErrors = () => {
+    dispatch({
+      type: actionTypes.SET_AUTH_ERRORS,
+      payload: [],
+    });
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -67,6 +74,7 @@ export const AuthProvider = ({ children }) => {
         signin,
         signup,
         logout,
+        cancelAuthErrors,
       }}
     >
       {children}

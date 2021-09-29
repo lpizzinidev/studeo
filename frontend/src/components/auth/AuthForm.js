@@ -4,6 +4,7 @@ import { Link, useLocation, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 
 import TextInput from '../views/TextInput';
+import { ErrorInfo } from '../views/ErrorInfo';
 
 const initialFormData = {
   email: '',
@@ -18,10 +19,12 @@ const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
 
-  const { authErrors, signin, signup } = useContext(AuthContext);
+  const { signin, signup, authErrors, cancelAuthErrors } =
+    useContext(AuthContext);
 
   useEffect(() => {
     setIsLogin(location.pathname === '/signin');
+    cancelAuthErrors();
   }, [location]);
 
   const handleSubmit = (e) => {
@@ -36,19 +39,14 @@ const AuthForm = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    cancelAuthErrors();
   };
 
   return (
     <div>
       <h2 className='heading-2'>Login</h2>
-      {authErrors.length > 0 && (
-        <ul className='list-error'>
-          {authErrors.map((error) => (
-            <li key={error}>{error}</li>
-          ))}
-        </ul>
-      )}
       <form className='auth-form' onSubmit={handleSubmit}>
+        <ErrorInfo errors={authErrors} />
         <TextInput
           type='email'
           name='email'

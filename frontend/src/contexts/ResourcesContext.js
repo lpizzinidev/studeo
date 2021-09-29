@@ -90,6 +90,10 @@ export const ResourcesProvider = ({ children }) => {
     dispatch({ type: actionTypes.HIDE_EDIT_RESOURCE });
   };
 
+  const cancelResourceErrors = () => {
+    dispatch({ type: actionTypes.SET_EDIT_RESOURCE_ERRORS, payload: [] });
+  };
+
   return (
     <ResourcesContext.Provider
       value={{
@@ -100,6 +104,7 @@ export const ResourcesProvider = ({ children }) => {
         deleteResource,
         showEditResource,
         hideEditResource,
+        cancelResourceErrors,
       }}
     >
       {children}

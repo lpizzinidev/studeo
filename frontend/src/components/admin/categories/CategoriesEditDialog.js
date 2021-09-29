@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import { CategoriesContext } from '../../../contexts/CategoriesContext';
 
 import TextInput from '../../views/TextInput';
+import { ErrorInfo } from '../../views/ErrorInfo';
 
 export const CategoriesEditDialog = () => {
   const initialFormData = {
@@ -47,14 +48,8 @@ export const CategoriesEditDialog = () => {
           {editingCategory ? 'Edit' : 'New'} category
         </h1>
         <div className='modal-body'>
-          {categoryErrors.length > 0 && (
-            <ul className='list-error'>
-              {categoryErrors.map((error) => (
-                <li key={error}>{error}</li>
-              ))}
-            </ul>
-          )}
           <form onSubmit={handleSubmit} className='dialog-form'>
+            <ErrorInfo errors={categoryErrors} />
             <TextInput
               title='Name'
               name='name'
