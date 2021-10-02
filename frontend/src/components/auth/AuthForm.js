@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { Link, useLocation, useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { AuthContext } from '../../contexts/AuthContext';
 
@@ -12,20 +12,17 @@ const initialFormData = {
   confirmPassword: '',
 };
 
-const AuthForm = () => {
+const AuthForm = ({ isLogin }) => {
   const history = useHistory();
-  const location = useLocation();
 
-  const [isLogin, setIsLogin] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
 
   const { signin, signup, authErrors, cancelAuthErrors } =
     useContext(AuthContext);
 
   useEffect(() => {
-    setIsLogin(location.pathname === '/signin');
     cancelAuthErrors();
-  }, [location]);
+  }, [isLogin]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
