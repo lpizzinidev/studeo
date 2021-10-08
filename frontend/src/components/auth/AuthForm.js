@@ -41,7 +41,7 @@ const AuthForm = ({ isLogin }) => {
 
   return (
     <div>
-      <h2 className='heading-2'>Login</h2>
+      <h2 className='heading-2'>{isLogin ? 'Login' : 'Register'}</h2>
       <form className='auth-form' onSubmit={handleSubmit}>
         <ErrorInfo errors={authErrors} />
         <TextInput
@@ -62,6 +62,7 @@ const AuthForm = ({ isLogin }) => {
             name='confirmPassword'
             title='Confirm password'
             onChange={handleChange}
+            dataTestId='confirm-password'
           />
         )}
         <input

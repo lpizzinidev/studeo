@@ -1,6 +1,6 @@
-const TextInput = ({ type, title, name, value, onChange }) => {
+const TextInput = ({ type, title, name, value, onChange, dataTestId }) => {
   return (
-    <div>
+    <div data-testid={dataTestId}>
       <span className='text-body-2'>{title}</span>
       <input
         type={type || 'text'}

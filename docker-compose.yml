@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   frontend:
     restart: always
@@ -11,7 +11,7 @@ services:
     depends_on:
       - backend
     ports:
-      - "3000:3000"
+      - '3000:3000'
     networks:
       - app-network
 
@@ -24,7 +24,7 @@ services:
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules
     ports:
-      - "5000:5000"
+      - '5000:5000'
     environment:
       - PORT=5000
       - MONGO_USER=backend
@@ -40,7 +40,7 @@ services:
     image: mongo
     restart: always
     ports:
-      - "27017:27017"
+      - '27017:27017'
     environment:
       MONGO_INITDB_ROOT_USERNAME: backend
       MONGO_INITDB_ROOT_PASSWORD: psw123!

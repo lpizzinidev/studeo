@@ -39,6 +39,7 @@ const validate = (method) => {
           .trim()
           .escape(),
         body('confirmPassword')
+          .not()
           .equals('password')
           .withMessage('Passwords do not correspond')
           .trim()
