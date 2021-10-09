@@ -3,9 +3,7 @@ export const ErrorInfo = ({ errors }) => {
 
   return (
     <ul className='list-error'>
-      {errors.map((error) => (
-        <li key={error}>{error}</li>
-      ))}
+      <li key={errors[0]}>{errors[0]}</li>
     </ul>
   );
 };
