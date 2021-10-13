@@ -1,15 +1,11 @@
-import { useContext } from 'react';
-
-import { CategoriesContext } from '../../../contexts/CategoriesContext';
-
 import { CategoriesListItem } from './CategoriesListItem';
 import { Loading } from '../../views/Loading';
 import { NoData } from '../../views/NoData';
+import { useGetCategoriesList } from '../../../hooks/useGetCategoriesList';
 
 export const CategoriesList = ({ search }) => {
-  const { categories, GetCategoriesList } = useContext(CategoriesContext);
-  const { loading } = GetCategoriesList();
-
+  const { loading, categories } = useGetCategoriesList();
+  console.log(search);
   if (loading) {
     return <Loading text='Loading categories...' />;
   }

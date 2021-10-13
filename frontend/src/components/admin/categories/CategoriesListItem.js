@@ -7,7 +7,7 @@ export const CategoriesListItem = ({ _id, name, resources }) => {
     (resources.length === 1 ? 'resource' : 'resources');
   return (
     <Link to={`/categories/${_id}`}>
-      <div className='card card-item'>
+      <div className='card card-item' data-testid='category-item'>
         <div>
           <p className='text-footer'>{resourcesDesc}</p>
           <p className='text-body-1'>{name}</p>

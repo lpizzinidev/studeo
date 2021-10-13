@@ -3,7 +3,6 @@ import { CategoriesReducer } from '../reducers/CategoriesReducer';
 
 // API
 import * as api from '../api/server';
-
 import * as utils from '../util/util';
 
 // Action types
@@ -11,7 +10,6 @@ import * as actionTypes from '../reducers/ActionTypes';
 
 // Initial state
 const initialState = {
-  categories: [],
   editingCategory: null,
   showEditingCategory: false,
   categoryErrors: [],
@@ -25,31 +23,9 @@ export const CategoriesProvider = ({ children }) => {
   const [state, dispatch] = useReducer(CategoriesReducer, initialState);
 
   // Actions
-  const GetCategoriesList = () => {
-    const [loading, setLoading] = useState(true);
-    const [categories, setCategories] = useState([]);
-
-    const loadCategories = async () => {
-      const { data } = await api.getCategoriesList();
-
-      dispatch({ type: actionTypes.SET_CATEGORIES_LIST, payload: data });
-
-      setCategories(data);
-      setLoading(false);
-    };
-
-    useEffect(() => {
-      loadCategories();
-    }, []);
-
-    return { loading, categories };
-  };
-
   const createCategory = async (formData) => {
     try {
-      const { data } = await api.createCategory(formData);
-      dispatch({ type: actionTypes.CREATE_CATEGORY, payload: data });
-
+      await api.createCategory(formData);
       hideEditCategory();
     } catch (err) {
       dispatch({
@@ -61,9 +37,7 @@ export const CategoriesProvider = ({ children }) => {
 
   const updateCategory = async (id, formData) => {
     try {
-      const { data } = await api.updateCategory(id, formData);
-      dispatch({ type: actionTypes.UPDATE_CATEGORY, payload: data });
-
+      await api.updateCategory(id, formData);
       hideEditCategory();
     } catch (err) {
       dispatch({
@@ -76,7 +50,6 @@ export const CategoriesProvider = ({ children }) => {
   const deleteCategory = async (id) => {
     try {
       await api.deleteCategory(id);
-      dispatch({ type: actionTypes.DELETE_CATEGORY, payload: id });
     } catch (err) {
       console.log(err);
     }
@@ -98,7 +71,6 @@ export const CategoriesProvider = ({ children }) => {
     <CategoriesContext.Provider
       value={{
         ...state,
-        GetCategoriesList,
         createCategory,
         updateCategory,
         deleteCategory,
