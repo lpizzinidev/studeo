@@ -5,7 +5,7 @@ import { useGetCategoriesList } from '../../../hooks/useGetCategoriesList';
 
 export const CategoriesList = ({ search }) => {
   const { loading, categories } = useGetCategoriesList();
-  console.log(search);
+
   if (loading) {
     return <Loading text='Loading categories...' />;
   }

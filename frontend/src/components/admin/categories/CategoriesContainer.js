@@ -3,6 +3,7 @@ import { Redirect, useParams, useHistory } from 'react-router-dom';
 
 import { CategoriesContext } from '../../../contexts/CategoriesContext';
 import { ResourcesContext } from '../../../contexts/ResourcesContext';
+import { useGetCategoriesList } from '../../../hooks/useGetCategoriesList';
 
 import { CategoriesEditDialog } from './CategoriesEditDialog';
 import { ResourcesList } from '../resources/ResourcesList';
@@ -10,6 +11,7 @@ import { ResourcesEditDialog } from '../resources/ResourcesEditDialog';
 import { DialogConfirm } from '../../views/DialogConfirm';
 import SearchBar from '../../views/SearchBar';
 import { Fab } from '../../views/Fab';
+import { Loading } from '../../views/Loading';
 
 import plusIcon from '../../../assets/icons/plus.svg';
 
@@ -17,8 +19,8 @@ export const CategoriesContainer = () => {
   const { _id } = useParams();
   const history = useHistory();
 
-  const { categories, showEditCategory, deleteCategory } =
-    useContext(CategoriesContext);
+  const { loading, categories } = useGetCategoriesList();
+  const { showEditCategory, deleteCategory } = useContext(CategoriesContext);
   const { showEditResource } = useContext(ResourcesContext);
 
   const category = categories.find((category) => category._id === _id);
@@ -42,6 +44,10 @@ export const CategoriesContainer = () => {
   const handleNewResource = () => {
     showEditResource(null);
   };
+
+  if (loading) {
+    return <Loading text='Loading category...' />;
+  }
 
   if (!category) {
     // Se non trovo la categoria torno alla dashboard
