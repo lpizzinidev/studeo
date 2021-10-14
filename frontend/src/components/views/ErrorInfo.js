@@ -1,5 +1,5 @@
 export const ErrorInfo = ({ errors }) => {
-  if (errors.length === 0) return <></>;
+  if (!errors || errors.length === 0) return <></>;
 
   return (
     <ul className='list-error' data-testid='error-info'>
