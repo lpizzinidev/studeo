@@ -23,7 +23,7 @@ export const CategoriesContainer = () => {
   const { showEditCategory, deleteCategory } = useContext(CategoriesContext);
   const { showEditResource } = useContext(ResourcesContext);
 
-  const category = categories.find((category) => category._id === _id);
+  const category = categories?.find((category) => category._id === _id);
 
   const [search, setSearch] = useState('');
   const [showDialogDelete, setShowDialogDelete] = useState(false);

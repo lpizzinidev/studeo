@@ -50,7 +50,7 @@ const MockCategoriesList = (props) => {
 };
 
 describe('CategoriesList', () => {
-  it('should render loading screen if still loading', () => {
+  it('should render loading spinner if still loading', () => {
     useGetCategoriesList.mockReturnValueOnce({
       loading: true,
     });
