@@ -9,7 +9,7 @@ const MockCategoriesEditDialog = (props) => {
   return (
     <CategoriesContext.Provider
       value={{
-        showEditingCategory: props.isVisible,
+        editingCategory: props.editingCategory,
       }}
     >
       <CategoriesEditDialog {...props} />
@@ -18,15 +18,25 @@ const MockCategoriesEditDialog = (props) => {
 };
 
 describe('CategoriesEditDialog', () => {
-  it('should be hidden if flag is false', () => {
-    render(<MockCategoriesEditDialog isVisible={false} />);
+  it('should display `New category` if no parameter are passed', () => {
+    render(<MockCategoriesEditDialog/>);
 
-    expect(screen.getByTestId(/modal-categories-edit/i)).not.toBeVisible();
+    expect(screen.getByText('New category')).toBeVisible();
   });
 
-  it('should be visible if flag is true', () => {
-    render(<MockCategoriesEditDialog isVisible={true} />);
+  it('should display `Edit category` if editing category is passed', () => {
+    render(<MockCategoriesEditDialog editingCategory={{}} />);
 
-    expect(screen.getByTestId(/modal-categories-edit/i)).toBeVisible();
+    expect(screen.getByText('Edit category')).toBeVisible();
   });
+
+    it('should display correct category name in editing field', () => {
+      const categoryName = 'Example category name';
+      
+      render(<MockCategoriesEditDialog editingCategory={{
+        name: categoryName
+      }} />);
+
+      expect(screen.getByRole('textbox', { value: categoryName })).toBeVisible();
+    });
 });

@@ -42,11 +42,8 @@ export const CategoriesEditDialog = () => {
   };
 
   return (
-    <div
-      className={`modal ${showEditingCategory ? 'open' : ''}`}
-      data-testid='modal-categories-edit'
-    >
-      <div className='modal-content'>
+    <div className={`modal ${showEditingCategory ? 'open' : ''}`}>
+      <div className='modal-content' data-testid='modal-categories-edit'>
         <h1 className='heading-2'>
           {editingCategory ? 'Edit' : 'New'} category
         </h1>
