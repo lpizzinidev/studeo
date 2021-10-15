@@ -107,8 +107,20 @@ describe('CategoriesList', () => {
     const editButton = screen.getByRole('button', { name: /edit/i });
     fireEvent.click(editButton);
 
-    // expect(screen.getByRole('textbox', { name: /name/i }).value).toBe(
-    //   'Example'
-    // );
+    expect(screen.getByText('Example')).toBeVisible();
+  });
+
+  it('should go back to dashboard on delete action', () => {
+    useGetCategoriesList.mockReturnValue({
+      loading: false,
+      categories: categoriesForTesting,
+    });
+
+    render(<MockCategoriesContainer />);
+
+    const confirmButton = screen.getByRole('button', { name: /confirm/i });
+    fireEvent.click(confirmButton);
+
+    expect(global.window.location.pathname).toEqual('/dashboard');
   });
 });
