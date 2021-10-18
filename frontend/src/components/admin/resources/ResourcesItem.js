@@ -12,7 +12,11 @@ export const ResourcesItem = ({ resource }) => {
   };
 
   return (
-    <div className='card card-item' onClick={handleClick}>
+    <div
+      className='card card-item'
+      onClick={handleClick}
+      data-testid='resources-item'
+    >
       <div>
         <p className='text-footer'>
           {resource.author !== '' ? resource.author : 'No author'} -{' '}
