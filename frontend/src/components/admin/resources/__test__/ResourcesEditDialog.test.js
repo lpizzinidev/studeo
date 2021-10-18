@@ -5,6 +5,13 @@ import { ResourcesContext } from '../../../../contexts/ResourcesContext';
 
 import { ResourcesEditDialog } from '../ResourcesEditDialog';
 
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useParams: () => ({
+    _id: '6165a4c343a9660020b1bf1d',
+  }),
+}));
+
 const testResource = {
   name: 'Example resource name',
   author: 'Example resource author',
