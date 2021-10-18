@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { ResourcesContext } from '../../../contexts/ResourcesContext';
 
@@ -6,6 +7,8 @@ import TextInput from '../../views/TextInput';
 import { ErrorInfo } from '../../views/ErrorInfo';
 
 export const ResourcesEditDialog = () => {
+  const { _id } = useParams();
+
   const {
     editingResource,
     showEditingResource,
@@ -34,9 +37,9 @@ export const ResourcesEditDialog = () => {
     e.preventDefault();
 
     if (editingResource) {
-      updateResource(formData);
+      updateResource(_id, formData);
     } else {
-      createResource(formData);
+      createResource(_id, formData);
     }
   };
 
