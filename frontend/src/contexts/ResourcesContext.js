@@ -25,12 +25,12 @@ export const ResourcesProvider = ({ children }) => {
   const [state, dispatch] = useReducer(ResourcesReducer, initialState);
 
   // Actions
-  const GetResourcesList = (category) => {
+  const GetResourcesList = (resource) => {
     const [loading, setLoading] = useState(true);
     const [resources, setResources] = useState([]);
 
     const loadResources = async () => {
-      const { data } = await api.getResourceList(category);
+      const { data } = await api.getResourceList(resource);
 
       dispatch({ type: actionTypes.SET_RESOURCES_LIST, payload: data });
 
@@ -45,9 +45,9 @@ export const ResourcesProvider = ({ children }) => {
     return { loading, resources };
   };
 
-  const createResource = async (category, formData) => {
+  const createResource = async (formData) => {
     try {
-      const { data } = await api.createResource(category, formData);
+      const { data } = await api.createResource(formData);
       dispatch({ type: actionTypes.CREATE_RESOURCE, payload: data });
 
       hideEditResource();
@@ -59,9 +59,9 @@ export const ResourcesProvider = ({ children }) => {
     }
   };
 
-  const updateResource = async (id, category, formData) => {
+  const updateResource = async (formData) => {
     try {
-      const { data } = await api.updateResource(id, category, formData);
+      const { data } = await api.updateResource(formData);
       dispatch({ type: actionTypes.UPDATE_RESOURCE, payload: data });
 
       hideEditResource();
@@ -73,9 +73,9 @@ export const ResourcesProvider = ({ children }) => {
     }
   };
 
-  const deleteResource = async (id, category) => {
+  const deleteResource = async (id, resource) => {
     try {
-      await api.deleteResource(id, category);
+      await api.deleteResource(id, resource);
       dispatch({ type: actionTypes.DELETE_RESOURCE, payload: id });
     } catch (err) {
       dispatch({ type: actionTypes.SET_EDIT_RESOURCE_ERRORS, payload: err });
