@@ -1,7 +1,6 @@
-import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { ResourcesContext } from '../../../contexts/ResourcesContext';
+import { useGetCategory } from '../../../hooks/useGetCategory';
 
 import { ResourcesItem } from './ResourcesItem';
 import { Loading } from '../../views/Loading';
@@ -10,16 +9,18 @@ import { NoData } from '../../views/NoData';
 export const ResourcesList = ({ search }) => {
   const { _id } = useParams();
 
-  const { resources, GetResourcesList } = useContext(ResourcesContext);
-  const { loading } = GetResourcesList(_id);
+  const { loading, category } = useGetCategory(_id);
 
   if (loading) {
     return <Loading text='Loading resources...' />;
   }
 
-  const filteredResources = resources.filter((resource) => {
-    return resource.name.toUpperCase().includes(search.toUpperCase());
-  });
+  const filteredResources =
+    category && category[0]
+      ? category[0].resources.filter((resource) => {
+          return resource.name.toUpperCase().includes(search.toUpperCase());
+        })
+      : [];
 
   if (filteredResources.length === 0) {
     return <NoData text='No resources found' />;

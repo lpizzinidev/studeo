@@ -84,7 +84,7 @@ describe('CategoriesList', () => {
     expect(categoriesListItems.length).toBe(3);
   });
 
-  it('should render only searched category if necessary', async () => {
+  it('should render only searched category', async () => {
     useGetCategoriesList.mockReturnValueOnce({
       loading: false,
       categories: categoriesForTesting,
