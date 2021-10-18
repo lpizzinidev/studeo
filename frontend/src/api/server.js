@@ -23,8 +23,8 @@ export const getResource = (id, category) =>
   API.get(`${resourcesPath}/${category}/${id}`);
 export const createResource = (category, formData) =>
   API.post(`${resourcesPath}/${category}`, formData);
-export const updateResource = (id, category, formData) =>
-  API.put(`${resourcesPath}/${category}/${id}`, formData);
+export const updateResource = (category, formData) =>
+  API.put(`${resourcesPath}/${category}/${formData._id}`, formData);
 export const deleteResource = (id, category) =>
   API.delete(`${resourcesPath}/${category}/${id}`);
 
