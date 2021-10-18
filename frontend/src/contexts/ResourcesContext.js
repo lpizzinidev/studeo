@@ -45,9 +45,9 @@ export const ResourcesProvider = ({ children }) => {
     return { loading, resources };
   };
 
-  const createResource = async (formData) => {
+  const createResource = async (category, formData) => {
     try {
-      const { data } = await api.createResource(formData);
+      const { data } = await api.createResource(category, formData);
       dispatch({ type: actionTypes.CREATE_RESOURCE, payload: data });
 
       hideEditResource();
@@ -59,9 +59,9 @@ export const ResourcesProvider = ({ children }) => {
     }
   };
 
-  const updateResource = async (formData) => {
+  const updateResource = async (category, formData) => {
     try {
-      const { data } = await api.updateResource(formData);
+      const { data } = await api.updateResource(category, formData);
       dispatch({ type: actionTypes.UPDATE_RESOURCE, payload: data });
 
       hideEditResource();
