@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { ResourcesContext } from '../../../contexts/ResourcesContext';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 import TextInput from '../../views/TextInput';
 import { ErrorInfo } from '../../views/ErrorInfo';
@@ -12,12 +13,11 @@ export const ResourcesEditDialog = () => {
   const {
     editingResource,
     showEditingResource,
-    resourceErrors,
     hideEditResource,
     createResource,
     updateResource,
-    cancelResourceErrors,
   } = useContext(ResourcesContext);
+  const { errors, clearError } = useContext(AuthContext);
 
   const initialState = {
     _id: '',
@@ -49,7 +49,7 @@ export const ResourcesEditDialog = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    cancelResourceErrors();
+    clearError();
   };
 
   return (
@@ -60,7 +60,7 @@ export const ResourcesEditDialog = () => {
         </h1>
         <div className='modal-body'>
           <form onSubmit={handleSubmit}>
-            <ErrorInfo errors={resourceErrors} />
+            <ErrorInfo errors={errors} />
             <TextInput
               title='Name'
               name='name'

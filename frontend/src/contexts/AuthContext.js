@@ -4,22 +4,15 @@ import { AuthReducer } from '../reducers/AuthReducer';
 // API
 import * as api from '../api/server';
 
-import * as utils from '../util/util';
-
 // Action types
 import * as actionTypes from '../reducers/ActionTypes';
-
-// Initial state
-const initialState = {
-  authErrors: [],
-};
 
 // Create context
 export const AuthContext = React.createContext();
 
 // Provider component
 export const AuthProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(AuthReducer, initialState);
+  const [state, dispatch] = useReducer(AuthReducer);
 
   // Actions
   const isLogged = () => {
@@ -33,10 +26,7 @@ export const AuthProvider = ({ children }) => {
 
       history.push('/dashboard');
     } catch (err) {
-      dispatch({
-        type: actionTypes.SET_AUTH_ERRORS,
-        payload: utils.handleErrorObj(err),
-      });
+      setError(err);
     }
   };
 
@@ -47,10 +37,7 @@ export const AuthProvider = ({ children }) => {
 
       history.push('/dashboard');
     } catch (err) {
-      dispatch({
-        type: actionTypes.SET_AUTH_ERRORS,
-        payload: utils.handleErrorObj(err),
-      });
+      setError(err);
     }
   };
 
@@ -59,11 +46,38 @@ export const AuthProvider = ({ children }) => {
     history.push('/');
   };
 
-  const cancelAuthErrors = () => {
-    dispatch({
-      type: actionTypes.SET_AUTH_ERRORS,
-      payload: [],
-    });
+  const setError = (err) => {
+    try {
+      const { status, data } = err.response;
+
+      switch (status) {
+        case 400:
+          // Client error
+          const { errors } = data;
+
+          let errMsg = [];
+          for (let error of errors) {
+            errMsg.push(error.msg);
+          }
+
+          dispatch({ type: actionTypes.SET_ERROR, payload: errMsg });
+          break;
+        case 401:
+          // Unauthorized
+          logout();
+          break;
+        default:
+          // Server error
+          dispatch({ type: actionTypes.SET_ERROR, payload: [data.message] });
+          break;
+      }
+    } catch (e) {
+      dispatch({ type: actionTypes.SET_ERROR, payload: [e.message] });
+    }
+  };
+
+  const clearError = () => {
+    dispatch({ type: actionTypes.CLEAR_ERROR });
   };
 
   return (
@@ -74,7 +88,8 @@ export const AuthProvider = ({ children }) => {
         signin,
         signup,
         logout,
-        cancelAuthErrors,
+        setError,
+        clearError,
       }}
     >
       {children}

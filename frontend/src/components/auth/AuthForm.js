@@ -17,11 +17,10 @@ const AuthForm = ({ isLogin }) => {
 
   const [formData, setFormData] = useState(initialFormData);
 
-  const { signin, signup, authErrors, cancelAuthErrors } =
-    useContext(AuthContext);
+  const { signin, signup, errors, clearError } = useContext(AuthContext);
 
   useEffect(() => {
-    cancelAuthErrors();
+    clearError();
   }, [isLogin]);
 
   const handleSubmit = (e) => {
@@ -36,14 +35,14 @@ const AuthForm = ({ isLogin }) => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    cancelAuthErrors();
+    clearError();
   };
 
   return (
     <div>
       <h2 className='heading-2'>{isLogin ? 'Login' : 'Register'}</h2>
       <form className='auth-form' onSubmit={handleSubmit}>
-        <ErrorInfo errors={authErrors} />
+        <ErrorInfo errors={errors} />
         <TextInput
           type='email'
           name='email'

@@ -6,26 +6,3 @@ export const formatDuration = (duration) => {
 
   return (hours > 0 ? hours + 'h ' : '') + (minutes > 0 ? minutes + 'm' : '');
 };
-
-/**
- * Handle an error object received from the server
- * and return an array of strings containing error messages
- */
-export const handleErrorObj = (err) => {
-  const { status } = err.response;
-  const { data } = err.response;
-
-  if (status === 400) {
-    // Client error
-    const { errors } = data;
-
-    let errMsg = [];
-    for (let error of errors) {
-      errMsg.push(error.msg);
-    }
-    return errMsg;
-  }
-
-  // Server error
-  return [data.message];
-};

@@ -1,25 +1,26 @@
-import { AUTH, LOGOUT, SET_AUTH_ERRORS } from './ActionTypes';
+import * as actionTypes from './ActionTypes';
 
 export const AuthReducer = (state, action) => {
   switch (action.type) {
-    case AUTH:
+    case actionTypes.AUTH:
       localStorage.setItem('token', action.payload);
-      return {
-        ...state,
-        authErrors: [],
-      };
-    case LOGOUT:
+      break;
+    case actionTypes.LOGOUT:
       localStorage.clear();
+      break;
+    case actionTypes.SET_ERROR:
       return {
         ...state,
-        authErrors: [],
+        errors: action.payload,
       };
-    case SET_AUTH_ERRORS:
+    case actionTypes.CLEAR_ERROR:
       return {
         ...state,
-        authErrors: action.payload,
+        errors: [],
       };
     default:
-      return state;
+      break;
   }
+
+  return state;
 };

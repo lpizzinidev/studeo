@@ -4,7 +4,7 @@ import HomeContainer from './components/homepage/HomeContainer';
 import AuthContainer from './components/auth/AuthContainer';
 import DashboardContainer from './components/admin/dashboard/DashboardContainer';
 import { CategoriesContainer } from './components/admin/categories/CategoriesContainer';
-import NotFound from './components/pages/NotFound';
+import { NotFound } from './components/pages/NotFound';
 
 import { AuthProvider } from './contexts/AuthContext';
 import { CategoriesProvider } from './contexts/CategoriesContext';

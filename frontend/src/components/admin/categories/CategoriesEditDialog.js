@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 
 import { CategoriesContext } from '../../../contexts/CategoriesContext';
+import { AuthContext } from '../../../contexts/AuthContext';
 
 import TextInput from '../../views/TextInput';
 import { ErrorInfo } from '../../views/ErrorInfo';
@@ -12,13 +13,12 @@ export const CategoriesEditDialog = () => {
 
   const {
     editingCategory,
-    categoryErrors,
     showEditingCategory,
     hideEditCategory,
     createCategory,
     updateCategory,
-    cancelCategoryErrors,
   } = useContext(CategoriesContext);
+  const { errors, clearError } = useContext(AuthContext);
 
   const [formData, setFormData] = useState(initialFormData);
 
@@ -38,7 +38,7 @@ export const CategoriesEditDialog = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    cancelCategoryErrors();
+    clearError();
   };
 
   return (
@@ -49,7 +49,7 @@ export const CategoriesEditDialog = () => {
         </h1>
         <div className='modal-body'>
           <form onSubmit={handleSubmit} className='dialog-form'>
-            <ErrorInfo errors={categoryErrors} />
+            <ErrorInfo errors={errors} />
             <TextInput
               title='Name'
               name='name'

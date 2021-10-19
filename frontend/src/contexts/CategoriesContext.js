@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useReducer, useContext } from 'react';
 import { CategoriesReducer } from '../reducers/CategoriesReducer';
+
+import { AuthContext } from './AuthContext';
 
 // API
 import * as api from '../api/server';
-import * as utils from '../util/util';
 
 // Action types
 import * as actionTypes from '../reducers/ActionTypes';
@@ -12,7 +13,6 @@ import * as actionTypes from '../reducers/ActionTypes';
 const initialState = {
   editingCategory: null,
   showEditingCategory: false,
-  categoryErrors: [],
 };
 
 // Create context
@@ -22,16 +22,15 @@ export const CategoriesContext = React.createContext();
 export const CategoriesProvider = ({ children }) => {
   const [state, dispatch] = useReducer(CategoriesReducer, initialState);
 
+  const { setError } = useContext(AuthContext);
+
   // Actions
   const createCategory = async (formData) => {
     try {
       await api.createCategory(formData);
       hideEditCategory();
     } catch (err) {
-      dispatch({
-        type: actionTypes.SET_EDIT_CATEGORY_ERRORS,
-        payload: utils.handleErrorObj(err),
-      });
+      setError(err);
     }
   };
 
@@ -40,10 +39,7 @@ export const CategoriesProvider = ({ children }) => {
       await api.updateCategory(id, formData);
       hideEditCategory();
     } catch (err) {
-      dispatch({
-        type: actionTypes.SET_EDIT_CATEGORY_ERRORS,
-        payload: utils.handleErrorObj(err),
-      });
+      setError(err);
     }
   };
 
@@ -51,7 +47,7 @@ export const CategoriesProvider = ({ children }) => {
     try {
       await api.deleteCategory(id);
     } catch (err) {
-      console.log(err);
+      setError(err);
     }
   };
 
@@ -63,10 +59,6 @@ export const CategoriesProvider = ({ children }) => {
     dispatch({ type: actionTypes.HIDE_EDIT_CATEGORY });
   };
 
-  const cancelCategoryErrors = () => {
-    dispatch({ type: actionTypes.SET_EDIT_CATEGORY_ERRORS, payload: '' });
-  };
-
   return (
     <CategoriesContext.Provider
       value={{
@@ -76,7 +68,6 @@ export const CategoriesProvider = ({ children }) => {
         deleteCategory,
         showEditCategory,
         hideEditCategory,
-        cancelCategoryErrors,
       }}
     >
       {children}

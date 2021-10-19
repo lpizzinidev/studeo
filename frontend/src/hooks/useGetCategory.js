@@ -4,17 +4,17 @@ import { AuthContext } from '../contexts/AuthContext';
 
 import * as api from '../api/server';
 
-export const useGetCategoriesList = () => {
+export const useGetCategory = (_id) => {
   const [loading, setLoading] = useState(true);
-  const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState(null);
 
   const { setError } = useContext(AuthContext);
 
-  const loadCategories = async () => {
+  const loadCategory = async () => {
     try {
-      const { data } = await api.getCategoriesList();
+      const { data } = await api.getCategory(_id);
 
-      setCategories(data);
+      setCategory(data);
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -22,8 +22,8 @@ export const useGetCategoriesList = () => {
   };
 
   useEffect(() => {
-    loadCategories();
-  }, []);
+    loadCategory();
+  }, [_id]);
 
-  return { loading, categories };
+  return { loading, category };
 };
