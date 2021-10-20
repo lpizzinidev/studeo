@@ -3,7 +3,7 @@ import { Redirect, useParams, useHistory } from 'react-router-dom';
 
 import { CategoriesContext } from '../../../contexts/CategoriesContext';
 import { ResourcesContext } from '../../../contexts/ResourcesContext';
-import { useGetCategoriesList } from '../../../hooks/useGetCategoriesList';
+import { useGetCategory } from '../../../hooks/useGetCategory';
 
 import { CategoriesEditDialog } from './CategoriesEditDialog';
 import { ResourcesList } from '../resources/ResourcesList';
@@ -19,11 +19,9 @@ export const CategoriesContainer = () => {
   const { _id } = useParams();
   const history = useHistory();
 
-  const { loading, categories } = useGetCategoriesList();
+  const { loading, category } = useGetCategory(_id);
   const { showEditCategory, deleteCategory } = useContext(CategoriesContext);
   const { showEditResource } = useContext(ResourcesContext);
-
-  const category = categories?.find((category) => category._id === _id);
 
   const [search, setSearch] = useState('');
   const [showDialogDelete, setShowDialogDelete] = useState(false);
@@ -76,7 +74,7 @@ export const CategoriesContainer = () => {
           onClick={requestDeleteCategory}
         />
       </div>
-      <ResourcesList search={search} />
+      <ResourcesList search={search} resources={category.resources} />
       <CategoriesEditDialog />
       <ResourcesEditDialog />
       <DialogConfirm

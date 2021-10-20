@@ -11,6 +11,7 @@ export const CategoriesReducer = (state, action) => {
     case actionTypes.HIDE_EDIT_CATEGORY:
       return {
         ...state,
+        refreshCategories: !state.refreshCategories,
         editingCategory: null,
         showEditingCategory: false,
       };

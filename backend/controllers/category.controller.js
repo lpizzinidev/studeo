@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator');
 
-const Category = require('../models/category.model');
 const Resource = require('../models/resource.model');
+const Category = require('../models/category.model');
 
 const getCategories = async (req, res) => {
   try {
@@ -10,6 +10,17 @@ const getCategories = async (req, res) => {
     res.status(200).json(data);
   } catch (err) {
     res.status(500).json({ message: 'Error fetching categories' });
+  }
+};
+
+const getCategory = async (req, res) => {
+  try {
+    const { _id } = req.params;
+    const category = await Category.findById(_id).populate('resources').exec();
+
+    res.status(200).json(category);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching category' + err });
   }
 };
 
@@ -59,6 +70,7 @@ const deleteCategory = async (req, res) => {
 
 module.exports = {
   getCategories,
+  getCategory,
   createCategory,
   updateCategory,
   deleteCategory,

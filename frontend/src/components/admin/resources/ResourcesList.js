@@ -1,26 +1,12 @@
-import { useParams } from 'react-router-dom';
-
-import { useGetCategory } from '../../../hooks/useGetCategory';
-
 import { ResourcesItem } from './ResourcesItem';
-import { Loading } from '../../views/Loading';
 import { NoData } from '../../views/NoData';
 
-export const ResourcesList = ({ search }) => {
-  const { _id } = useParams();
-
-  const { loading, category } = useGetCategory(_id);
-
-  if (loading) {
-    return <Loading text='Loading resources...' />;
-  }
-
-  const filteredResources =
-    category && category[0]
-      ? category[0].resources.filter((resource) => {
-          return resource.name.toUpperCase().includes(search.toUpperCase());
-        })
-      : [];
+export const ResourcesList = ({ resources, search }) => {
+  const filteredResources = resources
+    ? resources.filter((resource) => {
+        return resource.name.toUpperCase().includes(search.toUpperCase());
+      })
+    : [];
 
   if (filteredResources.length === 0) {
     return <NoData text='No resources found' />;

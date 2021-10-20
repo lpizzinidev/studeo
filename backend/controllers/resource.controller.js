@@ -3,17 +3,6 @@ const { validationResult } = require('express-validator');
 const Category = require('../models/category.model');
 const Resource = require('../models/resource.model');
 
-const getResourcesList = async (req, res) => {
-  try {
-    const { category } = req.params;
-    const data = await Resource.find({ category });
-
-    res.status(200).json(data);
-  } catch (err) {
-    res.status(500).json({ message: 'Error fetching resources' });
-  }
-};
-
 const getResource = async (req, res) => {
   try {
     const { _id } = req.params;
@@ -84,7 +73,6 @@ const deleteResource = async (req, res) => {
 };
 
 module.exports = {
-  getResourcesList,
   getResource,
   createResource,
   updateResource,

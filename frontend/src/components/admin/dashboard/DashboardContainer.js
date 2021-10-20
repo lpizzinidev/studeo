@@ -42,7 +42,7 @@ const DashboardContainer = () => {
         setSearch={setSearch}
       />
       <div className='list-header'>
-        <h1 className='heading-1'>Hello, User</h1>
+        <h1 className='heading-1'>Welcome back!</h1>
         <input
           type='button'
           className='text-button red'

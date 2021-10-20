@@ -11,6 +11,7 @@ import * as actionTypes from '../reducers/ActionTypes';
 
 // Initial state
 const initialState = {
+  refreshCategories: false,
   editingCategory: null,
   showEditingCategory: false,
 };

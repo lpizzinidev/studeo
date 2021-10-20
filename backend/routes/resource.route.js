@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const {
-  getResourcesList,
   getResource,
   createResource,
   updateResource,
@@ -11,7 +10,6 @@ const {
 
 const { validate } = require('../middlewares/validator.middleware');
 
-router.route('/resources/:category').get(getResourcesList);
 router
   .route('/resources/:category')
   .post(validate('createResource'), createResource);

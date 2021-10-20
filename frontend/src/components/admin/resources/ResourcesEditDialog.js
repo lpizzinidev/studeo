@@ -20,7 +20,6 @@ export const ResourcesEditDialog = () => {
   const { errors, clearError } = useContext(AuthContext);
 
   const initialState = {
-    _id: '',
     name: '',
     author: '',
     duration: 0,
@@ -37,7 +36,7 @@ export const ResourcesEditDialog = () => {
     e.preventDefault();
 
     if (editingResource) {
-      updateResource(_id, formData);
+      updateResource(_id, editingResource._id, formData);
     } else {
       createResource(_id, formData);
     }

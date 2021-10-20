@@ -1,4 +1,3 @@
-const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 
 const Resource = mongoose.model('resource', {
@@ -21,13 +20,13 @@ const Resource = mongoose.model('resource', {
     default: 0,
   },
   user: {
-    type: ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: 'users',
+    ref: 'user',
   },
   category: {
-    type: ObjectId,
-    ref: 'categories',
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'category',
   },
   completed: {
     type: Boolean,

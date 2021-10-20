@@ -1,4 +1,3 @@
-const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 
 const Category = mongoose.model('category', {
@@ -8,14 +7,14 @@ const Category = mongoose.model('category', {
     unique: true,
   },
   user: {
-    type: ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: 'users',
+    ref: 'user',
   },
   resources: [
     {
-      type: ObjectId,
-      ref: 'resources',
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'resource',
     },
   ],
   createdAt: {
