@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
+import { AuthProvider } from '../../../../contexts/AuthContext';
 import { ResourcesContext } from '../../../../contexts/ResourcesContext';
 
 import { ResourcesEditDialog } from '../ResourcesEditDialog';
@@ -21,13 +22,15 @@ const testResource = {
 
 const MockResourcesEditDialog = (props) => {
   return (
-    <ResourcesContext.Provider
-      value={{
-        editingResource: props.editingResource,
-      }}
-    >
-      <ResourcesEditDialog {...props} />
-    </ResourcesContext.Provider>
+    <AuthProvider>
+      <ResourcesContext.Provider
+        value={{
+          editingResource: props.editingResource,
+        }}
+      >
+        <ResourcesEditDialog {...props} />
+      </ResourcesContext.Provider>
+    </AuthProvider>
   );
 };
 

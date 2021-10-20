@@ -3,6 +3,7 @@ import '@testing-library/jest-dom';
 
 import { BrowserRouter } from 'react-router-dom';
 
+import { AuthProvider } from '../../../../contexts/AuthContext';
 import { CategoriesProvider } from '../../../../contexts/CategoriesContext';
 import { useGetCategoriesList } from '../../../../hooks/useGetCategoriesList';
 
@@ -42,9 +43,11 @@ const categoriesForTesting = [
 const MockCategoriesList = (props) => {
   return (
     <BrowserRouter>
-      <CategoriesProvider>
-        <CategoriesList {...props} />
-      </CategoriesProvider>
+      <AuthProvider>
+        <CategoriesProvider>
+          <CategoriesList {...props} />
+        </CategoriesProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 };

@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
+import { AuthProvider } from '../../../../contexts/AuthContext';
 import { CategoriesContext } from '../../../../contexts/CategoriesContext';
 
 import { CategoriesEditDialog } from '../CategoriesEditDialog';
@@ -11,13 +12,15 @@ const testCategory = {
 
 const MockCategoriesEditDialog = (props) => {
   return (
-    <CategoriesContext.Provider
-      value={{
-        editingCategory: props.editingCategory,
-      }}
-    >
-      <CategoriesEditDialog {...props} />
-    </CategoriesContext.Provider>
+    <AuthProvider>
+      <CategoriesContext.Provider
+        value={{
+          editingCategory: props.editingCategory,
+        }}
+      >
+        <CategoriesEditDialog {...props} />
+      </CategoriesContext.Provider>
+    </AuthProvider>
   );
 };
 
