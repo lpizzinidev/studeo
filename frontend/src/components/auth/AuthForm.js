@@ -70,6 +70,7 @@ const AuthForm = ({ isLogin }) => {
           type='submit'
           className='button auth-submit'
           value={isLogin ? 'LOGIN' : 'REGISTER'}
+          data-testid='login-button'
         />
       </form>
       {isLogin ? (
