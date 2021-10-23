@@ -54,10 +54,10 @@ const signUp = async (req, res) => {
     const salt = await bcrypt.genSalt(12);
     const encryptedPassword = await bcrypt.hash(password, salt);
 
-    const newUser = await User.create({ email, password: encryptedPassword });
+    const user = await User.create({ email, password: encryptedPassword });
 
     // Generate JWT
-    const token = await jwt.sign({ newUser }, JWT_TOKEN, {
+    const token = await jwt.sign({ user }, JWT_TOKEN, {
       expiresIn: '2h',
     });
 
