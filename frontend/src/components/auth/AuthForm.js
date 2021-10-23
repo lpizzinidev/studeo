@@ -47,12 +47,14 @@ const AuthForm = ({ isLogin }) => {
           type='email'
           name='email'
           title='E-mail'
+          dataTestId='email'
           onChange={handleChange}
         />
         <TextInput
           type='password'
           name='password'
           title='Password'
+          dataTestId='password'
           onChange={handleChange}
         />
         {isLogin || (
