@@ -1,6 +1,6 @@
 const TextInput = ({ type, title, name, value, onChange, dataTestId }) => {
   return (
-    <div data-testid={dataTestId}>
+    <div>
       <span className='text-body-2'>{title}</span>
       <input
         type={type || 'text'}
@@ -8,6 +8,7 @@ const TextInput = ({ type, title, name, value, onChange, dataTestId }) => {
         value={value}
         className='input-text-field'
         onChange={onChange}
+        data-testid={dataTestId}
       />
     </div>
   );
