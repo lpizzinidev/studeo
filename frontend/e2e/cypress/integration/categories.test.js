@@ -6,8 +6,8 @@ describe('Categories', () => {
   const chance = Chance();
 
   // Test account
-  const email = 'info@info.it';
-  const password = '123456';
+  const email = chance.email();
+  const password = chance.string();
 
   const category = {
     name: chance.string(),
@@ -20,12 +20,34 @@ describe('Categories', () => {
     link: chance.url(),
   };
 
+  before(() => {
+    // Create new test account
+    cy.visit('/');
+
+    // Click the sign up button
+    cy.get('[data-testid=signup-button]').click();
+
+    // Check that the current page URL is /signup
+    cy.url().should('include', '/signup');
+
+    // Type email, password and confirm password
+    cy.get('[data-testid=email').type(email);
+    cy.get('[data-testid=password').type(password);
+    cy.get('[data-testid=confirm-password').type(password);
+
+    // Click registration button
+    cy.get('[data-testid=login-button]').click();
+  });
+
   beforeEach(() => {
     // Login the user before each test
     cy.visit('/');
 
     // Click the sign in button
     cy.get('[data-testid=signin-button]').click();
+
+    // Check that the current page URL is /signin
+    cy.url().should('include', '/signin');
 
     // Type email, password
     cy.get('[data-testid=email').type(email);
