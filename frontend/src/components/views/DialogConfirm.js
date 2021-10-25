@@ -28,6 +28,7 @@ export const DialogConfirm = ({
             className='button'
             value='CONFIRM'
             onClick={confirmAction}
+            data-testid='confirm-button'
           />
         </div>
       </div>
