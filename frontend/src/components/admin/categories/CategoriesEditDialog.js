@@ -55,6 +55,7 @@ export const CategoriesEditDialog = () => {
               name='name'
               value={formData.name}
               onChange={handleChange}
+              dataTestId='category-name'
             />
             <div className='modal-footer'>
               <input
