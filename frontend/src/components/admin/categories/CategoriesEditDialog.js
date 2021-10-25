@@ -63,7 +63,12 @@ export const CategoriesEditDialog = () => {
                 value='CANCEL'
                 onClick={() => hideEditCategory()}
               />
-              <input type='submit' className='button' value='SAVE' />
+              <input
+                type='submit'
+                className='button'
+                value='SAVE'
+                data-testid='save-category'
+              />
             </div>
           </form>
         </div>
