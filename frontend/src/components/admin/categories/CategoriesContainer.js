@@ -68,12 +68,14 @@ export const CategoriesContainer = () => {
           className='text-button mr-15'
           value='EDIT'
           onClick={handleEditCategory}
+          data-testid='category-edit'
         />
         <input
           type='button'
           className='text-button red'
           value='DELETE'
           onClick={requestDeleteCategory}
+          data-testid='category-delete'
         />
       </div>
       <ResourcesList search={search} resources={category.resources} />
