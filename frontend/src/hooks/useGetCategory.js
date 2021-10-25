@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 
 import { AuthContext } from '../contexts/AuthContext';
 import { CategoriesContext } from '../contexts/CategoriesContext';
+import { ResourcesContext } from '../contexts/ResourcesContext';
 
 import * as api from '../api/server';
 
@@ -11,6 +12,7 @@ export const useGetCategory = (_id) => {
 
   const { setError } = useContext(AuthContext);
   const { refreshCategories } = useContext(CategoriesContext);
+  const { refreshResources } = useContext(ResourcesContext);
 
   const loadCategory = async () => {
     try {
@@ -25,7 +27,7 @@ export const useGetCategory = (_id) => {
 
   useEffect(() => {
     loadCategory();
-  }, [refreshCategories]);
+  }, [refreshCategories, refreshResources]);
 
   return { loading, category };
 };

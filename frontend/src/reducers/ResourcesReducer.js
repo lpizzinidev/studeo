@@ -11,6 +11,7 @@ export const ResourcesReducer = (state, action) => {
     case actionTypes.HIDE_EDIT_RESOURCE:
       return {
         ...state,
+        refreshResources: !state.refreshResources,
         editingResource: null,
         showEditingResource: false,
       };
