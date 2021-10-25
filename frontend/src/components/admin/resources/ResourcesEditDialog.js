@@ -65,12 +65,14 @@ export const ResourcesEditDialog = () => {
               name='name'
               value={formData.name}
               onChange={handleChange}
+              dataTestId='resource-name'
             />
             <TextInput
               title='Author'
               name='author'
               value={formData.author}
               onChange={handleChange}
+              dataTestId='resource-author'
             />
             <TextInput
               type='number'
@@ -78,12 +80,14 @@ export const ResourcesEditDialog = () => {
               name='duration'
               value={formData.duration}
               onChange={handleChange}
+              dataTestId='resource-duration'
             />
             <TextInput
               title='URL'
               name='link'
               value={formData.link}
               onChange={handleChange}
+              dataTestId='resource-link'
             />
             <div className='modal-footer'>
               <input
@@ -92,7 +96,12 @@ export const ResourcesEditDialog = () => {
                 value='CANCEL'
                 onClick={handleCancel}
               />
-              <input type='submit' className='button' value='SAVE' />
+              <input
+                type='submit'
+                className='button'
+                value='SAVE'
+                data-testid='save-resource'
+              />
             </div>
           </form>
         </div>
