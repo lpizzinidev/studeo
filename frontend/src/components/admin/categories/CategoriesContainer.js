@@ -60,7 +60,9 @@ export const CategoriesContainer = () => {
         setSearch={setSearch}
       />
       <div className='list-header'>
-        <h1 className='heading-1'>{category.name}</h1>
+        <h1 className='heading-1' data-testid='category-heading'>
+          {category.name}
+        </h1>
         <input
           type='button'
           className='text-button mr-15'
