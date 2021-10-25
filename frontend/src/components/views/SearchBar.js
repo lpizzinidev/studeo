@@ -24,6 +24,7 @@ const SearchBar = ({ search, setSearch, placeholder }) => {
         value={search}
         onInput={handleSearch}
         placeholder={placeholder}
+        data-testid='search-field'
       />
     </div>
   );
