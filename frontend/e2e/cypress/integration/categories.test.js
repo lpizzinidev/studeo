@@ -13,6 +13,13 @@ describe('Categories', () => {
     name: chance.string(),
   };
 
+  const resource = {
+    name: chance.string(),
+    author: chance.string(),
+    duration: chance.natural({ max: 1000 }),
+    link: chance.url(),
+  };
+
   beforeEach(() => {
     // Login the user before each test
     cy.visit('/');
@@ -29,7 +36,7 @@ describe('Categories', () => {
   });
 
   it('should be able to create a new category and filter it by name', () => {
-    // Toggle new category button
+    // Click new category button
     cy.get('[data-testid=fab]').click();
 
     // Type category name in editing dialog
@@ -52,6 +59,55 @@ describe('Categories', () => {
 
     // Category should not be visible
     cy.contains(category.name).should('not.exist');
+  });
+
+  it('should be able to add a resource to the category and edit it', () => {
+    // Click on created category
+    cy.contains(category.name).click();
+
+    // Click new resource button
+    cy.get('[data-testid=fab]').click();
+
+    // Fill form fields
+    cy.get('[data-testid=resource-name]').type(resource.name);
+    cy.get('[data-testid=resource-author]').type(resource.author);
+    cy.get('[data-testid=resource-duration]').clear().type(resource.duration);
+    cy.get('[data-testid=resource-link]').type(resource.link);
+
+    // Save resource
+    cy.get('[data-testid=save-resource]').click();
+
+    // Check that resource has been saved
+    cy.contains(resource.name).should('be.visible');
+
+    // Search for resource
+    cy.get('[data-testid=search-field]').type(resource.name);
+
+    // Resource should still be visible
+    cy.contains(resource.name).should('be.visible');
+
+    // Search for another resource
+    cy.get('[data-testid=search-field]').type(resource.name + chance.string());
+
+    // Resource should not be visible
+    cy.contains(resource.name).should('not.exist');
+
+    // Clear search
+    cy.get('[data-testid=search-field]').clear();
+
+    // Click on created resource
+    cy.contains(resource.name).click();
+
+    // Change resource name
+    const newName = chance.string();
+
+    cy.get('[data-testid=resource-name]').type(newName);
+
+    // Save resource
+    cy.get('[data-testid=save-resource]').click();
+
+    // Check that resource has been saved
+    cy.contains(resource.name).should('be.visible');
   });
 
   it('should be able to edit the category and delete it', () => {
