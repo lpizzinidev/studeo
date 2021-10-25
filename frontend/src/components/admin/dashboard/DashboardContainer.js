@@ -48,6 +48,7 @@ const DashboardContainer = () => {
           className='text-button red'
           value='LOGOUT'
           onClick={requestLogout}
+          data-testid='logout-button'
         />
       </div>
       <CategoriesList search={search} />
