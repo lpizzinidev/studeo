@@ -14,7 +14,7 @@ app.use(
 );
 
 // Database
-const connectDB = require('./config/database');
+const { connectDB } = require('./config/database');
 connectDB();
 
 // Authentication
@@ -52,4 +52,9 @@ app.use(
 app.use(require('./middlewares/errorHandler.middleware'));
 
 const { PORT } = require('./config/variables');
-app.listen(PORT, console.log(`Server is listening on port ${PORT}...`));
+const server = app.listen(
+  PORT,
+  console.log(`Server is listening on port ${PORT}...`)
+);
+
+module.exports = { app, server };

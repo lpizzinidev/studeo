@@ -18,12 +18,12 @@ const signIn = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      res.status(500).json({ message: 'User not found' });
+      return res.status(400).json({ message: 'User not found' });
     }
 
     const isValidPsw = await bcrypt.compare(password, user.password);
     if (!isValidPsw) {
-      res.status(500).json({ message: 'Invalid credentials' });
+      return res.status(400).json({ message: 'Invalid credentials' });
     }
 
     // Generate JWT
@@ -33,6 +33,7 @@ const signIn = async (req, res) => {
 
     res.status(200).json({ message: 'Authentication completed', token });
   } catch (err) {
+    console.log(err);
     res.status(500).json({ message: 'Authentication failed' });
   }
 };
@@ -48,7 +49,7 @@ const signUp = async (req, res) => {
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(500).json({ message: 'User already exists' });
+      return res.status(400).json({ message: 'User already exists' });
     }
 
     const salt = await bcrypt.genSalt(12);
