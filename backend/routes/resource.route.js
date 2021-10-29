@@ -16,7 +16,7 @@ router
 router
   .route('/resources/:category/:_id')
   .get(getResource)
-  .put(updateResource)
+  .put(validate('createResource'), updateResource)
   .delete(deleteResource);
 
 module.exports = router;

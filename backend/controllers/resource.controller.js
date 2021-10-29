@@ -47,6 +47,11 @@ const updateResource = async (req, res) => {
   try {
     const { _id, category } = req.params;
 
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const updatedResource = await Resource.findByIdAndUpdate(
       _id,
       {
