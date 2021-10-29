@@ -18,7 +18,7 @@ router
 router
   .route('/categories/:_id')
   .get(getCategory)
-  .put(updateCategory)
+  .put(validate('createCategory'), updateCategory)
   .delete(deleteCategory);
 
 module.exports = router;

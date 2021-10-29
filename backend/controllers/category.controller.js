@@ -47,6 +47,12 @@ const createCategory = async (req, res) => {
 const updateCategory = async (req, res) => {
   try {
     const { _id } = req.params;
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const updatedCategory = await Category.findByIdAndUpdate(_id, req.body, {
       new: true,
     });
