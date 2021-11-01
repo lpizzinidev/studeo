@@ -1,0 +1,20 @@
+name: docker-compose-workflow
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Build the stack
+      run: docker-compose up -d
+      
+    - name: Run e2e tests
+      run: docker run -it -v $PWD:/frontend/e2e -w /frontend/e2e cypress/included:3.2.0
