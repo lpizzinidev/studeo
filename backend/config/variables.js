@@ -8,6 +8,6 @@ module.exports = {
   PORT: process.env.PORT || 5000,
   MONGO_URI: `mongodb://${MONGO_USER}:${MONGO_PSW}@${MONGO_IP}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`,
   MONGO_STORE_SECRET_KEY:
-    process.env.MONGO_STORE_SECRET_KEY || 'mongo_secret_key',
+    process.env.MONGO_STORE_SECRET_KEY || 'mongo_secret_key1',
   JWT_TOKEN: process.env.JWT_TOKEN || 'secret_jwt_token',
 };
