@@ -1,0 +1,51 @@
+name: node-actions-workflow
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+
+  backend:
+
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./backend
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        
+    - run: npm i
+    - run: npm test
+
+  frontend:
+
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./frontend
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        
+    - run: npm i
+    - run: npm run test-all
