@@ -16,19 +16,6 @@ services:
     networks:
       - app-network
 
-  e2e:
-    image: cypress
-    build: ./frontend/e2e
-    container_name: cypress
-    depends_on:
-      - frontend
-    environment:
-      - CYPRESS_baseUrl=http://localhost:3000
-    command: npx cypress run
-    volumes:
-      - ./frontend/e2e/cypress:/app/cypress
-      - ./frontend/e2e/cypress.json:/app/cypress.json
-
   backend:
     build:
       context: ./backend
