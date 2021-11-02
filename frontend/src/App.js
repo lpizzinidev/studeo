@@ -17,11 +17,11 @@ import { PublicRoute } from './components/PublicRoute';
 
 function App() {
   return (
-    <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <AuthProvider>
-        <CategoriesProvider>
-          <ResourcesProvider>
-            <div className='container'>
+    <AuthProvider>
+      <CategoriesProvider>
+        <ResourcesProvider>
+          <div className='container'>
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
               <BrowserRouter>
                 <Switch>
                   <PublicRoute path='/' component={HomeContainer} exact />
@@ -38,11 +38,11 @@ function App() {
                   <AdminRoute component={NotFound} />
                 </Switch>
               </BrowserRouter>
-            </div>
-          </ResourcesProvider>
-        </CategoriesProvider>
-      </AuthProvider>
-    </ErrorBoundary>
+            </ErrorBoundary>
+          </div>
+        </ResourcesProvider>
+      </CategoriesProvider>
+    </AuthProvider>
   );
 }
 
