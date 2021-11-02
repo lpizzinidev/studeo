@@ -381,10 +381,6 @@ a {
   padding: 20px;
 }
 
-.card-item > div > p {
-  flex: 1;
-}
-
 /* Categories */
 .category-container {
   display: grid;
