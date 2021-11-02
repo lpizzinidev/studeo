@@ -28,7 +28,7 @@ jobs:
 
       - name: Execute tests
         working-directory: ./frontend
-        run: npm test-all
+        run: npm run test-all
 
   backend:
     runs-on: ubuntu-latest
