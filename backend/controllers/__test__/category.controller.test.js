@@ -222,18 +222,16 @@ describe('Controllers', () => {
       });
     });
 
-    describe('PUT /resources/:category/:id', () => {
+    describe('PUT /resources//:id', () => {
       it('should be a protected route', async () => {
-        const res = await request.put(
-          `/api/v1/resources/${_id}/${resource_id}`
-        );
+        const res = await request.put(`/api/v1/resources/${resource_id}`);
 
         expect(res.status).toBe(401);
       });
 
       it('should thow error if name is not passed', async () => {
         const res = await request
-          .put(`/api/v1/resources/${_id}/${resource_id}`)
+          .put(`/api/v1/resources/${resource_id}`)
           .set('Authorization', `Bearer ${token}`)
           .send({
             author: chance.string(),
@@ -246,7 +244,7 @@ describe('Controllers', () => {
 
       it('should thow error if duration is not numeric', async () => {
         const res = await request
-          .put(`/api/v1/resources/${_id}/${resource_id}`)
+          .put(`/api/v1/resources/${resource_id}`)
           .set('Authorization', `Bearer ${token}`)
           .send({
             name: chance.string(),
@@ -260,7 +258,7 @@ describe('Controllers', () => {
 
       it('should thow error if link is not a valid URL', async () => {
         const res = await request
-          .put(`/api/v1/resources/${_id}/${resource_id}`)
+          .put(`/api/v1/resources/${resource_id}`)
           .set('Authorization', `Bearer ${token}`)
           .send({
             name: chance.string(),
@@ -274,7 +272,7 @@ describe('Controllers', () => {
 
       it('should update resource correctly', async () => {
         const res = await request
-          .put(`/api/v1/resources/${_id}/${resource_id}`)
+          .put(`/api/v1/resources/${resource_id}`)
           .set('Authorization', `Bearer ${token}`)
           .send({
             name: chance.string(),
@@ -287,18 +285,16 @@ describe('Controllers', () => {
       });
     });
 
-    describe('DELETE /resources/:category/:id', () => {
+    describe('DELETE /resources/:id', () => {
       it('should be a protected route', async () => {
-        const res = await request.delete(
-          `/api/v1/resources/${_id}/${resource_id}`
-        );
+        const res = await request.delete(`/api/v1/resources/${resource_id}`);
 
         expect(res.status).toBe(401);
       });
 
-      it('should delete the required category', async () => {
+      it('should delete the required resource', async () => {
         const res = await request
-          .delete(`/api/v1/resources/${_id}/${resource_id}`)
+          .delete(`/api/v1/resources/${resource_id}`)
           .set('Authorization', `Bearer ${token}`);
 
         expect(res.status).toBe(200);
