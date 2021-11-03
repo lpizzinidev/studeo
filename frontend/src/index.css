@@ -264,15 +264,26 @@ a {
   box-shadow: var(--box-shadow);
 }
 
+.search-bar-parent {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .search-bar-container {
   position: relative;
   text-align: center;
 }
 
-.search-bar-container > img {
+.search-bar-container > .search-icon {
   position: absolute;
   margin-top: 15px;
   margin-left: 15px;
+}
+
+.search-bar-container > .back-icon {
+  padding-top: 10px;
+  padding-right: 10px;
 }
 
 .search-bar-container > input {

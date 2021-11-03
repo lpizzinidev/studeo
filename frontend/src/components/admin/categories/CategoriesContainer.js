@@ -58,6 +58,7 @@ export const CategoriesContainer = () => {
         placeholder='Search resource...'
         search={search}
         setSearch={setSearch}
+        showBack={true}
       />
       <div className='list-header'>
         <h1 className='heading-1' data-testid='category-heading'>
