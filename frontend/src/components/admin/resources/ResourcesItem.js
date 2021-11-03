@@ -11,9 +11,10 @@ import deleteIcon from '../../../assets/icons/delete.svg';
 export const ResourcesItem = ({ resource }) => {
   const [showDialogDelete, setShowDialogDelete] = useState(false);
 
-  const { showEditResource } = useContext(ResourcesContext);
+  const { showEditResource, deleteResource } = useContext(ResourcesContext);
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    if (e.target.className === 'icon-button') return;
     showEditResource(resource);
   };
 
@@ -22,27 +23,32 @@ export const ResourcesItem = ({ resource }) => {
   };
 
   const handleDeleteResource = () => {
+    deleteResource(resource._id);
     setShowDialogDelete(false);
   };
 
   return (
-    <div
-      className='card card-item'
-      onClick={handleClick}
-      data-testid='resources-item'
-    >
-      <div>
-        <p className='text-footer'>
-          {resource.author !== '' ? resource.author : 'No author'} -{' '}
-          {utils.formatDuration(resource.duration)}
-        </p>
-        <p className='text-body-1'>{resource.name}</p>
-        <img
-          src={deleteIcon}
-          alt='Delete resource'
-          className='icon'
-          onClick={requestDeleteResource}
-        />
+    <>
+      <div
+        className='card card-item'
+        onClick={handleClick}
+        data-testid='resources-item'
+      >
+        <div>
+          <div>
+            <p className='text-footer'>
+              {resource.author !== '' ? resource.author : 'No author'} -{' '}
+              {utils.formatDuration(resource.duration)}
+            </p>
+            <p className='text-body-1'>{resource.name}</p>
+          </div>
+          <img
+            src={deleteIcon}
+            alt='Delete resource'
+            className='icon-button'
+            onClick={requestDeleteResource}
+          />
+        </div>
       </div>
       <DialogConfirm
         title='Delete resource'
@@ -51,6 +57,6 @@ export const ResourcesItem = ({ resource }) => {
         show={showDialogDelete}
         setShow={setShowDialogDelete}
       />
-    </div>
+    </>
   );
 };

@@ -200,6 +200,7 @@ a {
   padding-right: 25px;
   outline: none;
   border: none;
+  align-self: center;
 }
 
 .info-button {
@@ -379,6 +380,11 @@ a {
 
 .card-item > div {
   padding: 20px;
+  display: flex;
+}
+
+.card-item > div > div {
+  flex: 1;
 }
 
 /* Categories */

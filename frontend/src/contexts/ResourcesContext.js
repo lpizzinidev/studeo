@@ -44,9 +44,11 @@ export const ResourcesProvider = ({ children }) => {
     }
   };
 
-  const deleteResource = async (id, resource) => {
+  const deleteResource = async (id) => {
     try {
-      await api.deleteResource(id, resource);
+      await api.deleteResource(id);
+      // Triggers resources refresh
+      hideEditResource();
     } catch (err) {
       setError(err);
     }
