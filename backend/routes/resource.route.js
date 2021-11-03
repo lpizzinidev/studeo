@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const {
-  getResource,
   createResource,
   updateResource,
   deleteResource,
@@ -14,9 +13,8 @@ router
   .route('/resources/:category')
   .post(validate('createResource'), createResource);
 router
-  .route('/resources/:category/:_id')
-  .get(getResource)
-  .put(validate('createResource'), updateResource);
-router.route('/resources/:_id').delete(deleteResource);
+  .route('/resources/:_id')
+  .put(validate('createResource'), updateResource)
+  .delete(deleteResource);
 
 module.exports = router;

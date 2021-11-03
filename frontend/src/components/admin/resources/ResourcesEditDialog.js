@@ -36,7 +36,7 @@ export const ResourcesEditDialog = () => {
     e.preventDefault();
 
     if (editingResource) {
-      updateResource(_id, editingResource._id, formData);
+      updateResource(editingResource._id, formData);
     } else {
       createResource(_id, formData);
     }
