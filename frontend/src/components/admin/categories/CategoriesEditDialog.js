@@ -60,7 +60,7 @@ export const CategoriesEditDialog = () => {
             <div className='modal-footer'>
               <input
                 type='button'
-                className='text-button mr-15'
+                className='text-button'
                 value='CANCEL'
                 onClick={() => hideEditCategory()}
               />

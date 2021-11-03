@@ -56,6 +56,7 @@
 }
 
 body {
+  height: calc(100vh - 40px);
   margin: 0;
   padding: 20px;
   background-color: var(--color-secondary-bck);
@@ -253,12 +254,6 @@ a {
   overflow-y: hidden;
 }
 
-@media screen and (max-width: 600px) {
-  .input-text-field {
-    width: auto;
-  }
-}
-
 .input-text-field:active,
 .input-text-field:focus {
   box-shadow: var(--box-shadow);
@@ -334,6 +329,12 @@ a {
   align-self: center;
 }
 
+@media screen and (max-width: 600px) {
+  .home-container {
+    display: block;
+  }
+}
+
 /* Authentication */
 .auth-container {
   display: flex;
@@ -342,6 +343,12 @@ a {
 .auth-container > * {
   flex: 1;
   align-self: center;
+}
+
+@media screen and (max-width: 600px) {
+  .auth-container {
+    display: block;
+  }
 }
 
 .auth-form {
@@ -458,6 +465,8 @@ a {
 .modal-footer {
   text-align: right;
   margin-top: 10px;
+  display: grid;
+  gap: 15px;
 }
 
 /* Loading spinner */
