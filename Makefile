@@ -4,7 +4,7 @@ run:
 stop:
 	@docker compose down
 
-run-test:
+test:
 	@cd backend && \
 		npm i && \
 		npm run test && \
