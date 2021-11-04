@@ -7,8 +7,8 @@ const HomeContainer = () => {
     <div>
       <HomeNav />
       <div className='home-container'>
-        <HomeHeading />
         <HomeLogo />
+        <HomeHeading />
       </div>
     </div>
   );

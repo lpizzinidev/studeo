@@ -19,16 +19,16 @@ export const DialogConfirm = ({
         <div className='modal-footer'>
           <input
             type='button'
-            className='text-button'
-            value='CANCEL'
-            onClick={handleCancel}
-          />
-          <input
-            type='button'
             className='button'
             value='CONFIRM'
             onClick={confirmAction}
             data-testid='confirm-button'
+          />
+          <input
+            type='button'
+            className='text-button'
+            value='CANCEL'
+            onClick={handleCancel}
           />
         </div>
       </div>

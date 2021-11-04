@@ -14,6 +14,7 @@ export const ResourcesItem = ({ resource }) => {
   const { showEditResource, deleteResource } = useContext(ResourcesContext);
 
   const handleClick = (e) => {
+    // Prevent event on delete icon click
     if (e.target.className === 'icon-button') return;
     showEditResource(resource);
   };

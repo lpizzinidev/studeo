@@ -13,11 +13,13 @@ export const ResourcesList = ({ resources, search }) => {
   }
 
   return (
-    <div className='card-list'>
+    <>
       <p className='subtitle'>Resources</p>
-      {filteredResources.map((resource) => {
-        return <ResourcesItem key={resource._id} resource={resource} />;
-      })}
-    </div>
+      <div className='card-list'>
+        {filteredResources.map((resource) => {
+          return <ResourcesItem key={resource._id} resource={resource} />;
+        })}
+      </div>
+    </>
   );
 };

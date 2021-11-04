@@ -3,7 +3,7 @@ import register from '../../assets/img/register.png';
 
 const AuthDescription = ({ isLogin }) => {
   return (
-    <div>
+    <div className='auth-description'>
       <img
         src={isLogin ? login : register}
         className='logo'

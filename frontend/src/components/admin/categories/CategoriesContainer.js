@@ -14,6 +14,7 @@ import { Fab } from '../../views/Fab';
 import { Loading } from '../../views/Loading';
 
 import plusIcon from '../../../assets/icons/plus.svg';
+import arrowLeftIcon from '../../../assets/icons/arrow-left.svg';
 
 export const CategoriesContainer = () => {
   const { _id } = useParams();
@@ -25,6 +26,10 @@ export const CategoriesContainer = () => {
 
   const [search, setSearch] = useState('');
   const [showDialogDelete, setShowDialogDelete] = useState(false);
+
+  const handleBack = () => {
+    history.goBack();
+  };
 
   const handleEditCategory = () => {
     showEditCategory(category);
@@ -61,22 +66,28 @@ export const CategoriesContainer = () => {
         showBack={true}
       />
       <div className='list-header'>
+        <img
+          src={arrowLeftIcon}
+          alt='Back to dashboard'
+          className='icon-button'
+          onClick={handleBack}
+        />
         <h1 className='heading-1' data-testid='category-heading'>
           {category.name}
         </h1>
-        <input
-          type='button'
-          className='text-button mr-15'
-          value='EDIT'
-          onClick={handleEditCategory}
-          data-testid='category-edit'
-        />
         <input
           type='button'
           className='text-button red'
           value='DELETE'
           onClick={requestDeleteCategory}
           data-testid='category-delete'
+        />
+        <input
+          type='button'
+          className='text-button'
+          value='EDIT'
+          onClick={handleEditCategory}
+          data-testid='category-edit'
         />
       </div>
       <ResourcesList search={search} resources={category.resources} />

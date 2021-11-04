@@ -91,16 +91,16 @@ export const ResourcesEditDialog = () => {
             />
             <div className='modal-footer'>
               <input
-                type='button'
-                className='text-button'
-                value='CANCEL'
-                onClick={handleCancel}
-              />
-              <input
                 type='submit'
                 className='button'
                 value='SAVE'
                 data-testid='save-resource'
+              />
+              <input
+                type='button'
+                className='text-button'
+                value='CANCEL'
+                onClick={handleCancel}
               />
             </div>
           </form>
