@@ -6,6 +6,8 @@ import { AuthContext } from '../../contexts/AuthContext';
 import TextInput from '../views/TextInput';
 import { ErrorInfo } from '../views/ErrorInfo';
 
+import arrowLeftIcon from '../../assets/icons/arrow-left.svg';
+
 const initialFormData = {
   email: '',
   password: '',
@@ -38,9 +40,21 @@ const AuthForm = ({ isLogin }) => {
     clearError();
   };
 
+  const handleBack = () => {
+    history.push('/dashboard');
+  };
+
   return (
     <div>
-      <h2 className='heading-2'>{isLogin ? 'Login' : 'Register'}</h2>
+      <div className='list-header-heading'>
+        <img
+          src={arrowLeftIcon}
+          alt='Back to dashboard'
+          className='icon-button'
+          onClick={handleBack}
+        />
+        <h2 className='heading-2'>{isLogin ? 'Login' : 'Register'}</h2>
+      </div>
       <form className='auth-form' onSubmit={handleSubmit}>
         <ErrorInfo errors={errors} />
         <TextInput

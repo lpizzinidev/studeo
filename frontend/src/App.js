@@ -25,15 +25,17 @@ function App() {
               <BrowserRouter>
                 <Switch>
                   <PublicRoute path='/' component={HomeContainer} exact />
-                  <PublicRoute path='/signin' component={AuthContainer} />
-                  <PublicRoute path='/signup' component={AuthContainer} />
+                  <PublicRoute path='/signin' component={AuthContainer} exact />
+                  <PublicRoute path='/signup' component={AuthContainer} exact />
                   <AdminRoute
                     path='/dashboard'
                     component={DashboardContainer}
+                    exact
                   />
                   <AdminRoute
                     path='/categories/:_id?'
                     component={CategoriesContainer}
+                    exact
                   />
                   <AdminRoute component={NotFound} />
                 </Switch>

@@ -28,8 +28,8 @@
   --scale-factor-tablet: 0.8;
   --scale-factor-mobile: 0.6;
 
-  --margin-top-desktop: 10%;
-  --margin-top-tablet: 30%;
+  --margin-top-desktop: 5%;
+  --margin-top-tablet: 10%;
   --margin-top-mobile: 25%;
 }
 
@@ -455,12 +455,18 @@ a {
 @media screen and (max-width: 600px) {
   .auth-container {
     display: block;
-    margin-top: var(--margin-top-mobile);
+    margin-top: 0;
   }
 }
 
 .auth-description {
   text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  .auth-description {
+    margin-top: var(--margin-top-mobile);
+  }
 }
 
 .auth-form {
@@ -482,16 +488,12 @@ a {
   margin-bottom: 10px;
 }
 
-.list-header > p,
-.list-header > h1 {
+.list-header p,
+.list-header h1 {
   flex: 1;
 }
 
-.list-header > img {
-  margin-right: 10px;
-}
-
-.list-header > input {
+.list-header input {
   margin-left: 15px;
 }
 
@@ -505,6 +507,15 @@ a {
   .list-header > input {
     margin: 0;
   }
+}
+
+.list-header-heading {
+  display: flex;
+  flex: 1;
+}
+
+.list-header-heading > img {
+  margin-right: 10px;
 }
 
 .card-list {
@@ -573,6 +584,10 @@ a {
   .no-data-container {
     margin-top: var(--margin-top-mobile);
   }
+}
+
+.not-found-container {
+  text-align: center;
 }
 
 /* Modal */

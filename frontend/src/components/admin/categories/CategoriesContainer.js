@@ -66,15 +66,17 @@ export const CategoriesContainer = () => {
         showBack={true}
       />
       <div className='list-header'>
-        <img
-          src={arrowLeftIcon}
-          alt='Back to dashboard'
-          className='icon-button'
-          onClick={handleBack}
-        />
-        <h1 className='heading-1' data-testid='category-heading'>
-          {category.name}
-        </h1>
+        <div className='list-header-heading'>
+          <img
+            src={arrowLeftIcon}
+            alt='Back to dashboard'
+            className='icon-button'
+            onClick={handleBack}
+          />
+          <h1 className='heading-1' data-testid='category-heading'>
+            {category.name}
+          </h1>
+        </div>
         <input
           type='button'
           className='text-button red'
