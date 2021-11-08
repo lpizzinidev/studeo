@@ -30,7 +30,7 @@ describe('Controllers', () => {
     token = res.body.token;
   });
 
-  afterAll(async () => {
+  afterAll(() => {
     disconnectDB();
     server.close();
   });

@@ -13,6 +13,9 @@ app.use(
   })
 );
 
+const Chance = require('chance');
+const chance = Chance();
+
 // Database
 const { connectDB } = require('./config/database');
 connectDB();
@@ -51,7 +54,10 @@ app.use(
 // Error handler middleware
 app.use(require('./middlewares/errorHandler.middleware'));
 
-const { PORT } = require('./config/variables');
+let { PORT } = require('./config/variables');
+if (process.env.NODE_ENV === 'test') {
+  PORT = chance.integer({ min: 3001, max: 9999 });
+}
 const server = app.listen(
   PORT,
   console.log(`Server is listening on port ${PORT}...`)

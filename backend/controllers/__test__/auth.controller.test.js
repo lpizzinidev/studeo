@@ -12,7 +12,7 @@ describe('Authentication controller', () => {
   const email = chance.email();
   const password = chance.string({ length: 8 });
 
-  afterAll(async () => {
+  afterAll(() => {
     disconnectDB();
     server.close();
   });
