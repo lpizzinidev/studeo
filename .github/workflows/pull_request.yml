@@ -41,6 +41,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Run application
+        run: make start
+
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
