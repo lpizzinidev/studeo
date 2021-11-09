@@ -55,6 +55,11 @@ export const AuthProvider = ({ children }) => {
           // Client error
           const { errors } = data;
 
+          if (!errors) {
+            dispatch({ type: actionTypes.SET_ERROR, payload: [data.message] });
+            return;
+          }
+
           let errMsg = [];
           for (let error of errors) {
             errMsg.push(error.msg);

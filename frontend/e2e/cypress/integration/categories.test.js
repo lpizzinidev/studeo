@@ -157,7 +157,7 @@ describe('Categories', () => {
     cy.get('[data-testid=category-delete]').click();
 
     // Confirm the delete operation
-    cy.get('[data-testid=confirm-button]').click();
+    cy.get('[data-testid=confirm-button]').last().click();
 
     // Check that the current URL is /dashboard
     cy.url().should('include', '/dashboard');

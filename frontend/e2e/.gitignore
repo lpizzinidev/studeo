@@ -12,8 +12,8 @@
 /build
 
 # assets
-/cypress/screenshots
 /cypress/videos
+/cypress/screenshots
 
 # misc
 .DS_Store
