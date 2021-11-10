@@ -4,8 +4,6 @@ import { ResourcesContext } from '../../../contexts/ResourcesContext';
 
 import { DialogConfirm } from '../../views/DialogConfirm';
 
-import * as utils from '../../../util/util';
-
 import deleteIcon from '../../../assets/icons/delete.svg';
 
 export const ResourcesItem = ({ resource }) => {
@@ -39,7 +37,7 @@ export const ResourcesItem = ({ resource }) => {
           <div>
             <p className='text-footer'>
               {resource.author !== '' ? resource.author : 'No author'} -{' '}
-              {utils.formatDuration(resource.duration)}
+              {resource.duration}
             </p>
             <p className='text-body-1'>{resource.name}</p>
           </div>

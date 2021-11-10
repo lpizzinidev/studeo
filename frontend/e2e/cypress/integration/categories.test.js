@@ -7,7 +7,7 @@ describe('Categories', () => {
 
   // Test account
   const email = chance.email();
-  const password = chance.string();
+  const password = chance.string({ length: 8 });
 
   const category = {
     name: chance.string(),
@@ -16,7 +16,13 @@ describe('Categories', () => {
   const resource = {
     name: chance.string(),
     author: chance.string(),
-    duration: chance.natural({ max: 1000 }),
+    duration: `${chance
+      .natural({ max: 24 })
+      .toString()
+      .padStart(2, '0')}:${chance
+      .natural({ max: 59 })
+      .toString()
+      .padStart(2, '0')}`,
     link: chance.url(),
   };
 

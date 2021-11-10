@@ -13,11 +13,13 @@ const Resource = mongoose.model('resource', {
   },
   author: {
     type: String,
+    required: true,
     default: '',
   },
   duration: {
-    type: Number,
-    default: 0,
+    type: String,
+    required: true,
+    default: '',
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -26,6 +28,7 @@ const Resource = mongoose.model('resource', {
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,
+    required: true,
     ref: 'category',
   },
   completed: {

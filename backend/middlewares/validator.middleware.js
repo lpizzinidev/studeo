@@ -51,10 +51,15 @@ const validate = (method) => {
     case 'createResource': {
       return [
         body('name', 'Name is required').not().isEmpty().trim().escape(),
-        body('author').optional().trim().escape(),
-        body('duration', 'Insert a valid duration')
-          .optional()
-          .isNumeric()
+        body('author', 'Author is required').not().isEmpty().trim().escape(),
+        body('duration')
+          .not()
+          .isEmpty()
+          .withMessage('Duration is required')
+          .custom((value) => {
+            return new RegExp(/^[0-2][0-9]:[0-5][0-9]$/, 'g').test(value);
+          })
+          .withMessage('Insert a valid duration')
           .trim()
           .escape(),
         body('link', 'Insert a valid URL').optional().isURL().trim().escape(),

@@ -1,4 +1,12 @@
-const TextInput = ({ type, title, name, value, onChange, dataTestId }) => {
+const TextInput = ({
+  type,
+  title,
+  name,
+  value,
+  onChange,
+  pattern,
+  dataTestId,
+}) => {
   return (
     <div>
       <span className='text-body-2'>{title}</span>
@@ -8,6 +16,7 @@ const TextInput = ({ type, title, name, value, onChange, dataTestId }) => {
         value={value}
         className='input-text-field'
         onChange={onChange}
+        pattern={pattern}
         data-testid={dataTestId}
       />
     </div>

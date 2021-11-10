@@ -157,6 +157,14 @@ describe('Controllers', () => {
   describe('-- Resources --', () => {
     let resource_id = '';
 
+    const duration = `${chance
+      .natural({ max: 24 })
+      .toString()
+      .padStart(2, '0')}:${chance
+      .natural({ max: 59 })
+      .toString()
+      .padStart(2, '0')}`;
+
     describe('POST /resources/:category', () => {
       it('should be a protected route', async () => {
         const res = await request.post(`/api/v1/resources/${_id}`);
@@ -170,14 +178,14 @@ describe('Controllers', () => {
           .set('Authorization', `Bearer ${token}`)
           .send({
             author: chance.string(),
-            duration: chance.integer(),
+            duration: duration,
             link: chance.url(),
           });
-
+        console.log(duration);
         expect(res.status).toBe(400);
       });
 
-      it('should thow error if duration is not numeric', async () => {
+      it('should thow error if duration is not in valid format', async () => {
         const res = await request
           .post(`/api/v1/resources/${_id}`)
           .set('Authorization', `Bearer ${token}`)
@@ -198,7 +206,7 @@ describe('Controllers', () => {
           .send({
             name: chance.string(),
             author: chance.string(),
-            duration: chance.integer(),
+            duration: duration,
             link: chance.string(),
           });
 
@@ -212,7 +220,7 @@ describe('Controllers', () => {
           .send({
             name: chance.string(),
             author: chance.string(),
-            duration: chance.integer(),
+            duration: duration,
             link: chance.url(),
           });
 
@@ -235,14 +243,14 @@ describe('Controllers', () => {
           .set('Authorization', `Bearer ${token}`)
           .send({
             author: chance.string(),
-            duration: chance.integer(),
+            duration: duration,
             link: chance.url(),
           });
 
         expect(res.status).toBe(400);
       });
 
-      it('should thow error if duration is not numeric', async () => {
+      it('should thow error if duration is not in valid format', async () => {
         const res = await request
           .put(`/api/v1/resources/${resource_id}`)
           .set('Authorization', `Bearer ${token}`)
@@ -263,7 +271,7 @@ describe('Controllers', () => {
           .send({
             name: chance.string(),
             author: chance.string(),
-            duration: chance.integer(),
+            duration: duration,
             link: chance.string(),
           });
 
@@ -277,7 +285,7 @@ describe('Controllers', () => {
           .send({
             name: chance.string(),
             author: chance.string(),
-            duration: chance.integer(),
+            duration: duration,
             link: chance.url(),
           });
 

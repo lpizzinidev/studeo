@@ -22,7 +22,7 @@ export const ResourcesEditDialog = () => {
   const initialState = {
     name: '',
     author: '',
-    duration: 0,
+    duration: '',
     link: '',
   };
 
@@ -75,12 +75,12 @@ export const ResourcesEditDialog = () => {
               dataTestId='resource-author'
             />
             <TextInput
-              type='number'
-              title='Duration (min)'
+              title='Duration (hh:mm)'
               name='duration'
               value={formData.duration}
               onChange={handleChange}
               dataTestId='resource-duration'
+              pattern='^[0-2][0-9]:[0-5][0-9]$'
             />
             <TextInput
               title='URL'
