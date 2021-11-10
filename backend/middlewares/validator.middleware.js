@@ -17,8 +17,7 @@ const validate = (method) => {
           .withMessage('Password is required')
           .isLength({ min: 6 })
           .withMessage('Password must be at least 6 characters long')
-          .trim()
-          .escape(),
+          .trim(),
       ];
     }
     case 'signup': {
@@ -36,22 +35,20 @@ const validate = (method) => {
           .withMessage('Password is required')
           .isLength({ min: 6 })
           .withMessage('Password must be at least 6 characters long')
-          .trim()
-          .escape(),
+          .trim(),
         body('confirmPassword')
           .custom((value, { req }) => value === req.body.password)
           .withMessage('Passwords do not correspond')
-          .trim()
-          .escape(),
+          .trim(),
       ];
     }
     case 'createCategory': {
-      return [body('name', 'Name is required').not().isEmpty().trim().escape()];
+      return [body('name', 'Name is required').not().isEmpty().trim()];
     }
     case 'createResource': {
       return [
-        body('name', 'Name is required').not().isEmpty().trim().escape(),
-        body('author', 'Author is required').not().isEmpty().trim().escape(),
+        body('name', 'Name is required').not().isEmpty().trim(),
+        body('author', 'Author is required').not().isEmpty().trim(),
         body('duration')
           .not()
           .isEmpty()
@@ -60,9 +57,8 @@ const validate = (method) => {
             return new RegExp(/^[0-2][0-9]:[0-5][0-9]$/, 'g').test(value);
           })
           .withMessage('Insert a valid duration')
-          .trim()
-          .escape(),
-        body('link', 'Insert a valid URL').optional().isURL().trim().escape(),
+          .trim(),
+        body('link', 'Insert a valid URL').optional().isURL().trim(),
       ];
     }
   }
