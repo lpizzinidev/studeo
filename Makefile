@@ -1,5 +1,9 @@
-start:
-	@docker-compose up -d
+start-dev:
+	@docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+
+start-prod:
+	@docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+
 
 stop:
 	@docker-compose down
