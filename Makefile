@@ -1,8 +1,8 @@
 start-dev:
-	@docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+	@NODE_ENV=development docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 
 start-prod:
-	@docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+	@NODE_ENV=production docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 
 
 stop:

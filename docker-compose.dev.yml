@@ -3,8 +3,6 @@ services:
   frontend:
     build:
       dockerfile: Dockerfile.dev
-    environment:
-      NODE_ENV: development
     volumes:
       - ./frontend:/usr/src/app
       - /usr/src/app/node_modules
@@ -23,8 +21,6 @@ services:
       - ./frontend/e2e/cypress.json:/app/cypress.json
 
   backend:
-    environment:
-      NODE_ENV: development
     volumes:
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules
