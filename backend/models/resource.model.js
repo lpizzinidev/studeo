@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
-const Resource = mongoose.model('resource', {
+const resourceSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
+    unique: false,
   },
   link: {
     type: String,
     required: true,
-    unique: true,
+    unique: false,
   },
   author: {
     type: String,
@@ -24,6 +24,7 @@ const Resource = mongoose.model('resource', {
   user: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
+    unique: false,
     ref: 'user',
   },
   category: {
@@ -44,4 +45,6 @@ const Resource = mongoose.model('resource', {
   },
 });
 
-module.exports = Resource;
+resourceSchema.index({ user: 1, name: 1, link: 1 }, { unique: true });
+
+module.exports = mongoose.model('resource', resourceSchema);

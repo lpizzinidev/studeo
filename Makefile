@@ -4,6 +4,8 @@ start-dev:
 start-prod:
 	@NODE_ENV=production docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
+list: 
+	@docker-compose ps
 
 stop:
 	@docker-compose down
