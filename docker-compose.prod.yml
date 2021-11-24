@@ -1,7 +1,14 @@
 version: '3'
 services:
   frontend:
+    restart: unless-stopped
     build:
       dockerfile: Dockerfile.prod
     ports:
-      - '8080:8080'
+      - '80:80'
+
+  backend:
+    restart: unless-stopped
+
+  mongo:
+    restart: unless-stopped

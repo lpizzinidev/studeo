@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "NODE_ENV=test jest"
+    "test": "NODE_ENV=test MONGO_STORE_SECRET_KEY=mongo_secret JWT_TOKEN=token jest"
   },
   "author": "Luca Pizzini",
   "license": "MIT",

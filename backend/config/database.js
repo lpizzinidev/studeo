@@ -29,7 +29,7 @@ const connectDB = async () => {
 
 const disconnectDB = async () => {
   try {
-    await mongoose.disconnect();
+    await mongoose.connection.close();
     if (mongod) {
       await mongod.stop();
     }

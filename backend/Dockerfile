@@ -1,11 +1,13 @@
-FROM node:14 
+FROM node:14-alpine
 
-RUN mkdir /usr/src/app
 WORKDIR /usr/src/app
+
 COPY package*.json ./
+
 RUN npm install
+
 COPY . .
 
 EXPOSE 5000
 
-CMD [ "npm", "run", "start" ]
+CMD [ "node", "app.js" ]
