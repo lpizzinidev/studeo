@@ -12,7 +12,7 @@ const connectDB = async () => {
       mongod = await MongoMemoryServer.create();
       dbUrl = mongod.getUri();
     }
-
+console.log(dbUrl)
     const conn = await mongoose.connect(dbUrl, {
       useNewUrlParser: true,
       useUnifiedTopology: true,

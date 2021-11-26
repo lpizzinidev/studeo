@@ -22,19 +22,8 @@ connectDB();
 
 // Authentication
 const passport = require('passport');
-const session = require('express-session');
-
-const { MONGO_STORE_SECRET_KEY } = require('./config/variables');
 
 require('./config/passport-jwt')(passport);
-
-app.use(
-  session({
-    secret: MONGO_STORE_SECRET_KEY,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
 
 app.use(passport.initialize());
 app.use(passport.session());

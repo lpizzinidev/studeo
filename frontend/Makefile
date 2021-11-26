@@ -1,22 +1,22 @@
 ## Development
 build-dev: 
-	docker build -t frontend-dev -f Dockerfile.dev .
+	docker build -t frontend -f Dockerfile.dev .
 
 run-dev:
-	docker run frontend-dev
+	docker run frontend
 
 run-dev-it:
-	docker run -it frontend-dev /bin/sh
+	docker run -it frontend /bin/sh
 
 ## Production
 build-prod:
-	docker build -t frontend-prod -f Dockerfile.prod .
+	docker build -t frontend -f Dockerfile.prod .
 
 run-prod:
-	docker run frontend-prod
+	docker run frontend
 
 run-prod-it:
-	docker run -it frontend-prod /bin/sh
+	docker run -it frontend /bin/sh
 
 ## Testing
 run-unit-test:
