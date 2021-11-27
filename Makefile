@@ -27,12 +27,6 @@ list:
 stop:
 	docker-compose down
 
-test:
-	@NODE_ENV=test && \
-		cd backend && \
-		npm i && \
-		npm run test && \
-		cd ../frontend && \
-		npm i && \
-		npm run test-all
-
+setup-env:
+	cd backend && \
+		echo 'MONGO_INITDB_ROOT_USERNAME=admin\nMONGO_INITDB_ROOT_PASSWORD=admin\nMONGO_INITDB_DATABASE=learning_path_builder\nJWT_TOKEN=secret_token' >> .env

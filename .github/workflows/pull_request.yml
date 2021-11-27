@@ -32,27 +32,6 @@ jobs:
         working-directory: ./frontend
         run: npm run test-all
 
-  e2e:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x]
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Start application
-        run: make start
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          start: 'npx cypress run'
-          working-directory: ./frontend/e2e
-          wait-on: 'http://localhost:3000'
-
   backend:
     runs-on: ubuntu-latest
 
