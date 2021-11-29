@@ -1,1 +1,1 @@
-# react-learning-path-builder
+# Studeo
