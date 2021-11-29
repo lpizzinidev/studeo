@@ -9,6 +9,7 @@
   --color-red: #d64933;
   --color-red-bck: rgba(214, 73, 51, 0.75);
 
+  --font-size-title: 100px;
   --font-size-heading-1: 72px;
   --font-size-heading-2: 48px;
   --font-size-subtitle: 40px;
@@ -103,6 +104,22 @@ a {
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.title {
+  font-size: var(--font-size-title);
+}
+
+@media screen and (max-width: 800px) {
+  .title {
+    font-size: calc(var(--font-size-title) * var(--scale-factor-tablet));
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .title {
+    font-size: calc(var(--font-size-title) * var(--scale-factor-mobile));
+  }
 }
 
 .heading-1 {
