@@ -29,4 +29,4 @@ stop:
 
 setup-env:
 	cd backend && \
-		echo 'MONGO_INITDB_ROOT_USERNAME=admin\nMONGO_INITDB_ROOT_PASSWORD=admin\nMONGO_INITDB_DATABASE=learning_path_builder\nJWT_TOKEN=secret_token' >> .env
+		echo 'MONGO_INITDB_ROOT_USERNAME=admin\nMONGO_INITDB_ROOT_PASSWORD=admin\nMONGO_INITDB_DATABASE=studeo\nJWT_TOKEN=secret_token' >> .env
