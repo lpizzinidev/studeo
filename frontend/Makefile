@@ -23,7 +23,5 @@ run-unit-test:
 	npm run test-all
 
 run-e2e-test:
-	cd .. && \
-		make run-dev \
-		cd frontend/e2e && \
+	cd e2e && \
 		npx cypress run
